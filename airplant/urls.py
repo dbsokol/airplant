@@ -13,12 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.views.generic.base import TemplateView
 from django.contrib import admin
 from django.urls import path
-from django.views.generic.base import TemplateView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='home.html'), name='home')
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('checkout/', TemplateView.as_view(template_name='checkout.html'), name='checkout'),
+    path('faq/', TemplateView.as_view(template_name='faq.html'), name='faq'),
+    path('gift-checkout/', TemplateView.as_view(template_name='gift-checkout.html'), name='gift-checkout'),
+    path('gift/', TemplateView.as_view(template_name='gift.html'), name='gift'),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('header/', TemplateView.as_view(template_name='header.html'), name='header'),
+    path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
+    path('privacy/', TemplateView.as_view(template_name='privacy.html'), name='privacy'),
+    path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
+    path('terms/', TemplateView.as_view(template_name='terms.html'), name='terms'),
 ]
