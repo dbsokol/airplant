@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tillandsia Gardens</title>
+  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">-->
+  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">-->
+  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">-->
+  <!--<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-icon-180x180.png">-->
+  <!--<link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">-->
+  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">-->
+  <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/app.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/style.css' %}">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+</head>
+<body data-gr-c-s-loaded="true">
+<sucstu-root _nghost-c0="" ng-version="7.2.0">
+    <!---->
+    <div _ngcontent-c0="" class="content">
+        <div _ngcontent-c0="" class="main">
+            <sucstu-notification-bar _ngcontent-c0="" _nghost-c1="">
+                <div _ngcontent-c1="" class="notification-bar notification-bar-disabled"><span _ngcontent-c1="" class="notification-bar-title"></span>
+                    <p _ngcontent-c1="" class="notification-bar-message"></p><span _ngcontent-c1="" class="close-icon">X</span>
+                </div>
+            </sucstu-notification-bar>
+            <sucstu-coupon-banner _ngcontent-c0="" _nghost-c2="">
+                <div _ngcontent-c2="" class="coupon-banner"><span _ngcontent-c2="" class="coupon-title">Eucalyptus Savings!</span>
+                    <p _ngcontent-c2="" class="coupon-message"></p><span _ngcontent-c2="" class="close-icon">X</span>
+                </div>
+            </sucstu-coupon-banner>
+            <sucstu-header _ngcontent-c0="" _nghost-c3="">
+                <header _ngcontent-c3="" class="header">
+                    <div _ngcontent-c3="" class="header-container">
+                        <!---->
+                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="{% static '../static/assets/images/top-logo.png' %}"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="{% static '../static/assets/images/top-logo.png' %}"></a>
+                            <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
+                            <!---->
+                            <!---->
+                            <div _ngcontent-c3="" class="nav-container">
+                                {% if user.is_authenticated %}
+                                <div _ngcontent-c3="" class="nav-action logged-in"><a _ngcontent-c3="" href="{% url 'profile' %}">Account</a><a _ngcontent-c3="" test-id="header__logout-button" href="{% url 'logout' %}">Log Out</a><!----></div>
+                                {% else %}
+                                <!---->
+                                <h5 _ngcontent-c3="" class="guarantee-text">100% satisfaction guarantee</h5>
+                                <!---->
+                                <div _ngcontent-c3="" class="nav-action"><a _ngcontent-c3="" routerlink="/login" test-id="header__login-button" href="/login">Log In</a></div>
+                                {% endif %}
+                                <!---->
+                            </div>
+                        </div>
+                        <!---->
+                        <div _ngcontent-c3="" class="title-row">
+                            <h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
+                        </div>
+                    </div>
+                </header>
+            </sucstu-header>
+
+{% block content %}
+{% endblock %}
+
+<sucstu-footer _ngcontent-c0="" class="footer-container" _nghost-c4="">
+            <!---->
+            <footer _ngcontent-c4="" class="footer">
+                <div _ngcontent-c4="" class="footer-links-container">
+                    <!---->
+                    <div _ngcontent-c4="" class="footer-links__group">
+                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">More info</h5>
+                        <!---->
+                        <ul _ngcontent-c4="" class="footer-links__list">
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="/gift">Send a Gift</a></li>
+                        </ul>
+                    </div>
+                    <div _ngcontent-c4="" class="footer-links__group">
+                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Customer Care</h5>
+                        <!---->
+                        <ul _ngcontent-c4="" class="footer-links__list">
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="/about">About Us</a></li>
+                        </ul>
+                        <ul _ngcontent-c4="" class="footer-links__list">
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li>
+                        </ul>
+                        <ul _ngcontent-c4="" class="footer-links__list">
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li>
+                        </ul>
+                    </div>
+                    <div _ngcontent-c4="" class="footer-links__group">
+                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
+                        <!---->
+                        <ul _ngcontent-c4="" class="footer-links__list">
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div _ngcontent-c4="" class="footer-social-links">
+                    <div _ngcontent-c4="" class="footer-social-links__group">
+                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a>
+                        <!---->
+                        <!---->
+                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a>
+                </div>
+            </footer>
+        </sucstu-footer>
+    </div>
+</sucstu-root>
+</body>
+</html>

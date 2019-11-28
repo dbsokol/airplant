@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - TillandsiaGarden{% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<!doctype html>
+        <div _ngcontent-c0="" class="app-container">
+            <router-outlet _ngcontent-c0=""></router-outlet>
+            <sucstu-login>
+                <div class="login-container container">
+                    <h2 class="login-container__title">Log In</h2>
+                    <sucstu-auth-form _nghost-c6="">
+                        <form _ngcontent-c6="" method="post" action="/login/" class="login-form ng-dirty ng-touched ng-valid" novalidate="">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <span>{{ form.username.errors }}</span>
+                            <span>{{ form.password.errors }}</span>
+                            <div _ngcontent-c6="" class="form-group form-group--flex-start">
+                                {{ form.username|add_class:"form-group__input ng-dirty ng-valid ng-touched"|attr:"placeholder=Email" }}
+                            </div>
+                            
+                            <div _ngcontent-c6="" class="form-group form-group--flex-start">
+                                <div _ngcontent-c6="" class="form-group__password">
+                                {{ form.password|add_class:"form-group__input form-group__input--password ng-dirty ng-valid ng-touched"|attr:"placeholder=Password" }}
+                                <button _ngcontent-c6="" class="btn-show" type="button">Show</button></div>
+                            </div><a _ngcontent-c6="" class="forgot-password" routerlink="/forgot_password" href="/forgot_password">Forgot password?</a>
+                            <div _ngcontent-c6="" class="form-group form-group--submit"><button _ngcontent-c6="" class="btn btn-primary btn-primary--with-hover" type="submit" test-id="login__login-button"> Log In </button></div>
+                            <div _ngcontent-c6="" class="error-text-container">
+                            </div><a _ngcontent-c6="" class="subscribe-link" href="/checkout">Don't have an account? Subscribe now.</a>
+                        </form>
+                    </sucstu-auth-form>
+                </div>
+            </sucstu-login>
+        </div>
+    </div>
+{% endblock %}

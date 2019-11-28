@@ -1,65 +1,9 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Tillandsia Gardens</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<!--  <link rel="stylesheet/less" type="text/css" href="assets/css/style.less">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>-->
-  <base href="/">
+{% block title %}Home - TillandsiaGarden{% endblock %}
 
-  <!-- Fonts -->
-  <link rel="stylesheet" href="/assets/fonts/bebas-neue/style.css">
-  <link rel="stylesheet" href="/assets/fonts/space-mono/style.css">
-
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
-</head>
-<body data-gr-c-s-loaded="true">
-<sucstu-root _nghost-c0="" ng-version="7.2.0">
-    <!---->
-    <div _ngcontent-c0="" class="content">
-        <div _ngcontent-c0="" class="main">
-            <sucstu-notification-bar _ngcontent-c0="" _nghost-c1="">
-                <div _ngcontent-c1="" class="notification-bar notification-bar-disabled"><span _ngcontent-c1="" class="notification-bar-title"></span>
-                    <p _ngcontent-c1="" class="notification-bar-message"></p><span _ngcontent-c1="" class="close-icon">X</span>
-                </div>
-            </sucstu-notification-bar>
-            <sucstu-coupon-banner _ngcontent-c0="" _nghost-c2="">
-                <div _ngcontent-c2="" class="coupon-banner"><span _ngcontent-c2="" class="coupon-title">Eucalyptus Savings!</span>
-                    <p _ngcontent-c2="" class="coupon-message"></p><span _ngcontent-c2="" class="close-icon">X</span>
-                </div>
-            </sucstu-coupon-banner>
-            <sucstu-header _ngcontent-c0="" _nghost-c3="">
-                <header _ngcontent-c3="" class="header">
-                    <div _ngcontent-c3="" class="header-container">
-                        <!---->
-                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="/Users/josephsokol/Desktop/Tillandsia Gardens/Top Logo.png"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="/Users/josephsokol/Desktop/Tillandsia Gardens/Top Logo.png"></a>
-                            <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
-                            <!---->
-                            <!---->
-                            <div _ngcontent-c3="" class="nav-container">
-                                <!---->
-                                <h5 _ngcontent-c3="" class="guarantee-text">100% satisfaction guarantee</h5>
-                                <!---->
-                                <div _ngcontent-c3="" class="nav-action"><a _ngcontent-c3="" routerlink="/login" test-id="header__login-button" href="/login">Log In</a></div>
-                                <!---->
-                            </div>
-                        </div>
-                        <!---->
-                        <div _ngcontent-c3="" class="title-row">
-                            <h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
-                        </div>
-                    </div>
-                </header>
-            </sucstu-header>
+{% load static %}
+{% block content %}
             <div _ngcontent-c0="" class="app-container" style="margin-top: 60px;">
                 <router-outlet _ngcontent-c0=""></router-outlet>
                 <sucstu-pages-home _nghost-c5="">
@@ -71,48 +15,6 @@
                             </div>
                             <div _ngcontent-c5="" class="hero-slides-container">
                                 <div _ngcontent-c5="" class="mobile-hero-slide">
-                                    <owl-carousel _ngcontent-c5="">
-                                        <!---->
-                                        <owl-carousel-child class="owl-custom-theme owl-carousel owl-loaded">
-                                            <!---->
-                                            <div class="owl-stage-outer">
-                                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s;">
-                                                    <div class="owl-item active" style="display:none">
-                                                        <div _ngcontent-c5="">
-                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url(&quot;/Users/josephsokol/Desktop/Tillandsia Gardens/Tillandsia/IMG_3985.JPG&quot;);">
-                                                                <div _ngcontent-c5="" class="hero-title-container">
-                                                                    <h2 _ngcontent-c5="" class="hero-title hero-title--dark">Eucalyptus shipped straight to your door.</h2>
-                                                                    <div _ngcontent-c5="" class="hero-text hero-text--dark">Each month you'll receive a bundle of gorgeous eucalyptus for a pop of natural beauty in any space.</div>
-                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" class="hero-btn btn btn-primary--inset btn-primary--with-hoer">Subscribe</a></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item active">
-                                                        <div _ngcontent-c5="">
-                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url(&quot;/assets/images/desktop-bg-2.jpg&quot;);">
-                                                                <div _ngcontent-c5="" class="hero-title-container">
-                                                                    <h2 _ngcontent-c5="" class="hero-title hero-title--dark">Ancient trees. Fresh, modern spaces.</h2>
-                                                                    <div _ngcontent-c5="" class="hero-text hero-text--dark">Eucalyptus has been around for over 52 million years, but this ancient beauty is a seriously dreamy refresh for any modern space.</div>
-                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" class="hero-btn btn btn-primary--inset btn-primary--with-hoer hero-btn--dark">Subscribe</a></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="owl-nav disabled">
-                                                <div class="owl-prev">prev</div>
-                                                <div class="owl-next">next</div>
-                                            </div>
-                                            <div class="owl-dots">
-                                                <div class="owl-dot active"><span></span></div>
-                                                <div class="owl-dot"><span></span></div>
-                                                <div class="owl-dot"><span></span></div>
-                                                <div class="owl-dot"><span></span></div>
-                                            </div>
-                                        </owl-carousel-child>
-                                    </owl-carousel>
                                 </div>
                                 <div _ngcontent-c5="" class="desktop-hero-slide">
                                     <owl-carousel _ngcontent-c5="">
@@ -121,24 +23,24 @@
                                             <!---->
                                             <div class="owl-stage-outer">
                                                 <div class="owl-stage">
-                                                    <div class="owl-item">
+                                                    <div class="owl-item" style="display: none">
                                                         <div _ngcontent-c5="">
-                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url(&quot;/Users/josephsokol/Desktop/Tillandsia Gardens/Tillandsia/IMG_3985.JPG&quot;);">
+                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url({% static '../static/assets/images/IMG_3985.JPG' %});">
                                                                 <div _ngcontent-c5="" class="hero-title-container">
                                                                     <h2 _ngcontent-c5="" class="hero-title--dark">Grown in California, enjoyed everywhere.</h2>
                                                                     <div _ngcontent-c5="" class="hero-text--dark">Each sprig in your bouquet is hand-snipped from one of our trees, carefully bundled and boxed, then shipped to your doorstep.</div>
-                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" class="hero-btn btn btn-primary--inset btn-primary--with-hoer">Subscribe</a></div>
+                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" href="{% url 'checkout' %}" class="hero-btn btn btn-primary--inset btn-primary--with-hoer">Subscribe</a></div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="owl-item active">
                                                         <div _ngcontent-c5="">
-                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url(&quot;/Users/josephsokol/Desktop/Tillandsia Gardens/Tillandsia/IMG_3982.JPG&quot;);">
+                                                            <div _ngcontent-c5="" appbgdinamic="" class="slide-picture" style="background-image: url({% static '../static/assets/images/IMG_3985.JPG' %});">
                                                                 <div _ngcontent-c5="" class="hero-title-container">
                                                                     <h2 _ngcontent-c5="" class="hero-title">Grown in California, enjoyed everywhere.</h2>
                                                                     <div _ngcontent-c5="" class="hero-text">Each sprig in your bouquet is hand-snipped from one of our trees, carefully bundled and boxed, then shipped to your doorstep.</div>
-                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" class="hero-btn btn btn-primary--inset btn-primary--with-hoer">Subscribe</a></div>
+                                                                    <div _ngcontent-c5="" class="hero-actions"><a _ngcontent-c5="" href="{% url 'checkout' %}"class="hero-btn btn btn-primary--inset btn-primary--with-hoer">Subscribe</a></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -219,68 +121,4 @@
                 </sucstu-pages-home>
             </div>
         </div>
-        <sucstu-footer _ngcontent-c0="" class="footer-container" _nghost-c4="">
-            <!---->
-            <footer _ngcontent-c4="" class="footer">
-                <div _ngcontent-c4="" class="footer-links-container">
-                    <!---->
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">More info</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/gift">Send a Gift</a></li>
-                        </ul>
-                    </div>
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Customer Care</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/about">About Us</a></li>
-                        </ul>
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li>
-                        </ul>
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li>
-                        </ul>
-                    </div>
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div _ngcontent-c4="" class="footer-social-links">
-                    <div _ngcontent-c4="" class="footer-social-links__group">
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a>
-                        <!---->
-                        <!---->
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a>
-                </div>
-            </footer>
-        </sucstu-footer>
-    </div>
-</sucstu-root>
-    </script>
-  <script>
-    if (global === undefined) {
-      var global = window;
-    }
-  </script>
-
-  <!-- Pingdom (RUM) -->
-  <script src="//rum-static.pingdom.net/pa-5a6902084c407700070000ec.js" async=""></script>
-  <!-- End Pingdom (RUM) -->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/runtime.6e8730dc04db99b10d21.js"></script>-->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/polyfills.5b37dfb3e805b5dad2c6.js"></script>-->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/scripts.81ae062ed942e4a0c2d1.js"></script>-->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/main.73543d18de3973e9ec2e.js"></script><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ83LGH" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>-->
-
-
-
-<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","541096559715034");fbq("track","PageView");</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=541096559715034&amp;ev=PageView&amp;noscript=1"></noscript>
-</body>
-</html>
+    {% endblock %}

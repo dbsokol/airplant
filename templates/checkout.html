@@ -1,30 +1,11 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Tillandsia Gardens</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<!--  <link rel="stylesheet/less" type="text/css" href="assets/css/style.less">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>-->
-  <base href="/">
+{% block title %}Checkout - TillandsiaGarden{% endblock %}
 
-  <!-- Fonts -->
-  <link rel="stylesheet" href="/assets/fonts/bebas-neue/style.css">
-  <link rel="stylesheet" href="/assets/fonts/space-mono/style.css">
-
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
-</head>
+{% load static %}
+{% block content %}
 <body data-gr-c-s-loaded="true">
 <sucstu-root _nghost-c0="" ng-version="7.2.0">
-    <!---->
     <div _ngcontent-c0="" class="content">
         <div _ngcontent-c0="" class="main">
             <sucstu-notification-bar _ngcontent-c0="" _nghost-c1="">
@@ -40,20 +21,13 @@
             <sucstu-header _ngcontent-c0="" _nghost-c3="">
                 <header _ngcontent-c3="" class="header">
                     <div _ngcontent-c3="" class="header-container">
-                        <!---->
                         <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="assets/images/header-icon.png"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="assets/images/header-icon-mobile.png"></a>
                             <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
-                            <!---->
-                            <!---->
                             <div _ngcontent-c3="" class="nav-container">
-                                <!---->
                                 <h5 _ngcontent-c3="" class="guarantee-text">100% satisfaction guarantee</h5>
-                                <!---->
                                 <div _ngcontent-c3="" class="nav-action"><a _ngcontent-c3="" routerlink="/login" test-id="header__login-button" href="/login">Log In</a></div>
-                                <!---->
                             </div>
                         </div>
-                        <!---->
                         <div _ngcontent-c3="" class="title-row">
                             <h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
                         </div>
@@ -61,15 +35,10 @@
                 </header>
             </sucstu-header>
             <div _ngcontent-c0="" class="app-container">
-                <router-outlet _ngcontent-c0=""></router-outlet>
+                <router-outlet _ngcontent-c0=""></router-outlet> 
                 <sucstu-checkout _nghost-c29="">
                     <div _ngcontent-c29="" class="checkout-container container">
                         <div _ngcontent-c29="" class="checkout-text">
-                            <!---->
-                            <!---->
-                            <!---->
-                            <!---->
-                            <!---->
                             <div _ngcontent-c29="">
                                 <div _ngcontent-c29="">
                                     <p class="page-title">California’s most gorgeous eucalyptus shipped straight to your door.</p>
@@ -79,9 +48,6 @@
                                     <p class="checkout-text__2">Just $12 / month +shipping.</p>
                                 </div>
                             </div>
-                            <!---->
-                            <!---->
-                            <!---->
                         </div>
                         <div _ngcontent-c29="" class="checkout-container-title"><img _ngcontent-c29="" alt="" src="/assets/images/shoppingCart@2x.png">
                             <h5 _ngcontent-c29="" class="text-bolder">Checkout</h5>
@@ -93,14 +59,10 @@
                                         <div _ngcontent-c30="" class="card-header">
                                             <h3 _ngcontent-c30="" class="card-checkout__title">1. The Basics</h3>
                                         </div>
-                                        <!---->
                                         <div _ngcontent-c30="" class="card-content">
-                                            <!---->
                                             <div _ngcontent-c30="" class="ng-invalid ng-dirty ng-touched">
                                                 <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="email" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="email" name="email" placeholder="Email" type="email" test-id="checkout__basics__email">
-                                                    <!---->
-                                                    <!---->
-                                                    <!----><span _ngcontent-c30="" class="user-exist-message"> Email address already exist - <a _ngcontent-c30="" routerlink="/login" href="/login?redirect=checkout"><strong _ngcontent-c30="">Log in here.</strong></a></span>
+                                                    <span _ngcontent-c30="" class="user-exist-message"> Email address already exist - <a _ngcontent-c30="" routerlink="/login" href="/login?redirect=checkout"><strong _ngcontent-c30="">Log in here.</strong></a></span>
                                                     <!---->
                                                 </div>
                                                 <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="nope" class="form-group__input ng-dirty ng-valid ng-touched" formcontrolname="password" name="password" placeholder="Create Password" type="password" test-id="checkout__basics__password">
@@ -217,47 +179,24 @@
                                         <div _ngcontent-c34="" class="card-content ng-pristine ng-valid ng-touched">
                                             <div _ngcontent-c34="" class="order-summary-order">
                                                 <div _ngcontent-c34="" class="order-summary-img">
-                                                    <!---->
-                                                    <!---->
-                                                    <!---->
-                                                    <!---->
-                                                    <!---->
-                                                    <!----><img _ngcontent-c34="" alt="" src="/assets/images/checkout-img.png"></div>
+                                                <img _ngcontent-c34="" alt="" src="/assets/images/checkout-img.png"></div>
                                                 <div _ngcontent-c34="" class="order-summary-items">
                                                     <h4 _ngcontent-c34="" class="order-summary-plan text-medium"><span _ngcontent-c34="">Monthly Plan</span>
-                                                        <!---->
                                                     </h4>
-                                                    <!---->
                                                     <div _ngcontent-c34="" class="order-summary-plan-term">
-                                                        <!---->
-                                                        <!---->
                                                     </div>
-                                                    <!---->
                                                 </div>
                                             </div><span _ngcontent-c34="" class="card-checkout__separator mb-15"></span>
-                                            <!---->
                                             <div _ngcontent-c34="" class="order-summary-total">
-                                                <!---->
-                                                <!---->
                                                 <div _ngcontent-c34="" class="order-detail-item order-subtotal"><span _ngcontent-c34="">Subtotal</span><span _ngcontent-c34="">$12.00</span></div>
-                                                <!---->
                                                 <div _ngcontent-c34="" class="order-detail-item order-shipping"><span _ngcontent-c34="">Shipping</span><span _ngcontent-c34="">$7.50</span></div>
-                                                <!---->
-                                                <!---->
-                                                <!---->
                                                 <div _ngcontent-c34="" class="order-detail-item order-coupon"><img _ngcontent-c34="" alt="" src="assets/images/coupon.svg">
-                                                    <!---->
-                                                    <!----><input _ngcontent-c34="" class="coupon-input ng-pristine ng-valid ng-touched" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text">
-                                                    <!----><button _ngcontent-c34="" class="btn btn-coupon btn-primary--with-hover">Apply</button>
-                                                    <!---->
+                                                    <input _ngcontent-c34="" class="coupon-input ng-pristine ng-valid ng-touched" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text">
+                                                    <button _ngcontent-c34="" class="btn btn-coupon btn-primary--with-hover">Apply</button>
                                                 </div>
-                                                <!---->
                                                 <div _ngcontent-c34="" class="order-detail-item order-total"><span _ngcontent-c34="" class="text-bolder">Grand Total</span><span _ngcontent-c34="" class="text-bolder">$19.50</span>
-                                                    <!---->
                                                 </div>
                                             </div>
-                                            <!---->
-                                            <!---->
                                         </div>
                                     </div>
                                 </sucstu-checkout-summary>
@@ -267,97 +206,4 @@
                 </sucstu-checkout>
             </div>
         </div>
-        <sucstu-footer _ngcontent-c0="" class="footer-container" _nghost-c4="">
-            <!---->
-            <footer _ngcontent-c4="" class="footer">
-                <div _ngcontent-c4="" class="footer-links-container">
-                    <!---->
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">More info</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/gift">Send a Gift</a></li>
-                        </ul>
-                    </div>
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Customer Care</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/about">About Us</a></li>
-                        </ul>
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li>
-                        </ul>
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li>
-                        </ul>
-                    </div>
-                    <div _ngcontent-c4="" class="footer-links__group">
-                        <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
-                        <!---->
-                        <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div _ngcontent-c4="" class="footer-social-links">
-                    <div _ngcontent-c4="" class="footer-social-links__group">
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a>
-                        <!---->
-                        <!---->
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a>
-                </div>
-            </footer>
-        </sucstu-footer>
-    </div>
-</sucstu-root>
-
-<script>
-    if (global === undefined) {
-        var global = window;
-    }
-</script>
-
-<!-- Pingdom (RUM) -->
-<script src="//rum-static.pingdom.net/pa-5a6902084c407700070000ec.js" async=""></script>
-<!-- End Pingdom (RUM) -->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/runtime.6e8730dc04db99b10d21.js"></script>-->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/polyfills.5b37dfb3e805b5dad2c6.js"></script>-->
-<!--<script type="text/javascript" src="https://eucalyptusfarms.com/scripts.81ae062ed942e4a0c2d1.js"></script>-->
-<script type="text/javascript" src="https://eucalyptusfarms.com/main.73543d18de3973e9ec2e.js"></script>
-    
-    
-    
-<!-- GOOGLE -->    
-<!--    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ83LGH" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>-->
-
-
-<!-- FACEBOOK -->    
-<!--
-<script type="text/javascript" id="">
-    ! function(b, e, f, g, a, c, d) {
-        b.fbq || (a = b.fbq = function() {
-            a.callMethod ? a.callMethod.apply(a, arguments) : a.queue.push(arguments)
-        }, b._fbq || (b._fbq = a), a.push = a, a.loaded = !0, a.version = "2.0", a.queue = [], c = e.createElement(f), c.async = !0, c.src = g, d = e.getElementsByTagName(f)[0], d.parentNode.insertBefore(c, d))
-    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-    fbq("init", "541096559715034");
-    fbq("track", "PageView");
-</script>
-
-    
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=541096559715034&amp;ev=PageView&amp;noscript=1"></noscript>
--->
-<div class="pac-container pac-logo hdpi" style="display: none;"></div>
-<sucstu-modal _ngcontent-c29="" id="payment-error-modal" _nghost-c17="">
-    <div _ngcontent-c17="" class="modal">
-        <div _ngcontent-c17="" class="modal-body">
-            <div _ngcontent-c29="" class="error-modal">
-                <p _ngcontent-c29="" class="error-text">Sorry, something went wrong with your payment. Please try again.</p><button _ngcontent-c29="" class="btn btn-primary btn-primary--with-hover">Accept</button>
-            </div>
-        </div>
-    </div>
-    <div _ngcontent-c17="" class="modal-background"></div>
-</sucstu-modal>
-<div class="pac-container pac-logo hdpi" style="display: none;"></div>
-</body>
-</html>
+{% endblock %}

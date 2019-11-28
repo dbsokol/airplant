@@ -1,43 +1,303 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Tillandsia Gardens</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<!--  <link rel="stylesheet/less" type="text/css" href="assets/css/style.less">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>-->
-  <base href="/">
+{% block title %}About - TillandsiaGarden{% endblock %}
 
-  <!-- Fonts -->
-  <link rel="stylesheet" href="/assets/fonts/bebas-neue/style.css">
-  <link rel="stylesheet" href="/assets/fonts/space-mono/style.css">
-
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
-</head>
+{% load static %}
+{% block content %}
 <body data-gr-c-s-loaded="true">
-  <sucstu-root _nghost-c0="" ng-version="7.2.0"><!----><div _ngcontent-c0="" class="content"><div _ngcontent-c0="" class="main"><sucstu-notification-bar _ngcontent-c0="" _nghost-c1=""><div _ngcontent-c1="" class="notification-bar notification-bar-disabled"><span _ngcontent-c1="" class="notification-bar-title"></span><p _ngcontent-c1="" class="notification-bar-message"></p><span _ngcontent-c1="" class="close-icon">X</span></div></sucstu-notification-bar><sucstu-coupon-banner _ngcontent-c0="" _nghost-c2=""><div _ngcontent-c2="" class="coupon-banner"><span _ngcontent-c2="" class="coupon-title">Eucalyptus Savings!</span><p _ngcontent-c2="" class="coupon-message"></p><span _ngcontent-c2="" class="close-icon">X</span></div></sucstu-coupon-banner><sucstu-header _ngcontent-c0="" _nghost-c3=""><header _ngcontent-c3="" class="header"><div _ngcontent-c3="" class="header-container"><!----><div _ngcontent-c3="" class="nav-row" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="assets/images/header-icon.png"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="assets/images/header-icon-mobile.png"></a><h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1><!----><!----><div _ngcontent-c3="" class="nav-container"><!----><!----><div _ngcontent-c3="" class="nav-action logged-in"><a _ngcontent-c3="" routerlink="/profile" href="/profile">Account</a><a _ngcontent-c3="" routerlink="/" test-id="header__logout-button" href="/">Log Out</a><!----></div><!----></div></div><!----><div _ngcontent-c3="" class="title-row"><h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1></div></div></header></sucstu-header><div _ngcontent-c0="" class="app-container"><router-outlet _ngcontent-c0=""></router-outlet><sucstu-checkout _nghost-c9=""><div _ngcontent-c9="" class="checkout-container container"><div _ngcontent-c9="" class="checkout-text"><!----><!----><!----><!----><div _ngcontent-c9=""><div _ngcontent-c9=""><p class="page-title">California's Best Eucalyptus Shipped To Their Door.</p></div><div _ngcontent-c9=""><p class="checkout-text__2">Gift 6 months of eucalyptus to someone special, and we'll ship a bouquet right to their doorstep every month. Trimmed from our trees and carefully bundled, it's the perfect dose of serenity that will last for months to come!</p></div></div><!----><!----><!----><!----></div><div _ngcontent-c9="" class="checkout-container-title"><img _ngcontent-c9="" alt="" src="/assets/images/shoppingCart@2x.png"><h5 _ngcontent-c9="" class="text-bolder">Checkout</h5></div><form _ngcontent-c9="" class="checkout-form ng-untouched ng-pristine ng-valid" novalidate=""><div _ngcontent-c9="" class="checkout-content__right"><sucstu-checkout-basics _ngcontent-c9="" _nghost-c10=""><div _ngcontent-c10="" class="card card--checkout card--close card--deactivate" test-id="checkout__basics-container"><div _ngcontent-c10="" class="card-header"><h3 _ngcontent-c10="" class="card-checkout__title">1. The Basics</h3></div><!----></div></sucstu-checkout-basics><!----><sucstu-checkout-shipping-details _ngcontent-c9="" _nghost-c11=""><div _ngcontent-c11="" class="card card--checkout" test-id="checkout__shipping-details-container"><div _ngcontent-c11="" class="card-header"><h3 _ngcontent-c11="" class="card-checkout__title">1. Shipping Details</h3></div><div _ngcontent-c11="" class="card-content" style="display: block;"><div _ngcontent-c11="" class="ng-untouched ng-pristine ng-invalid" style="display: block;"><!----><div _ngcontent-c11="" class="gift-question-input"><label _ngcontent-c11="" for="isAGiftCheck">Is this a gift?</label><input _ngcontent-c11="" formcontrolname="isAGift" id="isAGiftCheck" name="isAGiftCheck" style="margin-left: 8px" type="checkbox" class="ng-untouched ng-pristine ng-valid"></div><!----><!----><div _ngcontent-c11="" class="form-group-row"><div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input capitalized-input ng-untouched ng-pristine ng-invalid" formcontrolname="firstName" id="firstName" name="firstName" placeholder="Recipient First Name" type="text" test-id="checkout__shipping-details__first-name"><!----></div><div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input capitalized-input ng-untouched ng-pristine ng-invalid" formcontrolname="lastName" id="lastName" name="lastName" placeholder="Recipient Last Name" type="text" test-id="checkout__shipping-details__last-name"><!----></div></div><!----><p _ngcontent-c11="" class="recipient-text">Make sure they get the full benefits of a Eucalyptus Farms membership! Keep the recipient of your gift updated on things like shipping, plant information, and care tips! Enter their email address here:</p><div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="email" id="recipientEmail" name="recipientEmail" placeholder="Recipient Email" type="text"><!----></div><!----><sucstu-gift-message-selection _ngcontent-c11="" _nghost-c17=""><div _ngcontent-c17="" class="gift-message-container"><div _ngcontent-c17="" class="select-container"><select _ngcontent-c17="" class="gift-select"><option _ngcontent-c17="" disabled="" selected="" value="">Fun gift message ideas...</option><!----><option _ngcontent-c17="" value="Enjoy this bundle of eucalyptus!"> Enjoy this bundle of eucalyptus! </option><option _ngcontent-c17="" value="You're cool. Here's some eucalyptus."> You're cool. Here's some eucalyptus. </option><option _ngcontent-c17="" value="I love you-calyptus."> I love you-calyptus. </option><option _ngcontent-c17="" value="Roses are red, violets are blue, but eucalyptus means &quot;I love you.&quot;"> Roses are red, violets are blue, but eucalyptus means "I love you." </option></select><img _ngcontent-c17="" class="arrow-icon" src="/assets/images/triangle.png"></div><div _ngcontent-c17="" class="form-group form-group__flex-start gift-message-box-container"><textarea _ngcontent-c17="" class="form-group__textarea ng-untouched ng-pristine ng-valid" id="message" maxlength="280" name="message" placeholder="Gift Message" rows="3"></textarea></div></div></sucstu-gift-message-selection><div _ngcontent-c11="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid"><!----><div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" appnonautocomplete="" autocomplete="2019-11-26T21:11:30.635Z" class="form-group__input ng-untouched ng-pristine ng-invalid" formcontrolname="shippingAddress" id="address" name="2019-11-26T21:11:30.635Z" placeholder="Address" type="text"><!----><!----></div><!----><!----><div _ngcontent-c11="" class="action-btn mb-10" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div><!----><div _ngcontent-c11="" class="form-group"><input _ngcontent-c11="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div><!----><!----><!----></div><!----><div _ngcontent-c11="" class="form-group form-group-shipment-item mb-15"><h4 _ngcontent-c11="" class="initial-date-title">Pick a Shipment Date!</h4><p _ngcontent-c11="" class="initial-date-text">Choose a shipping date for your gift! Gifts will be mailed out on the shipment date and arrive a few days later.</p><input _ngcontent-c11="" formcontrolname="initialDate" placeholder="Date Time" style="background-color: rgb(246, 246, 243); padding: 0.5rem 1rem; border: none; margin: 1rem 0px; width: 100%" test-id="checkout__shipping-details__shipping-date" aria-haspopup="true" min="2019-11-26T08:00:00.000Z" class="ng-untouched ng-pristine ng-valid"><owl-date-time _ngcontent-c11="" class="full-width" pickermode="popup" pickertype="calendar" placeholder="Pick up your shipment date" _nghost-c18=""></owl-date-time><!----></div><div _ngcontent-c11="" class="form-button-container"><button _ngcontent-c11="" class="btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__shipping-details__shipping-next"> Next </button></div></div><div _ngcontent-c11="" class="card-content__summary" style="display: none;"><div _ngcontent-c11="" class="summary-container"><div _ngcontent-c11="" class="summary__item"><div _ngcontent-c11="" class="summary__title">Recipient</div><p _ngcontent-c11="" class="summary__value">   </p></div><!----><!----><div _ngcontent-c11="" class="summary__item"><div _ngcontent-c11="" class="summary__title">Shipment Date</div><p _ngcontent-c11="" class="summary__value">11/26/19</p></div><div _ngcontent-c11="" class="summary__item"><div _ngcontent-c11="" class="summary__title">Address</div><p _ngcontent-c11="" class="summary__value"><span _ngcontent-c11=""></span><!----><span _ngcontent-c11=""> ,  </span></p></div></div><button _ngcontent-c11="" class="btn btn-primary--inset" type="button"> Edit </button></div></div></div></sucstu-checkout-shipping-details><!----><sucstu-checkout-secure-payment _ngcontent-c9="" _nghost-c13=""><div _ngcontent-c13="" class="card card--checkout card--secure-payment card--close disabled" test-id="checkout__card-container"><div _ngcontent-c13="" class="card-header"><h3 _ngcontent-c13="" class="card-checkout__title">2. Secure Payment <span _ngcontent-c13=""><img _ngcontent-c13="" alt="" src="/assets/images/locked@2x.png"></span></h3></div><div _ngcontent-c13="" class="card-content" style="display: none;"><!----><div _ngcontent-c13="" class="ng-untouched ng-pristine ng-valid" style="display: block;"><!----><div _ngcontent-c13="" class="form-group"><sucstu-payment-method-select _ngcontent-c13="" _nghost-c16=""><div _ngcontent-c16="" class="form-group__select"><select _ngcontent-c16="" class="custom-select" id="" name=""><!----><option _ngcontent-c16="" value="5cb62a6b1a0ad26800334553"> Visa ending in **** **** **** 9277 </option></select></div></sucstu-payment-method-select></div><div _ngcontent-c13="" class="form-group form-group__flex-start" test-id="checkout__card__iframe-cardNumber" style="display: none;"><div _ngcontent-c13="" class="form-group__input" id="card-number"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="number" name="braintree-hosted-field-number" id="braintree-hosted-field-number" style="border: none; width: 100%; height: 100%; float: left;"></iframe><div style="clear: both;"></div></div><!----></div><div _ngcontent-c13="" class="card-info-group" test-id="checkout__card__iframe-expDate" style="display: none;"><div _ngcontent-c13="" class="form-group card-info__date form-group__flex-start"><label _ngcontent-c13="" class="form-group__input" for="expiration-date"><span _ngcontent-c13="" class="hosted-label">Expiration Date</span><div _ngcontent-c13="" id="expiration-date"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="expirationDate" name="braintree-hosted-field-expirationDate" id="braintree-hosted-field-expirationDate" style="border: none; width: 100%; height: 100%; float: left;"></iframe><div style="clear: both;"></div></div></label><!----></div><div _ngcontent-c13="" class="form-group card-info__cvv form-group__flex-start" test-id="checkout__card__iframe-cvv"><label _ngcontent-c13="" class="form-group__input" for="cvv"><span _ngcontent-c13="" class="hosted-label">CVV</span><div _ngcontent-c13="" id="cvv"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="cvv" name="braintree-hosted-field-cvv" id="braintree-hosted-field-cvv" style="border: none; width: 100%; height: 100%; float: left;"></iframe><div style="clear: both;"></div></div></label><!----></div></div><div _ngcontent-c13="" class="form-button-container mt-15"><button _ngcontent-c13="" class="btn btn-primary btn-desk btn-primary--with-hover" id="submit-btn" type="button" test-id="checkout__card__card-next"> Next </button></div><!----></div><!----></div></div></sucstu-checkout-secure-payment></div><div _ngcontent-c9="" class="checkout-content__left"><sucstu-checkout-summary _ngcontent-c9="" _nghost-c14=""><div _ngcontent-c14="" class="card card--checkout"><div _ngcontent-c14="" class="card-header"><h3 _ngcontent-c14="" class="card-checkout__title">Order Summary</h3><span _ngcontent-c14="" class="card-checkout__separator"></span></div><div _ngcontent-c14="" class="card-content ng-untouched ng-pristine ng-valid"><div _ngcontent-c14="" class="order-summary-order"><div _ngcontent-c14="" class="order-summary-img"><!----><!----><!----><!----><!----><!----><img _ngcontent-c14="" alt="" src="/assets/images/checkout-img.png"></div><div _ngcontent-c14="" class="order-summary-items"><h4 _ngcontent-c14="" class="order-summary-plan text-medium"><span _ngcontent-c14="">6 Month Gift</span><!----></h4><!----><div _ngcontent-c14="" class="order-summary-plan-term"><!----><!----><a _ngcontent-c14=""><span _ngcontent-c14="" aria-hidden="true" class="glyphicon glyphicon-pencil"></span></a></div><!----></div></div><span _ngcontent-c14="" class="card-checkout__separator mb-15"></span><!----><div _ngcontent-c14="" class="order-summary-total"><!----><!----><div _ngcontent-c14="" class="order-detail-item order-subtotal"><span _ngcontent-c14="">Subtotal</span><span _ngcontent-c14="">$12.00</span></div><!----><div _ngcontent-c14="" class="order-detail-item order-shipping"><span _ngcontent-c14="">Shipping</span><span _ngcontent-c14="">$7.50</span></div><!----><!----><!----><div _ngcontent-c14="" class="order-detail-item order-coupon"><img _ngcontent-c14="" alt="" src="assets/images/coupon.svg"><!----><!----><input _ngcontent-c14="" class="coupon-input ng-untouched ng-pristine ng-valid" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text"><!----><button _ngcontent-c14="" class="btn btn-coupon btn-primary--with-hover">Apply</button><!----></div><!----><div _ngcontent-c14="" class="order-detail-item order-total"><span _ngcontent-c14="" class="text-bolder">Grand Total</span><span _ngcontent-c14="" class="text-bolder">$19.50</span><!----></div></div><!----><!----></div></div></sucstu-checkout-summary></div></form></div></sucstu-checkout></div></div><sucstu-footer _ngcontent-c0="" class="footer-container" _nghost-c4=""><!----><footer _ngcontent-c4="" class="footer"><div _ngcontent-c4="" class="footer-links-container"><!----><div _ngcontent-c4="" class="footer-links__group"><h5 _ngcontent-c4="" class="footer-links__title text-medium">More info</h5><!----><ul _ngcontent-c4="" class="footer-links__list"><li _ngcontent-c4="" class="footer-link__item"><a href="/gift">Send a Gift</a></li></ul></div><div _ngcontent-c4="" class="footer-links__group"><h5 _ngcontent-c4="" class="footer-links__title text-medium">Customer Care</h5><!----><ul _ngcontent-c4="" class="footer-links__list"><li _ngcontent-c4="" class="footer-link__item"><a href="/about">About Us</a></li></ul><ul _ngcontent-c4="" class="footer-links__list"><li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li></ul><ul _ngcontent-c4="" class="footer-links__list"><li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li></ul></div><div _ngcontent-c4="" class="footer-links__group"><h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5><!----><ul _ngcontent-c4="" class="footer-links__list"><li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li></ul></div></div><div _ngcontent-c4="" class="footer-social-links"><div _ngcontent-c4="" class="footer-social-links__group"><!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a><!----><!----><!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a></div></footer></sucstu-footer></div></sucstu-root>
-
-  <script>
-    if (global === undefined) {
-      var global = window;
-    }
-  </script>
-
-  <!-- Pingdom (RUM) -->
-  <script src="//rum-static.pingdom.net/pa-5a6902084c407700070000ec.js" async=""></script>
-  <!-- End Pingdom (RUM) -->
-<script type="text/javascript" src="runtime.6e8730dc04db99b10d21.js"></script><script type="text/javascript" src="polyfills.5b37dfb3e805b5dad2c6.js"></script><script type="text/javascript" src="scripts.81ae062ed942e4a0c2d1.js"></script><script type="text/javascript" src="main.73543d18de3973e9ec2e.js"></script><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ83LGH" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
-
-
-
-<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","541096559715034");fbq("track","PageView");</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=541096559715034&amp;ev=PageView&amp;noscript=1"></noscript>
-<img src="//logs-01.loggly.com/inputs/9b965af4-52fb-46fa-be1b-8dc5fb0aad05/tag/jsinsight/1*1.gif?ver=U11&amp;acid=A1254162-4675-4020-a73a-399a309a254d1&amp;type=UTT&amp;msg=No%20campaign%20for%20landing%20page%3A%20https%3A%2F%2Feucalyptusfarms.com%2Fgift&amp;event=identify() exit&amp;agent=Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_10_5)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F78.0.3904.97%20Safari%2F537.36" border="0" height="0" width="0" style="position: absolute; height: 0px; width: 0px; visibility: hidden;"><img src="//logs-01.loggly.com/inputs/9b965af4-52fb-46fa-be1b-8dc5fb0aad05/tag/jsinsight/1*1.gif?ver=U11&amp;acid=A1254162-4675-4020-a73a-399a309a254d1&amp;type=UTT&amp;msg=No%20campaign%20for%20landing%20page%3A%20https%3A%2F%2Feucalyptusfarms.com%2Fgift&amp;event=identify() exit&amp;agent=Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_10_5)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F78.0.3904.97%20Safari%2F537.36" border="0" height="0" width="0" style="position: absolute; height: 0px; width: 0px; visibility: hidden;"><sucstu-modal _ngcontent-c9="" id="payment-error-modal" _nghost-c15=""><div _ngcontent-c15="" class="modal"><div _ngcontent-c15="" class="modal-body"><div _ngcontent-c9="" class="error-modal"><p _ngcontent-c9="" class="error-text">Sorry, something went wrong with your payment. Please try again.</p><button _ngcontent-c9="" class="btn btn-primary btn-primary--with-hover">Accept</button></div></div></div><div _ngcontent-c15="" class="modal-background"></div></sucstu-modal><div class="pac-container pac-logo hdpi" style="display: none; width: 482px; position: absolute; left: 270px; top: 873px;"></div></body>
+<sucstu-root _nghost-c0="" ng-version="7.2.0">
+  <!---->
+  <div _ngcontent-c0="" class="content">
+    <div _ngcontent-c0="" class="main">
+      <sucstu-notification-bar _ngcontent-c0="" _nghost-c1="">
+        <div _ngcontent-c1="" class="notification-bar notification-bar-disabled"><span _ngcontent-c1="" class="notification-bar-title"></span>
+          <p _ngcontent-c1="" class="notification-bar-message"></p><span _ngcontent-c1="" class="close-icon">X</span></div>
+      </sucstu-notification-bar>
+      <sucstu-coupon-banner _ngcontent-c0="" _nghost-c2="">
+        <div _ngcontent-c2="" class="coupon-banner"><span _ngcontent-c2="" class="coupon-title">Eucalyptus Savings!</span>
+          <p _ngcontent-c2="" class="coupon-message"></p><span _ngcontent-c2="" class="close-icon">X</span></div>
+      </sucstu-coupon-banner>
+      <sucstu-header _ngcontent-c0="" _nghost-c3="">
+        <header _ngcontent-c3="" class="header">
+          <div _ngcontent-c3="" class="header-container">
+            <!---->
+            <div _ngcontent-c3="" class="nav-row" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="assets/images/header-icon.png"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="assets/images/header-icon-mobile.png"></a>
+              <h1
+                _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
+                <!---->
+                <!---->
+                <div _ngcontent-c3="" class="nav-container">
+                  <!---->
+                  <!---->
+                  <div _ngcontent-c3="" class="nav-action logged-in"><a _ngcontent-c3="" routerlink="/profile" href="/profile">Account</a><a _ngcontent-c3="" routerlink="/" test-id="header__logout-button" href="/">Log Out</a>
+                    <!---->
+                  </div>
+                  <!---->
+                </div>
+            </div>
+            <!---->
+            <div _ngcontent-c3="" class="title-row">
+              <h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
+            </div>
+          </div>
+        </header>
+      </sucstu-header>
+      <div _ngcontent-c0="" class="app-container">
+        <router-outlet _ngcontent-c0=""></router-outlet>
+        <sucstu-checkout _nghost-c9="">
+          <div _ngcontent-c9="" class="checkout-container container">
+            <div _ngcontent-c9="" class="checkout-text">
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <div _ngcontent-c9="">
+                <div _ngcontent-c9="">
+                  <p class="page-title">California's Best Eucalyptus Shipped To Their Door.</p>
+                </div>
+                <div _ngcontent-c9="">
+                  <p class="checkout-text__2">Gift 6 months of eucalyptus to someone special, and we'll ship a bouquet right to their doorstep every month. Trimmed from our trees and carefully bundled, it's the perfect dose of serenity that will last for months to come!</p>
+                </div>
+              </div>
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+            </div>
+            <div _ngcontent-c9="" class="checkout-container-title"><img _ngcontent-c9="" alt="" src="/assets/images/shoppingCart@2x.png">
+              <h5 _ngcontent-c9="" class="text-bolder">Checkout</h5>
+            </div>
+            <form _ngcontent-c9="" class="checkout-form ng-untouched ng-pristine ng-valid" novalidate="">
+              <div _ngcontent-c9="" class="checkout-content__right">
+                <sucstu-checkout-basics _ngcontent-c9="" _nghost-c10="">
+                  <div _ngcontent-c10="" class="card card--checkout card--close card--deactivate" test-id="checkout__basics-container">
+                    <div _ngcontent-c10="" class="card-header">
+                      <h3 _ngcontent-c10="" class="card-checkout__title">1. The Basics</h3>
+                    </div>
+                    <!---->
+                  </div>
+                </sucstu-checkout-basics>
+                <!---->
+                <sucstu-checkout-shipping-details _ngcontent-c9="" _nghost-c11="">
+                  <div _ngcontent-c11="" class="card card--checkout" test-id="checkout__shipping-details-container">
+                    <div _ngcontent-c11="" class="card-header">
+                      <h3 _ngcontent-c11="" class="card-checkout__title">1. Shipping Details</h3>
+                    </div>
+                    <div _ngcontent-c11="" class="card-content" style="display: block;">
+                      <div _ngcontent-c11="" class="ng-untouched ng-pristine ng-invalid" style="display: block;">
+                        <!---->
+                        <div _ngcontent-c11="" class="gift-question-input"><label _ngcontent-c11="" for="isAGiftCheck">Is this a gift?</label><input _ngcontent-c11="" formcontrolname="isAGift" id="isAGiftCheck" name="isAGiftCheck" style="margin-left: 8px" type="checkbox" class="ng-untouched ng-pristine ng-valid"></div>
+                        <!---->
+                        <!---->
+                        <div _ngcontent-c11="" class="form-group-row">
+                          <div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input capitalized-input ng-untouched ng-pristine ng-invalid" formcontrolname="firstName" id="firstName" name="firstName" placeholder="Recipient First Name" type="text" test-id="checkout__shipping-details__first-name">
+                            <!---->
+                          </div>
+                          <div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input capitalized-input ng-untouched ng-pristine ng-invalid" formcontrolname="lastName" id="lastName" name="lastName" placeholder="Recipient Last Name" type="text" test-id="checkout__shipping-details__last-name">
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                        <p _ngcontent-c11="" class="recipient-text">Make sure they get the full benefits of a Eucalyptus Farms membership! Keep the recipient of your gift updated on things like shipping, plant information, and care tips! Enter their email address here:</p>
+                        <div _ngcontent-c11=""
+                          class="form-group form-group__flex-start"><input _ngcontent-c11="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="email" id="recipientEmail" name="recipientEmail" placeholder="Recipient Email" type="text">
+                          <!---->
+                        </div>
+                        <!---->
+                        <sucstu-gift-message-selection _ngcontent-c11="" _nghost-c17="">
+                          <div _ngcontent-c17="" class="gift-message-container">
+                            <div _ngcontent-c17="" class="select-container"><select _ngcontent-c17="" class="gift-select"><option _ngcontent-c17="" disabled="" selected="" value="">Fun gift message ideas...</option><!----><option _ngcontent-c17="" value="Enjoy this bundle of eucalyptus!"> Enjoy this bundle of eucalyptus! </option><option _ngcontent-c17="" value="You're cool. Here's some eucalyptus."> You're cool. Here's some eucalyptus. </option><option _ngcontent-c17="" value="I love you-calyptus."> I love you-calyptus. </option><option _ngcontent-c17="" value="Roses are red, violets are blue, but eucalyptus means &quot;I love you.&quot;"> Roses are red, violets are blue, but eucalyptus means "I love you." </option></select>
+                              <img
+                                _ngcontent-c17="" class="arrow-icon" src="/assets/images/triangle.png"></div>
+                            <div _ngcontent-c17="" class="form-group form-group__flex-start gift-message-box-container"><textarea _ngcontent-c17="" class="form-group__textarea ng-untouched ng-pristine ng-valid" id="message" maxlength="280" name="message" placeholder="Gift Message" rows="3"></textarea></div>
+                          </div>
+                        </sucstu-gift-message-selection>
+                        <div _ngcontent-c11="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid">
+                          <!---->
+                          <div _ngcontent-c11="" class="form-group form-group__flex-start"><input _ngcontent-c11="" appnonautocomplete="" autocomplete="2019-11-26T21:11:30.635Z" class="form-group__input ng-untouched ng-pristine ng-invalid" formcontrolname="shippingAddress" id="address" name="2019-11-26T21:11:30.635Z"
+                              placeholder="Address" type="text">
+                            <!---->
+                            <!---->
+                          </div>
+                          <!---->
+                          <!---->
+                          <div _ngcontent-c11="" class="action-btn mb-10" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
+                          <!---->
+                          <div _ngcontent-c11="" class="form-group"><input _ngcontent-c11="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                          <!---->
+                          <!---->
+                          <!---->
+                        </div>
+                        <!---->
+                        <div _ngcontent-c11="" class="form-group form-group-shipment-item mb-15">
+                          <h4 _ngcontent-c11="" class="initial-date-title">Pick a Shipment Date!</h4>
+                          <p _ngcontent-c11="" class="initial-date-text">Choose a shipping date for your gift! Gifts will be mailed out on the shipment date and arrive a few days later.</p><input _ngcontent-c11="" formcontrolname="initialDate" placeholder="Date Time" style="background-color: rgb(246, 246, 243); padding: 0.5rem 1rem; border: none; margin: 1rem 0px; width: 100%"
+                            test-id="checkout__shipping-details__shipping-date" aria-haspopup="true" min="2019-11-26T08:00:00.000Z" class="ng-untouched ng-pristine ng-valid">
+                          <owl-date-time _ngcontent-c11="" class="full-width" pickermode="popup" pickertype="calendar"
+                            placeholder="Pick up your shipment date" _nghost-c18=""></owl-date-time>
+                          <!---->
+                        </div>
+                        <div _ngcontent-c11="" class="form-button-container"><button _ngcontent-c11="" class="btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__shipping-details__shipping-next"> Next </button></div>
+                      </div>
+                      <div _ngcontent-c11="" class="card-content__summary" style="display: none;">
+                        <div _ngcontent-c11="" class="summary-container">
+                          <div _ngcontent-c11="" class="summary__item">
+                            <div _ngcontent-c11="" class="summary__title">Recipient</div>
+                            <p _ngcontent-c11="" class="summary__value"> </p>
+                          </div>
+                          <!---->
+                          <!---->
+                          <div _ngcontent-c11="" class="summary__item">
+                            <div _ngcontent-c11="" class="summary__title">Shipment Date</div>
+                            <p _ngcontent-c11="" class="summary__value">11/26/19</p>
+                          </div>
+                          <div _ngcontent-c11="" class="summary__item">
+                            <div _ngcontent-c11="" class="summary__title">Address</div>
+                            <p _ngcontent-c11="" class="summary__value"><span _ngcontent-c11=""></span>
+                              <!----><span _ngcontent-c11=""> ,  </span></p>
+                          </div>
+                        </div><button _ngcontent-c11="" class="btn btn-primary--inset" type="button"> Edit </button></div>
+                    </div>
+                  </div>
+                </sucstu-checkout-shipping-details>
+                <!---->
+                <sucstu-checkout-secure-payment _ngcontent-c9="" _nghost-c13="">
+                  <div _ngcontent-c13="" class="card card--checkout card--secure-payment card--close disabled" test-id="checkout__card-container">
+                    <div _ngcontent-c13="" class="card-header">
+                      <h3 _ngcontent-c13="" class="card-checkout__title">2. Secure Payment <span _ngcontent-c13=""><img _ngcontent-c13="" alt="" src="/assets/images/locked@2x.png"></span></h3>
+                    </div>
+                    <div _ngcontent-c13="" class="card-content" style="display: none;">
+                      <!---->
+                      <div _ngcontent-c13="" class="ng-untouched ng-pristine ng-valid" style="display: block;">
+                        <!---->
+                        <div _ngcontent-c13="" class="form-group">
+                          <sucstu-payment-method-select _ngcontent-c13="" _nghost-c16="">
+                            <div _ngcontent-c16="" class="form-group__select"><select _ngcontent-c16="" class="custom-select" id="" name=""><!----><option _ngcontent-c16="" value="5cb62a6b1a0ad26800334553"> Visa ending in **** **** **** 9277 </option></select></div>
+                          </sucstu-payment-method-select>
+                        </div>
+                        <div _ngcontent-c13="" class="form-group form-group__flex-start" test-id="checkout__card__iframe-cardNumber" style="display: none;">
+                          <div _ngcontent-c13="" class="form-group__input" id="card-number"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="number" name="braintree-hosted-field-number"
+                              id="braintree-hosted-field-number" style="border: none; width: 100%; height: 100%; float: left;"></iframe>
+                            <div style="clear: both;"></div>
+                          </div>
+                          <!---->
+                        </div>
+                        <div _ngcontent-c13="" class="card-info-group" test-id="checkout__card__iframe-expDate" style="display: none;">
+                          <div _ngcontent-c13="" class="form-group card-info__date form-group__flex-start"><label _ngcontent-c13="" class="form-group__input" for="expiration-date"><span _ngcontent-c13="" class="hosted-label">Expiration Date</span><div _ngcontent-c13="" id="expiration-date"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="expirationDate" name="braintree-hosted-field-expirationDate" id="braintree-hosted-field-expirationDate" style="border: none; width: 100%; height: 100%; float: left;"></iframe><div style="clear: both;"></div></div></label>
+                            <!---->
+                          </div>
+                          <div _ngcontent-c13="" class="form-group card-info__cvv form-group__flex-start" test-id="checkout__card__iframe-cvv"><label _ngcontent-c13="" class="form-group__input" for="cvv"><span _ngcontent-c13="" class="hosted-label">CVV</span><div _ngcontent-c13="" id="cvv"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#54c7e4e7-ffb9-4be6-a4a1-5b2f61fad14a" frameborder="0" allowtransparency="true" scrolling="no" type="cvv" name="braintree-hosted-field-cvv" id="braintree-hosted-field-cvv" style="border: none; width: 100%; height: 100%; float: left;"></iframe><div style="clear: both;"></div></div></label>
+                            <!---->
+                          </div>
+                        </div>
+                        <div _ngcontent-c13="" class="form-button-container mt-15"><button _ngcontent-c13="" class="btn btn-primary btn-desk btn-primary--with-hover" id="submit-btn" type="button" test-id="checkout__card__card-next"> Next </button></div>
+                        <!---->
+                      </div>
+                      <!---->
+                    </div>
+                  </div>
+                </sucstu-checkout-secure-payment>
+              </div>
+              <div _ngcontent-c9="" class="checkout-content__left">
+                <sucstu-checkout-summary _ngcontent-c9="" _nghost-c14="">
+                  <div _ngcontent-c14="" class="card card--checkout">
+                    <div _ngcontent-c14="" class="card-header">
+                      <h3 _ngcontent-c14="" class="card-checkout__title">Order Summary</h3><span _ngcontent-c14="" class="card-checkout__separator"></span></div>
+                    <div _ngcontent-c14="" class="card-content ng-untouched ng-pristine ng-valid">
+                      <div _ngcontent-c14="" class="order-summary-order">
+                        <div _ngcontent-c14="" class="order-summary-img">
+                          <!---->
+                          <!---->
+                          <!---->
+                          <!---->
+                          <!---->
+                          <!----><img _ngcontent-c14="" alt="" src="/assets/images/checkout-img.png"></div>
+                        <div _ngcontent-c14="" class="order-summary-items">
+                          <h4 _ngcontent-c14="" class="order-summary-plan text-medium"><span _ngcontent-c14="">6 Month Gift</span>
+                            <!---->
+                          </h4>
+                          <!---->
+                          <div _ngcontent-c14="" class="order-summary-plan-term">
+                            <!---->
+                            <!----><a _ngcontent-c14=""><span _ngcontent-c14="" aria-hidden="true" class="glyphicon glyphicon-pencil"></span></a></div>
+                          <!---->
+                        </div>
+                      </div><span _ngcontent-c14="" class="card-checkout__separator mb-15"></span>
+                      <!---->
+                      <div _ngcontent-c14="" class="order-summary-total">
+                        <!---->
+                        <!---->
+                        <div _ngcontent-c14="" class="order-detail-item order-subtotal"><span _ngcontent-c14="">Subtotal</span><span _ngcontent-c14="">$12.00</span></div>
+                        <!---->
+                        <div _ngcontent-c14="" class="order-detail-item order-shipping"><span _ngcontent-c14="">Shipping</span><span _ngcontent-c14="">$7.50</span></div>
+                        <!---->
+                        <!---->
+                        <!---->
+                        <div _ngcontent-c14="" class="order-detail-item order-coupon"><img _ngcontent-c14="" alt="" src="assets/images/coupon.svg">
+                          <!---->
+                          <!----><input _ngcontent-c14="" class="coupon-input ng-untouched ng-pristine ng-valid" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text">
+                          <!----><button _ngcontent-c14="" class="btn btn-coupon btn-primary--with-hover">Apply</button>
+                          <!---->
+                        </div>
+                        <!---->
+                        <div _ngcontent-c14="" class="order-detail-item order-total"><span _ngcontent-c14="" class="text-bolder">Grand Total</span><span _ngcontent-c14="" class="text-bolder">$19.50</span>
+                          <!---->
+                        </div>
+                      </div>
+                      <!---->
+                      <!---->
+                    </div>
+                  </div>
+                </sucstu-checkout-summary>
+              </div>
+            </form>
+          </div>
+        </sucstu-checkout>
+      </div>
+    </div>
+    <sucstu-footer _ngcontent-c0="" class="footer-container" _nghost-c4="">
+      <!---->
+      <footer _ngcontent-c4="" class="footer">
+        <div _ngcontent-c4="" class="footer-links-container">
+          <!---->
+          <div _ngcontent-c4="" class="footer-links__group">
+            <h5 _ngcontent-c4="" class="footer-links__title text-medium">More info</h5>
+            <!---->
+            <ul _ngcontent-c4="" class="footer-links__list">
+              <li _ngcontent-c4="" class="footer-link__item"><a href="/gift">Send a Gift</a></li>
+            </ul>
+          </div>
+          <div _ngcontent-c4="" class="footer-links__group">
+            <h5 _ngcontent-c4="" class="footer-links__title text-medium">Customer Care</h5>
+            <!---->
+            <ul _ngcontent-c4="" class="footer-links__list">
+              <li _ngcontent-c4="" class="footer-link__item"><a href="/about">About Us</a></li>
+            </ul>
+            <ul _ngcontent-c4="" class="footer-links__list">
+              <li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li>
+            </ul>
+            <ul _ngcontent-c4="" class="footer-links__list">
+              <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li>
+            </ul>
+          </div>
+          <div _ngcontent-c4="" class="footer-links__group">
+            <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
+            <!---->
+            <ul _ngcontent-c4="" class="footer-links__list">
+              <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div _ngcontent-c4="" class="footer-social-links">
+          <div _ngcontent-c4="" class="footer-social-links__group">
+            <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a>
+            <!---->
+            <!---->
+            <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a></div>
+      </footer>
+    </sucstu-footer>
+  </div>
+</sucstu-root>
+</body>
+</html>
+{% endblock %}
