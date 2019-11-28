@@ -6,7 +6,6 @@ from django import forms
 
 class RegisterForm(UserCreationForm):
     phone = forms.CharField(max_length=20, help_text='Required.')
-    full_name = forms.CharField(max_length=100, help_text='Required.')
 
     class Meta:
         model = User

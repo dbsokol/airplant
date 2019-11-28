@@ -1,39 +1,8 @@
 {% extends 'base.html' %}
-
 {% block title %}Checkout - TillandsiaGarden{% endblock %}
-
+{% load widget_tweaks %}
 {% load static %}
 {% block content %}
-<body data-gr-c-s-loaded="true">
-<sucstu-root _nghost-c0="" ng-version="7.2.0">
-    <div _ngcontent-c0="" class="content">
-        <div _ngcontent-c0="" class="main">
-            <sucstu-notification-bar _ngcontent-c0="" _nghost-c1="">
-                <div _ngcontent-c1="" class="notification-bar notification-bar-enabled"><span _ngcontent-c1="" class="notification-bar-title"></span>
-                    <p _ngcontent-c1="" class="notification-bar-message"></p><span _ngcontent-c1="" class="close-icon">X</span>
-                </div>
-            </sucstu-notification-bar>
-            <sucstu-coupon-banner _ngcontent-c0="" _nghost-c2="">
-                <div _ngcontent-c2="" class="coupon-banner"><span _ngcontent-c2="" class="coupon-title">Eucalyptus Savings!</span>
-                    <p _ngcontent-c2="" class="coupon-message"></p><span _ngcontent-c2="" class="close-icon">X</span>
-                </div>
-            </sucstu-coupon-banner>
-            <sucstu-header _ngcontent-c0="" _nghost-c3="">
-                <header _ngcontent-c3="" class="header">
-                    <div _ngcontent-c3="" class="header-container">
-                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="assets/images/header-icon.png"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="assets/images/header-icon-mobile.png"></a>
-                            <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
-                            <div _ngcontent-c3="" class="nav-container">
-                                <h5 _ngcontent-c3="" class="guarantee-text">100% satisfaction guarantee</h5>
-                                <div _ngcontent-c3="" class="nav-action"><a _ngcontent-c3="" routerlink="/login" test-id="header__login-button" href="/login">Log In</a></div>
-                            </div>
-                        </div>
-                        <div _ngcontent-c3="" class="title-row">
-                            <h1 _ngcontent-c3="" class="header-title header-title--mobile"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
-                        </div>
-                    </div>
-                </header>
-            </sucstu-header>
             <div _ngcontent-c0="" class="app-container">
                 <router-outlet _ngcontent-c0=""></router-outlet> 
                 <sucstu-checkout _nghost-c29="">
@@ -49,10 +18,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div _ngcontent-c29="" class="checkout-container-title"><img _ngcontent-c29="" alt="" src="/assets/images/shoppingCart@2x.png">
+                        <div _ngcontent-c29="" class="checkout-container-title"><img _ngcontent-c29="" alt="" src="{% static '../static/assets/images/shoppingCart@2x.png' %}">
                             <h5 _ngcontent-c29="" class="text-bolder">Checkout</h5>
                         </div>
-                        <form _ngcontent-c29="" class="checkout-form ng-pristine ng-valid ng-touched" novalidate="">
+                        <form _ngcontent-c29="" action="/register/" method="post" class="checkout-form ng-pristine ng-valid ng-touched" novalidate="">
+                            {% csrf_token %}
                             <div _ngcontent-c29="" class="checkout-content__right">
                                 <sucstu-checkout-basics _ngcontent-c29="" _nghost-c30="">
                                     <div _ngcontent-c30="" class="card card--checkout enabled" test-id="checkout__basics-container">
@@ -61,21 +31,21 @@
                                         </div>
                                         <div _ngcontent-c30="" class="card-content">
                                             <div _ngcontent-c30="" class="ng-invalid ng-dirty ng-touched">
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="email" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="email" name="email" placeholder="Email" type="email" test-id="checkout__basics__email">
-                                                    <span _ngcontent-c30="" class="user-exist-message"> Email address already exist - <a _ngcontent-c30="" routerlink="/login" href="/login?redirect=checkout"><strong _ngcontent-c30="">Log in here.</strong></a></span>
-                                                    <!---->
+                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                                    {{ form.username|add_class:"form-group__input ng-untouched ng-pristine ng-valid"|attr:"placeholder=Email" }}
+                                                    <!--<span _ngcontent-c30="" class="user-exist-message"> Email address already exist - <a _ngcontent-c30="" routerlink="/login" href="/login?redirect=checkout"><strong _ngcontent-c30="">Log in here.</strong></a></span>-->
                                                 </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="nope" class="form-group__input ng-dirty ng-valid ng-touched" formcontrolname="password" name="password" placeholder="Create Password" type="password" test-id="checkout__basics__password">
-                                                    <!---->
+                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                                    {{ form.password|add_class:"form-group__input ng-dirty ng-valid ng-touched"|attr:"placeholder=Create Password" }}
                                                 </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="given-name" class="form-group__input capital-case-input ng-untouched ng-pristine ng-invalid" formcontrolname="firstName" name="name" placeholder="First Name" type="text" test-id="checkout__basics__first-name">
-                                                    <!---->
+                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                                    {{ form.firstname|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=First Name" }}
                                                 </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="family-name" class="form-group__input capital-case-input ng-untouched ng-pristine ng-invalid" formcontrolname="lastName" name="lname" placeholder="Last Name" type="text" test-id="checkout__basics__last-name">
-                                                    <!---->
+                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                                    {{ form.lastname|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=Last Name" }}
                                                 </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start"><input _ngcontent-c30="" autocomplete="tel" class="form-group__input ng-untouched ng-pristine ng-invalid" formcontrolname="phone" name="phone" placeholder="Phone Number" type="phone" test-id="checkout__basics__phone-number">
-                                                    <!---->
+                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                                    {{ form.phone|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=Phone Number" }}
                                                 </div>
                                                 <div _ngcontent-c30="" class="form-button-container"><button _ngcontent-c30="" class="btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__basics__basic-next" disabled=""> Next </button></div>
                                             </div>

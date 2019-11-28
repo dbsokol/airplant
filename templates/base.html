@@ -1,16 +1,14 @@
 {% load static %}
+{% load widget_tweaks %}
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <title>Tillandsia Gardens</title>
-  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">-->
-  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">-->
-  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">-->
-  <!--<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-icon-180x180.png">-->
-  <!--<link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">-->
-  <!--<link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">-->
+  <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-16x16.png' %}" sizes="16x16">
+  <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-32x32.png' %}" sizes="32x32">
+  <link rel="icon" type="image/x-icon" href="{% static '../static/assets/images/favicons/favicon.ico' %}">
   <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/app.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/style.css' %}">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
@@ -96,14 +94,21 @@
                 </div>
                 <div _ngcontent-c4="" class="footer-social-links">
                     <div _ngcontent-c4="" class="footer-social-links__group">
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="/assets/images/facebook@2x.png"></a>
-                        <!---->
-                        <!---->
-                        <!----><a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Instagram Icon" src="/assets/images/instagram@2x.png"></a></div><a _ngcontent-c4="" class="go-top-btn"><img _ngcontent-c4="" alt="" src="/assets/images/go-top.png"></a>
+                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms-389566058474846/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/facebok-icon.png' %}"></a>
+                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><i class="fab fa-instagram"></i></a></div>
                 </div>
             </footer>
         </sucstu-footer>
     </div>
 </sucstu-root>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- application javascript -->
+<script>
+$('#btn-show').click(function() {
+     $('#pass').attr('type','text');
+});
+</script>
+
 </html>

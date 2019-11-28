@@ -9,7 +9,6 @@ class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20)
-    full_name = models.CharField(max_length=100, blank=True)
     
     def __str__(self):
         return self.user.email
@@ -19,7 +18,24 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+    
+    
+    
+class ShippingDetails(models.Model):
+    
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=100)
+    address1 = models.CharField(max_length=100)
+    address2 = models.CharField(max_length=100, blank=True)
+    
+    def __str__(self):
+        return self.profile.user.email
+        
+    class Meta:
+        verbose_name = 'Shipping Details'
+        verbose_name_plural = 'Shipping Details'

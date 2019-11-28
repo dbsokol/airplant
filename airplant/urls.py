@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('Accounts.urls')),
     path('admin/', admin.site.urls),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    #path('checkout/', TemplateView.as_view(template_name='checkout.html'), name='checkout'),
+    path('checkout/', TemplateView.as_view(template_name='checkout.html'), name='checkout'),
     path('faq/', TemplateView.as_view(template_name='faq.html'), name='faq'),
     path('gift-checkout/', TemplateView.as_view(template_name='gift-checkout.html'), name='gift-checkout'),
     path('gift/', TemplateView.as_view(template_name='gift.html'), name='gift'),

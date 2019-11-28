@@ -2,7 +2,17 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Profile, ShippingDetails
+
+
+class CustomShippingDetailsAdmin(admin.ModelAdmin):
+    
+    list_display = ('get_email', 'state', 'city', 'zip_code', 'address1', 'address2')
+
+    def get_email(self, instance):
+        return instance.profile.user.email
+    get_email.short_description = 'email'
+
 
 class ProfileInline(admin.StackedInline):
     model = Profile
@@ -10,20 +20,17 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'Profile'
     fk_name = 'user'
 
+
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
 
-    list_display = ('email', 'get_phone', 'get_full_name')
+    list_display = ('email', 'get_phone')
     list_select_related = ('profile', )
 
     def get_phone(self, instance):
         return instance.profile.phone
     get_phone.short_description = 'Phone'
         
-    def get_full_name(self, instance):
-        return instance.profile.full_name
-    get_full_name.short_description = 'Full Name'
-
     def get_inline_instances(self, request, obj=None):
         if not obj:
             return list()
@@ -32,3 +39,4 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(ShippingDetails, CustomShippingDetailsAdmin)
