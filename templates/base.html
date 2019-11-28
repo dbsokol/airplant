@@ -107,7 +107,9 @@
 <!-- application javascript -->
 <script>
 $('#btn-show').click(function() {
-     $('#pass').attr('type','text');
+    pass = $('#id_password');
+    type = pass.attr('type');
+    type == 'text' ? pass.attr('type','password') : pass.attr('type','text');
 });
 </script>
 
