@@ -36,4 +36,5 @@ wcwidth==0.1.7
 websocket-client==0.56.0
 dj-database-url==0.5.0
 braintree==3.57.1
-eastpost==4.0.0
+easypost==4.0.0
+
