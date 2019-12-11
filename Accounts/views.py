@@ -1,32 +1,451 @@
+from Accounts.forms import RegisterForm, PersonalDetailsForm, ShippingDetailsForm, PaymentDetailsForm
+from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, Coupon
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
-from Accounts.forms import RegisterForm
+from django.contrib.auth.models import User
+from django.template import RequestContext
+from airplant.settings import gateway
+from django.http import HttpResponse
+from datetime import datetime
+import Tools.Tools as tools
+from time import time
+import easypost
+import hashlib
+import json
+import re
+
+
+def LoadCheckout(request):
+
+    ''' Accepts request from '/checkout', renders checkout.html template '''
+
+    tools.PrintTitle('Accounts.views.LoadCheckout')
+    
+    return render(request, 'checkout.html')
+
+
+
+def CheckEmail(request):
+    
+    ''' Accepts request from '/check_email', returns 1 if email is in use, 0 otherwise '''
+    
+    tools.PrintTitle('Accounts.views.CheckEmail')
+    
+    # get email from request:
+    email = request.POST['email']
+
+    # regex for valid email:
+    regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$'
+
+    # debug:
+    print('[Accounts.views.CheckEmail]: Received email input from front-end [%s] ' %email)
+    
+    # check if email is invalid:
+    if(not re.search(regex,email)):  
+        
+        status = 1
+        internal_message = 'invalid email'
+        message = 'Invalid email.'
+        
+        # debug:
+        print('[Accounts.views.CheckEmail]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message)) 
+
+        return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+    
+    # check if email is already in use:
+    if User.objects.filter(email=email).exists():
+        
+        # check if user completed registration:
+        if User.objects.get(email=email).profile.is_registered():
+        
+            # set message, status
+            message = 'Email is already in use, <a style="text-decoration:underline" href="/login/"> log in instead.</a>'
+            internal_message = 'email in use, user registered'
+            status = 1
+        
+        # check if user never completed registration: 
+        else:
+            message = ''
+            internal_message = 'email in use, user not registered'
+            status = 0
+        
+    # check that email is not in use:
+    else:
+        message = ''
+        internal_message = 'email available'
+        status = 0
+
+    # debug:
+    print('[Accounts.views.CheckEmail]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+    
+    return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+    
+
+
+def CheckPassword(request):
+    
+    ''' Accepts request from front end at '/check_password', returns password status '''
+    
+    tools.PrintTitle('Accounts.views.CheckPassword')
+    
+    # unpack request:
+    password1 = request.POST['password1']
+    password2 = request.POST['password2']
+    
+    # debug:
+    print('[Accounts.views.CheckPassword]: Received passwords input from front-end 1:[%s], 2:[%s] ' %(password1, password2))
+    
+    # check if passwords match:
+    if (password1 != password2):
+        
+        status = 1
+        message = 'Passwords do not match'
+        internal_message = message
+        
+        # debug:
+        print('[Accounts.views.CheckPassword]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+        
+        return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+     
+    # check length of password:
+    if (len(password1) < 6):
+        
+        status = 1
+        message = 'Passwords must be at least 6 characters'
+        internal_message = message
+        
+        # debug:
+        print('[Accounts.views.CheckPassword]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+        
+        return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+    
+    # check if password contains only numbers or only letters:
+    if (password1.isdigit() or password1.isalpha()):
+        
+        status = 1
+        message = 'Passwords must contain at least 1 letter and 1 number'
+        internal_message = message
+        
+        # debug:
+        print('[Accounts.views.CheckPassword]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+        
+        return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+    
+    status = 0
+    message = 'Password okay'
+    internal_message = message
+    
+    return HttpResponse(json.dumps({'message': message, 'status' : status}), content_type='application/json')
+
+
+
+def CheckCoupon(request):
+    
+    ''' Checks coupon code from front end '''
+    
+    tools.PrintTitle('Accounts.views.CheckCoupon')
+    
+    try:
+        
+        # debug:
+        print('[Accounts.views.CheckCoupon]: Got post request with [%s]' %request.POST)
+    
+        email = request.POST['email']
+        coupon_code = request.POST['coupon']
+        
+        # check if code is valid:
+        if Coupon.objects.filter(coupon_code=coupon_code).exists():
+            
+            discount = Coupon.objects.get(coupon_code=coupon_code).discount
+            
+            status = 0
+            internal_message = 'discount: %s' %discount
+            message = 'Found coupon.'
+            
+        # if code is not valid:    
+        else:
+        
+            discount = 0
+        
+            status = -1
+            internal_message = 'coupon does not exist'
+            message = 'Coupon does not exist.'
+
+    # error handler:
+    except Exception as e:
+        
+        discount = 0
+        
+        status = 1
+        internal_message = e
+        message = 'bad request (404)'
+
+    print('[Accounts.views.CheckCoupon]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+
+    return HttpResponse(json.dumps({'message': message, 'status' : status, 'discount' : discount}))
+
+
+
+def GetToken(request):
+    
+    ''' Sends braintree token to front end '''
+    
+    tools.PrintTitle('Accounts.views.GetToken')
+    
+    try:
+        
+        # debug:
+        print('[Accounts.views.GetToken]: Got post request with [%s]' %request.POST)
+        
+        # get braintree token keyword argsuments:
+        braintree_token_kwargs = {
+            'id' : hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
+            'email' : request.POST['email'],
+            'first_name' : request.POST['first_name'],
+            'last_name' : request.POST['last_name'],
+            'phone' : request.POST['phone'],
+        }
+            
+        # create braintree customer:    
+        braintree_customer_result = gateway.customer.create(braintree_token_kwargs)
+        braintree_client_token = gateway.client_token.generate({"customer_id" : braintree_token_kwargs['id'] })
+        
+        
+        status = 0
+        internal_message = 'built token with user email [%s]' %braintree_token_kwargs['email'] 
+        message = 'built token'
+    
+        print('[Accounts.views.GetToken]: customer id [%s]' %braintree_token_kwargs['id'])
+        print('[Accounts.views.GetToken]: Braintree customer [%s]' %braintree_customer_result)
+        
+    except Exception as e:
+        
+        print('[Accounts.views.GetToken]: Exception [%s]' %e)
+        
+        braintree_client_token = 0
+        
+        status = 1
+        internal_message = 'error in token creation'
+        message = 'could not build token'
+
+    print('[Accounts.views.GetToken]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+
+    return HttpResponse(json.dumps({'message': message, 'status' : status, 'token' : braintree_client_token, 'customer_id' : braintree_token_kwargs['id']}))
 
 
 
 def Register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
+
+    ''' Accepts request from front end registers user '''
+
+    tools.PrintTitle('Accounts.views.Register')
+
+    # debug:
+    print('[Accounts.views.Register]: Received post request with [%s]' %request.POST)
+    
+    try:
         
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.username = form.cleaned_data.get('email')
-            user.profile.phone = form.cleaned_data.get('phone')
-            user.profile.full_name = form.cleaned_data.get('full_name')
-            user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('apps')
-    else:
-        form = RegisterForm()
-    return render(request, 'checkout.html', {'form': form})
+        # get personal details key word arguments from front end:
+        personal_details_kwargs = {
+            'email' : request.POST['email'],
+            'first_name' : request.POST['first_name'],
+            'last_name' : request.POST['last_name'],
+            'phone' : request.POST['phone'],
+        }
+        
+        # get shipping details key word arguments from front end:
+        shipping_details_kwargs = {
+            'email' : request.POST['email'],
+            'address1' : request.POST['address1'],
+            'address2' : request.POST['address2'],
+            'first_name' : request.POST['first_name'],
+            'last_name' : request.POST['last_name'],
+            'country' : request.POST['country'],
+            'state' : request.POST['state'],
+            'zip_code' : request.POST['zip_code'],
+            'city' : request.POST['city'],
+            'street_name' : request.POST['street_name'],
+            'street_number' : request.POST['street_number'],     
+        }
+        
+        # get payment details key word arguments:
+        payment_details_kwargs = {
+            'email' : request.POST['email'],
+            'payment_token' : request.POST['nonce'],
+            'card_type' : request.POST['card_type'],
+            'last_four' : request.POST['last_four'],
+            'expiration' : request.POST['expiration'],
+            'start_date' : datetime.now(),
+        }
+        
+        # get user key word arguments:
+        user_kwargs = {
+            'username' : request.POST['email'],
+            'email' : request.POST['email'],
+            'password' : request.POST['password1'],
+        }
+        
+        # get payment_method key word arguments:
+        payment_method_kwargs = {
+            'customer_id' : request.POST['customer_id'],
+            'payment_method_nonce' : request.POST['nonce'],
+            # 'token' : 'token_' + request.POST['customer_id'],
+        }
+        
+        
+        subscription_kwargs = {
+            'payment_method_token' : request.POST['nonce'],
+            'plan_id' : 'Standard_Plan',
+            'discounts' : { 
+                'add' : {
+                    'inherited_from_id' : request.POST['discount'],
+                }
+            }
+        }
+
+        # create personal details, shipping details, payment objects:
+        personal_details = PersonalDetails.objects.create(**personal_details_kwargs)
+        shipping_details = ShippingDetails.objects.create(**shipping_details_kwargs)
+        payment_details = PaymentDetails.objects.create(**payment_details_kwargs)
+        
+        # save personal details, shipping details, payment objects:
+        personal_details.save()
+        shipping_details.save()
+        payment_details.save()
+        
+        # create, save registered user:
+        user = User.objects.create_user(**user_kwargs)
+        user.save()
+        
+        # update profile fields:
+        user.refresh_from_db()
+        user.profile.personal_details = personal_details
+        user.profile.shipping_details = shipping_details
+        user.profile.payment_details = payment_details
+        user.save()
+        
+        # get braintree payment method
+        braintree_payment_method_result = gateway.payment_method.create({
+            "customer_id": hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
+            "payment_method_nonce": payment_method_kwargs['payment_method_nonce']
+        })
+        print('[Accounts.views.Register]: Braintree payment_method result [%s]' %braintree_payment_method_result)
+
+        # create payment method:
+        # braintree_payment_method_result = gateway.payment_method.create(payment_method_kwargs)
+        if Coupon.objects.filter(coupon_code=request.POST['discount']).exists():
+            braintree_subscription_result = gateway.subscription.create({
+                'payment_method_token' : braintree_payment_method_result.payment_method.token,
+                'plan_id' : 'Standard_Plan',
+                'discounts' : { 
+                    'add' : [{
+                        'inherited_from_id' : request.POST['discount'],
+                        'amount' : 5
+                    }]
+                }
+            })
+        else:
+            braintree_subscription_result = gateway.subscription.create({
+                'payment_method_token' : braintree_payment_method_result.payment_method.token,
+                'plan_id' : 'Standard_Plan',
+            })
+        
+        # debug:
+        # print('[Accounts.views.Register]: Braintree payment_method result [%s]' %braintree_payment_method_result)
+        print('[Accounts.views.Register]: Braintree subscription result [%s]' %braintree_subscription_result)
+        
+        # authenticate user and log them in:
+        user = authenticate(username=user_kwargs['email'], password=user_kwargs['password'])
+        login(request, user)
+        
+        status = 0
+        internal_message = 'user successfully registered'
+        message = 'Weclome!'
+
+    # error handler:
+    except Exception as e:
+        
+        status = 1
+        internal_message = e
+        message = 'Error in user registration.'
+
+    print('[Accounts.views.Register]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))    
+
+    return HttpResponse(json.dumps({'message': message, 'status' : status}))
     
     
+def Shipping(request):
+
+    # ''' Accepts request from ship requet '''
+
+    # tools.PrintTitle('Accounts.views.Ship')
+
+    # # debug:
+    # print('[Accounts.views.Ship]: Received post request with [%s]' %request.POST)
+    
+    # # create from address
+    # easypost.api_key = 'EZTK6aa9c53aa3ba4cc6ae340255e42f29b63mZEbaBzBqSdFREqTWhNSw'
+    # fromAddress = easypost.Address.create(
+    #     company='TillandsiaGardens',
+    #     street1='9415 Oakmore Rd.',
+    #     street2='',
+    #     city='Los Angeles',
+    #     state='CA',
+    #     zip='90035',
+    #     phone='310-614-7904'
+    # )
+    # print('[Accounts.views.Ship]: Shipping From Address [%s]' %fromAddress)
+
+    # # create to address  
+    # toAddress = easypost.Address.create(
+    #     name = personal_details.first_name + personal_details.last_name,
+    #     street1 = shipping_details.address,
+    #     street2 = shipping_details.address2,
+    #     city = shipping_details.city,
+    #     state = shipping_details.state,
+    #     zip = shipping_details.zip'
+    # )
+    # print('[Accounts.views.Ship]: Shipping To Address [%s]' %toAddress)
+    
+    # parcel = easypost.Parcel.create(
+    #     length=3,
+    #     width=3,
+    #     height=3,
+    #     weight=2
+    # )
+
+    # # create parcel
+    # shipment = easypost.Shipment.create(
+    #     to_address=toAddress,
+    #     from_address=fromAddress,
+    #     parcel=parcel
+    # )
+  
+    # print('[Accounts.views.Ship]: Shipping shipment [%s]' %shipment)
+
+    # shipment.buy(rate=shipment.lowest_rate(carriers=['USPS'], services=['First']))
+
+    # ## Print PNG link
+    # print(shipment.postage_label.label_url)
+    # ## Print Tracking Code
+    # print(shipment.tracking_code)
+    
+    return render(request, 'index.html')
+
     
 @login_required(login_url='/login/')
 def Profile(request):
     
-    return render(request, 'profile.html')
+    name = request.user
+    email = name.email
+    address = name.profile.shipping_details
+    payment = name.profile.payment_details
+    context = {
+        "name" : name.profile.personal_details,
+        "email" : email,
+        "address" : address,
+        "payment" : payment,
+    }
+    
+    return render(request, 'profile.html', context)

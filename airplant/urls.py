@@ -21,6 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('Accounts.urls')),
+    path('', include('Backend.urls')),
     path('admin/', admin.site.urls),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('checkout/', TemplateView.as_view(template_name='checkout.html'), name='checkout'),

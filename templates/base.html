@@ -8,9 +8,10 @@
   <title>Tillandsia Gardens</title>
   <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-16x16.png' %}" sizes="16x16">
   <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-32x32.png' %}" sizes="32x32">
-  <link rel="icon" type="image/x-icon" href="{% static '../static/assets/images/favicons/favicon.ico' %}">
   <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/app.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '../static/assets/css/owl.carousel.css' %}">
+  <!--<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">-->
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
 </head>
 <body data-gr-c-s-loaded="true">
@@ -32,7 +33,7 @@
                 <header _ngcontent-c3="" class="header">
                     <div _ngcontent-c3="" class="header-container">
                         <!---->
-                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="{% static '../static/assets/images/top-logo.png' %}"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="{% static '../static/assets/images/top-logo.png' %}"></a>
+                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="{% static '../static/assets/images/top-logo.png' %}"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="{% static '../static/assets/images/top-logo-mobile.png' %}"></a>
                             <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
                             <!---->
                             <!---->
@@ -81,14 +82,14 @@
                             <li _ngcontent-c4="" class="footer-link__item"><a href="/faq">FAQ</a></li>
                         </ul>
                         <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy-policy">Privacy policy</a></li>
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="/privacy">Privacy policy</a></li>
                         </ul>
                     </div>
                     <div _ngcontent-c4="" class="footer-links__group">
                         <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
                         <!---->
                         <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@eucalyptusfarms.com</a></li>
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@tillandsia.garden</a></li>
                         </ul>
                     </div>
                 </div>
@@ -104,14 +105,558 @@
 </sucstu-root>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlCs3tRB6kR3JCtnlEKtFknc0oZgxBIv8&libraries=places&callback=initAutocomplete" async defer></script>
+<script type="text/javascript" src="https://js.braintreegateway.com/web/3.55.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.55.0/js/hosted-fields.min.js"></script>
+<script src="{% static '../static/assets/js/owl.carousel.js' %}"></script>
 
 <!-- application javascript -->
 <script>
+
+var owl = $('.owl-carousel');
+
+$(document).ready(function(){
+  owl.owlCarousel({
+      items:1,
+      number:1,
+      autoplay : true,
+      autoplaySpeed: 800,
+      autoplayTimeout: 8000,
+      slideSpeed : 8000,
+      paginationSpeed : 8000,
+      singleItem:true,
+      loop:true,
+  });
+});
+
+$('#next_image').click(function() {
+    owl.trigger('next.owl.carousel');
+})
+// Go to the previous item
+$('#previous_image').click(function() {
+    // With optional speed parameter
+    // Parameters has to be in square bracket '[]'
+    owl.trigger('prev.owl.carousel', [300]);
+})
+
+// from https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+
+// This sample uses the Autocomplete widget to help the user select a
+// place, then it retrieves the address components associated with that
+// place, and then it populates the form fields with those details.
+// This sample requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script
+// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+var placeSearch, autocomplete;
+
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search predictions to
+  // geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'), {types: ['geocode']});
+
+  // Avoid paying for data that you don't need by restricting the set of
+  // place fields that are returned to just the address components.
+  autocomplete.setFields(['address_component']);
+
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle(
+          {center: geolocation, radius: position.coords.accuracy});
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+$('#address_cant_find').click(function(){
+    $('#address_autofill').css('display','none');
+    $('#address_manual').css('display','block');
+});
+
+// register controls
 $('#btn-show').click(function() {
     pass = $('#id_password');
     type = pass.attr('type');
     type == 'text' ? pass.attr('type','password') : pass.attr('type','text');
 });
+
+$('.faq-question-container').click(function() {
+    // $('.answer').css('display','none');
+    $('.arrow').removeClass('flip-arrow');
+    $('.answer').removeClass('answer-active');
+    $(this).children('.answer').toggleClass('answer-active');
+    $(this).find('.arrow').addClass('flip-arrow');
+});
+
+//glob variables doms
+var email = $('#id_email');
+var pass1 = $('#id_password1');
+var pass2 = $('#id_password2');
+var first = $('#id_first_name');
+var last = $('#id_last_name');
+var phone = $('#id_phone');
+var password_okay = false;
+var email_okay = false;
+var user_details = false;
+var user_address = false;
+var user_payment = false;
+
+// Check email okay on key up in email field: 
+$(email).keyup(function (){
+    $.ajax({
+        url : "{% url 'check_email' %}",
+        type : 'POST',
+        data : {
+            'email' : email.val(),
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType    :'json',
+        success : function(data) { 
+            var email_status = Number(data.status)
+            if(email_status == 1){
+                email_okay = false;
+                $('.email_errors').html(data.message);
+            } else {
+                email_okay = true;
+                $('.email_errors').html("");
+                return;
+            }
+        },
+        error : function(request,error)
+        {
+            alert("Request: "+JSON.stringify(request));
+        }
+    });
+});
+
+
+// Check password okay in key up in password field:
+$('#id_password1, #id_password2').keyup(function () {
+    $.ajax({
+        url : "{% url 'check_password' %}",
+        type : 'POST',
+        data : {
+            'password1' : pass1.val(),
+            'password2' : pass2.val(),
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType    :'json',
+        success : function(data) { 
+            var password_status = Number(data.status)
+            if (password_status == 1){
+                password_okay = false;
+                $('.password_errors').html(data.message).css("color","red");
+            } else {
+                password_okay = true;
+                $('.password_errors').html(data.message).css("color","green");
+                return;
+            }
+        },
+        error : function(request,error)
+        {
+            alert("Request: "+JSON.stringify(request));
+        }
+    });
+});
+
+
+// Check if shipping details address is complete:
+$('.user_address').keyup('change', function () {
+    if ($(this).val()){
+        $('.address_next').prop('disabled', false);
+    } else {
+        $('.address_next').prop('disabled', true);
+    }
+});
+
+
+
+// Check if user can proceed (enables next button):
+window.setInterval(function(){
+  
+    //check personal details form has values
+    if (email.val() && pass1.val() && pass2.val() && first.val() && last.val() && phone.val() && email_okay && password_okay) {
+        $('#user_details').prop('disabled', false);
+    } else {
+        $('#user_details').prop('disabled', true);
+    }
+
+}, 100);
+
+
+//buttons 
+$('.user_details_next').click(function(){
+    nextDisaply($(this));
+    $('.personal_name').html(first.val() + ' ' + last.val());
+    $('.personal_email').html(email.val());
+    $('.personal_phone').html(phone.val());
+    user_details = true;
+    cardSummary();
+    if (user_address == false){
+        $('.user_address_details').css('display','block');
+    }
+    getBraintreeToken();
+});
+
+$('.address_next').click(function(){
+    nextDisaply($(this));
+    if (user_payment == false){
+        $('.payment_details').css('display','block');
+    }
+    $('.personal_name').html(first.val() + ' ' + last.val());
+    $('.personal_address').html($('.user_address').val());
+    user_address = true;
+    cardSummary();
+});
+
+$('#apply-coupon').click(function(){
+    coupon_apply($(this));
+});
+
+//edit buttons
+$('.edit_button').click(function() {
+    $('.card-content').css('display','none');
+    $(this).parent().siblings('.card-content').css('display','block');
+    $(this).parent('.card-content__summary').css('display','none');
+});
+
+function nextDisaply(button) {
+    console.log('next applied')
+    debugger;
+    $(button).closest('.card-content').css('display','none');
+    $(button).closest('.card-content').siblings('.card-content__summary').css('display','block');
+}
+
+
+$('#place-order').click(function() {
+    register();
+});
+
+$("#terms-check").click(function(){   
+    $("#place-order").attr('disabled', !this.checked)
+});
+
+var discount = "NONE";
+var discount_amount = 0;
+
+//retrieves and applies coupon
+function coupon_apply(button){
+    $.ajax({
+        url : "{% url 'check_coupon' %}",
+        type : 'POST',
+        data : {
+            'email' : email.val(),
+            'coupon' : $('#coupon-input').val(),
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType:'json',
+        success : function(data) {  
+            console.log(data)
+            if (data.status === 0){
+                $('#discounted_amount_subtotal').html("$5 - DISCOUNTED").css("color","green");
+                $('#discounted_amount_grandtotal').html("$11.50");
+                discount_amount = data.amount;
+            } else {
+                console.log(data.message);
+            }
+        },
+        error : function(request,error)
+        {
+            alert("There was an error processing your order, please contact support@tillandsia.garden");
+        }
+    });
+}
+
+function register(button) {
+    console.log(email.val() + "submitted payment");
+    $.ajax({
+        url : "{% url 'register' %}",
+        type : 'POST',
+        data : {
+            'password1' : pass1.val(),
+            'email' : email.val(),
+            'first_name' : first.val(),
+            'last_name' : last.val(),
+            'phone' : phone.val(),
+            'address1' : $('.user_address').val(),
+            'address2' : $('.user_address_2').val(),
+            'street_number' : $('#street_number').val(),
+            'street_name' : $('#route').val(),
+            'city' : $('#locality').val(),
+            'state' : $('#administrative_area_level_1').val(),
+            'zip_code' : $('#postal_code').val(),
+            'country' : $('#country').val(),
+            'nonce' : hold_payment.nonce,
+            'card_type' : hold_payment.details.cardType,
+            'last_four' : hold_payment.details.lastFour,
+            'expiration' : hold_payment.details.expirationMonth + '/' + hold_payment.details.expirationYear,
+            'discount' : $('#coupon-input').val(),
+            'discount_amount' : discount_amount,
+            'customer_id' : customer_id,
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType:'json',
+        success : function(data) {              
+            window.location.href="/profile";
+            console.log(email.val() + "completed registation");
+        },
+        error : function(request,error)
+        {
+            alert("There was an error processing your order, please contact support@tillandsia.garden");
+        }
+    });
+}
+
+var customer_id = "";
+
+function getBraintreeToken() {
+    $.ajax({
+        url : "{% url 'get_token' %}",
+        type : 'POST',
+        data : {
+            'email' : email.val(),
+            'first_name' : first.val(),
+            'last_name' : last.val(),
+            'phone' : phone.val(),
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType:'json',
+        success : function(data) {   
+            console.log(data.status + data.token + data.message + data.customer_id);
+            debugger;
+            customer_id = data.customer_id;
+            initializeBraintreeFields(data.token);
+            return data.token;
+        },
+        error : function(request,error)
+        {
+            alert("There was an error processing your order, please contact support@tillandsia.garden");
+        }
+    });
+}
+
+function cardSummary() {
+    if (user_address && user_details && user_payment){
+        $('.checkout_order_summary').css('display','block');
+    }
+}
+
+
+//braintree payment JS
+var form = $('#payment_form');
+var hold_payment;
+
+function initializeBraintreeFields(token){
+braintree.client.create({
+  authorization: token
+}, function(err, clientInstance) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  braintree.hostedFields.create({
+    client: clientInstance,
+    styles: {
+      input: {
+        // change input styles to match
+        'font-family' : '"Space mono", sans-serif',
+        'font-size' : '14px',
+        color: 'blue',
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '4111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#card-cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#card-expiration',
+        placeholder: 'MM / YY'
+      }
+    }
+  }, function(err, hostedFieldsInstance) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    function createInputChangeEventListener(element) {
+      return function () {
+        validateInput(element);
+      }
+    }
+
+    function setValidityClasses(element, validity) {
+      if (validity) {
+        element.removeClass('is-invalid');
+        element.addClass('is-valid');  
+      } else {
+        element.addClass('is-invalid');
+        element.removeClass('is-valid');  
+      }    
+    }
+    
+    function validateInput(element) {
+      // very basic validation, if the
+      // fields are empty, mark them
+      // as invalid, if not, mark them
+      // as valid
+
+      if (!element.val().trim()) {
+        setValidityClasses(element, false);
+
+        return false;
+      }
+
+      setValidityClasses(element, true);
+
+      return true;
+    }
+
+    var ccName = $('#card-name');
+    // email = email.val();
+
+    ccName.on('change', function () {
+      validateInput(ccName);
+    });
+
+
+hostedFieldsInstance.on('validityChange', function(event) {
+      var field = event.fields[event.emittedBy];
+   
+      $(field.container.parentElement.parentElement).removeClass('is-valid');
+      $(field.container.parentElement.parentElement).removeClass('is-invalid');
+
+      if (field.isValid) {
+        $(field.container.parentElement.parentElement).addClass('is-valid');
+      } else if (field.isPotentiallyValid) {
+        // skip adding classes if the field is
+        // not valid, but is potentially valid
+      } else {
+        $(field.container.parentElement.parentElement).addClass('is-invalid');
+      }
+    });
+
+    hostedFieldsInstance.on('cardTypeChange', function(event) {
+      var cardBrand = $('#card-brand');
+      var cvvLabel = $('[for="cc-cvv"]');
+
+      if (event.cards.length === 1) {
+        var card = event.cards[0];
+
+        // change pay button to specify the type of card
+        // being used
+        cardBrand.text(card.niceType);
+        // update the security code label
+        cvvLabel.text(card.code.name);
+      } else {
+        // reset to defaults
+        cardBrand.text('Card');
+        cvvLabel.text('CVV');
+      }
+    });
+    
+    $("#submit-card").click(function(){
+            debugger;
+             var formIsInvalid = false;
+             var state = hostedFieldsInstance.getState();
+        
+    
+        
+              // Loop through the Hosted Fields and check
+              // for validity, apply the is-invalid class
+              // to the field container if invalid
+              Object.keys(state.fields).forEach(function(field) {
+                if (!state.fields[field].isValid) {
+                  $(state.fields[field].container).addClass('is-invalid');
+                  formIsInvalid = true;
+                }
+              });
+        
+              if (formIsInvalid) {
+                // skip tokenization request if any fields are invalid
+                return;
+              }
+        
+              hostedFieldsInstance.tokenize({
+                // include the cardholderName in the tokenization
+                // request
+                cardholderName: $('#card-name').val()
+              }, function(err, payload) {
+                  
+                  debugger;
+                if (err) {
+                  console.error(err);
+                  return;
+                }
+
+                console.log('submitting payment load');
+                
+                
+                hold_payment = payload;
+                debugger;
+                // submitToken(payload);
+                
+                //handles payment method summary and form
+                user_payment = true;
+                cardSummary();
+                nextDisaply($("#submit-card"))
+                $('.payment-summary').css('display','block');
+                $('.custom-select').html('<option value="Card Choice">' + payload.nonce.cardType + ' ending in **** **** **** ' + payload.details.lastFour + '</option>');
+  
+            });
+    });
+  });
+});
+}
+
 </script>
 
 </html>

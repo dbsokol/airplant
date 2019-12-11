@@ -1,179 +1,267 @@
-{% extends 'base.html' %}
-{% block title %}Checkout - TillandsiaGarden{% endblock %}
-{% load widget_tweaks %}
-{% load static %}
-{% block content %}
-            <div _ngcontent-c0="" class="app-container">
-                <router-outlet _ngcontent-c0=""></router-outlet> 
-                <sucstu-checkout _nghost-c29="">
-                    <div _ngcontent-c29="" class="checkout-container container">
-                        <div _ngcontent-c29="" class="checkout-text">
-                            <div _ngcontent-c29="">
-                                <div _ngcontent-c29="">
-                                    <p class="page-title">California’s most gorgeous eucalyptus shipped straight to your door.</p>
-                                </div>
-                                <div _ngcontent-c29="">
-                                    <p class="checkout-text__2">Subscribe to receive one bouquet of California-grown eucalyptus a month! Trimmed from our trees, carefully bundled and boxed, then shipped securely right to your door, ready to enjoy.</p>
-                                    <p class="checkout-text__2">Just $12 / month +shipping.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div _ngcontent-c29="" class="checkout-container-title"><img _ngcontent-c29="" alt="" src="{% static '../static/assets/images/shoppingCart@2x.png' %}">
-                            <h5 _ngcontent-c29="" class="text-bolder">Checkout</h5>
-                        </div>
-                        <form _ngcontent-c29="" action="/register/" method="post" class="checkout-form ng-pristine ng-valid ng-touched" novalidate="">
-                            {% csrf_token %}
-                            <div _ngcontent-c29="" class="checkout-content__right">
-                                <sucstu-checkout-basics _ngcontent-c29="" _nghost-c30="">
-                                    <div _ngcontent-c30="" class="card card--checkout enabled" test-id="checkout__basics-container">
-                                        <div _ngcontent-c30="" class="card-header">
-                                            <h3 _ngcontent-c30="" class="card-checkout__title">1. The Basics</h3>
-                                        </div>
-                                        <div _ngcontent-c30="" class="card-content">
-                                            <div _ngcontent-c30="" class="ng-invalid ng-dirty ng-touched">
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
-                                                    {{ form.username|add_class:"form-group__input ng-untouched ng-pristine ng-valid"|attr:"placeholder=Email" }}
-                                                    <!--<span _ngcontent-c30="" class="user-exist-message"> Email address already exist - <a _ngcontent-c30="" routerlink="/login" href="/login?redirect=checkout"><strong _ngcontent-c30="">Log in here.</strong></a></span>-->
-                                                </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
-                                                    {{ form.password|add_class:"form-group__input ng-dirty ng-valid ng-touched"|attr:"placeholder=Create Password" }}
-                                                </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
-                                                    {{ form.firstname|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=First Name" }}
-                                                </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
-                                                    {{ form.lastname|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=Last Name" }}
-                                                </div>
-                                                <div _ngcontent-c30="" class="form-group form-group__flex-start">
-                                                    {{ form.phone|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=Phone Number" }}
-                                                </div>
-                                                <div _ngcontent-c30="" class="form-button-container"><button _ngcontent-c30="" class="btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__basics__basic-next" disabled=""> Next </button></div>
-                                            </div>
-                                            <!---->
-                                        </div>
-                                    </div>
-                                </sucstu-checkout-basics>
-                                <!---->
-                                <sucstu-checkout-shipping-details _ngcontent-c29="" _nghost-c31="">
-                                    <div _ngcontent-c31="" class="card card--checkout card--close disabled" test-id="checkout__shipping-details-container">
-                                        <div _ngcontent-c31="" class="card-header">
-                                            <h3 _ngcontent-c31="" class="card-checkout__title">2. Shipping Details</h3>
-                                        </div>
-                                        <div _ngcontent-c31="" class="card-content" style="display: none;">
-                                            <div _ngcontent-c31="" class="ng-untouched ng-pristine ng-invalid" style="display: block;">
-                                                <!---->
-                                                <!---->
-                                                <!---->
-                                                <div _ngcontent-c31="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid">
-                                                    <!---->
-                                                    <div _ngcontent-c31="" class="form-group form-group__flex-start"><input _ngcontent-c31="" appnonautocomplete="" autocomplete="2019-11-26T16:27:25.721Z" class="form-group__input ng-untouched ng-pristine ng-invalid" formcontrolname="shippingAddress" id="address" name="2019-11-26T16:27:25.721Z" placeholder="Address" type="text">
-                                                        <!---->
-                                                        <!---->
-                                                    </div>
-                                                    <!---->
-                                                    <!---->
-                                                    <div _ngcontent-c31="" class="action-btn mb-10" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
-                                                    <!---->
-                                                    <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
-                                                    <!---->
-                                                    <!---->
-                                                    <!---->
-                                                </div>
-                                                <!---->
-                                                <div _ngcontent-c31="" class="form-button-container"><button _ngcontent-c31="" class="btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__shipping-details__shipping-next"> Next </button></div>
-                                            </div>
-                                            <div _ngcontent-c31="" class="card-content__summary" style="display: none;">
-                                                <div _ngcontent-c31="" class="summary-container">
-                                                    <div _ngcontent-c31="" class="summary__item">
-                                                        <div _ngcontent-c31="" class="summary__title">Name</div>
-                                                        <p _ngcontent-c31="" class="summary__value"> </p>
-                                                    </div>
-                                                    <!---->
-                                                    <!---->
-                                                    <div _ngcontent-c31="" class="summary__item">
-                                                        <div _ngcontent-c31="" class="summary__title">Address</div>
-                                                        <p _ngcontent-c31="" class="summary__value"><span _ngcontent-c31=""></span>
-                                                            <!----><span _ngcontent-c31=""> , </span></p>
-                                                    </div>
-                                                </div><button _ngcontent-c31="" class="btn btn-primary--inset" type="button"> Edit </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </sucstu-checkout-shipping-details>
-                                <!---->
-                                <sucstu-checkout-secure-payment _ngcontent-c29="" _nghost-c33="">
-                                    <div _ngcontent-c33="" class="card card--checkout card--secure-payment card--close disabled" test-id="checkout__card-container">
-                                        <div _ngcontent-c33="" class="card-header">
-                                            <h3 _ngcontent-c33="" class="card-checkout__title">3. Secure Payment <span _ngcontent-c33=""><img _ngcontent-c33="" alt="" src="/assets/images/locked@2x.png"></span></h3>
-                                        </div>
-                                        <div _ngcontent-c33="" class="card-content" style="display: none;">
-                                            <!---->
-                                            <div _ngcontent-c33="" class="ng-untouched ng-pristine ng-invalid" style="display: block;">
-                                                <!---->
-                                                <div _ngcontent-c33="" class="form-group form-group__flex-start" test-id="checkout__card__iframe-cardNumber" style="display: flex;">
-                                                    <div _ngcontent-c33="" class="form-group__input" id="card-number"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#c2748fd5-2813-434d-849e-e935aa422ddf" frameborder="0" allowtransparency="true" scrolling="no" type="number" name="braintree-hosted-field-number" id="braintree-hosted-field-number" style="border: none; width: 100%; height: 100%; float: left;"></iframe>
-                                                        <div style="clear: both;"></div>
-                                                    </div>
-                                                    <!---->
-                                                </div>
-                                                <div _ngcontent-c33="" class="card-info-group" test-id="checkout__card__iframe-expDate" style="display: flex;">
-                                                    <div _ngcontent-c33="" class="form-group card-info__date form-group__flex-start"><label _ngcontent-c33="" class="form-group__input" for="expiration-date"><span _ngcontent-c33="" class="hosted-label">Expiration Date</span>
-                                                            <div _ngcontent-c33="" id="expiration-date"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#c2748fd5-2813-434d-849e-e935aa422ddf" frameborder="0" allowtransparency="true" scrolling="no" type="expirationDate" name="braintree-hosted-field-expirationDate" id="braintree-hosted-field-expirationDate" style="border: none; width: 100%; height: 100%; float: left;"></iframe>
-                                                                <div style="clear: both;"></div>
-                                                            </div>
-                                                        </label>
-                                                        <!---->
-                                                    </div>
-                                                    <div _ngcontent-c33="" class="form-group card-info__cvv form-group__flex-start" test-id="checkout__card__iframe-cvv"><label _ngcontent-c33="" class="form-group__input" for="cvv"><span _ngcontent-c33="" class="hosted-label">CVV</span>
-                                                            <div _ngcontent-c33="" id="cvv"><iframe src="https://assets.braintreegateway.com/web/3.22.0/html/hosted-fields-frame.min.html#c2748fd5-2813-434d-849e-e935aa422ddf" frameborder="0" allowtransparency="true" scrolling="no" type="cvv" name="braintree-hosted-field-cvv" id="braintree-hosted-field-cvv" style="border: none; width: 100%; height: 100%; float: left;"></iframe>
-                                                                <div style="clear: both;"></div>
-                                                            </div>
-                                                        </label>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div _ngcontent-c33="" class="form-button-container mt-15"><button _ngcontent-c33="" class="btn btn-primary btn-desk btn-primary--with-hover" id="submit-btn" type="button" test-id="checkout__card__card-next"> Next </button></div>
-                                                <!---->
-                                            </div>
-                                            <!---->
-                                        </div>
-                                    </div>
-                                </sucstu-checkout-secure-payment>
-                            </div>
-                            <div _ngcontent-c29="" class="checkout-content__left">
-                                <sucstu-checkout-summary _ngcontent-c29="" _nghost-c34="">
-                                    <div _ngcontent-c34="" class="card card--checkout">
-                                        <div _ngcontent-c34="" class="card-header">
-                                            <h3 _ngcontent-c34="" class="card-checkout__title">Order Summary</h3><span _ngcontent-c34="" class="card-checkout__separator"></span>
-                                        </div>
-                                        <div _ngcontent-c34="" class="card-content ng-pristine ng-valid ng-touched">
-                                            <div _ngcontent-c34="" class="order-summary-order">
-                                                <div _ngcontent-c34="" class="order-summary-img">
-                                                <img _ngcontent-c34="" alt="" src="/assets/images/checkout-img.png"></div>
-                                                <div _ngcontent-c34="" class="order-summary-items">
-                                                    <h4 _ngcontent-c34="" class="order-summary-plan text-medium"><span _ngcontent-c34="">Monthly Plan</span>
-                                                    </h4>
-                                                    <div _ngcontent-c34="" class="order-summary-plan-term">
-                                                    </div>
-                                                </div>
-                                            </div><span _ngcontent-c34="" class="card-checkout__separator mb-15"></span>
-                                            <div _ngcontent-c34="" class="order-summary-total">
-                                                <div _ngcontent-c34="" class="order-detail-item order-subtotal"><span _ngcontent-c34="">Subtotal</span><span _ngcontent-c34="">$12.00</span></div>
-                                                <div _ngcontent-c34="" class="order-detail-item order-shipping"><span _ngcontent-c34="">Shipping</span><span _ngcontent-c34="">$7.50</span></div>
-                                                <div _ngcontent-c34="" class="order-detail-item order-coupon"><img _ngcontent-c34="" alt="" src="assets/images/coupon.svg">
-                                                    <input _ngcontent-c34="" class="coupon-input ng-pristine ng-valid ng-touched" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text">
-                                                    <button _ngcontent-c34="" class="btn btn-coupon btn-primary--with-hover">Apply</button>
-                                                </div>
-                                                <div _ngcontent-c34="" class="order-detail-item order-total"><span _ngcontent-c34="" class="text-bolder">Grand Total</span><span _ngcontent-c34="" class="text-bolder">$19.50</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </sucstu-checkout-summary>
-                            </div>
-                        </form>
+{% extends 'base.html' %} {% block title %}Checkout - TillandsiaGarden{% endblock %} {% load widget_tweaks %} {% load static %} {% block content %} {% csrf_token %}
+<div _ngcontent-c0="" class="app-container">
+    <router-outlet _ngcontent-c0=""></router-outlet>
+    <sucstu-checkout _nghost-c29="">
+        <div _ngcontent-c29="" class="checkout-container container">
+            <div _ngcontent-c29="" class="checkout-text">
+                <div _ngcontent-c29="">
+                    <div _ngcontent-c29="">
+                        <p class="page-title">Incredible Tillandsia shipped straight to your door.</p>
                     </div>
-                </sucstu-checkout>
+                    <div _ngcontent-c29="">
+                        <p class="checkout-text__2">Subscribe to receive two different Tillandsia each month! Hand picked, carefully packaged and boxed, then shipped to your door, ready to enjoy. Collect them all!</p>
+                        <p class="checkout-text__2">Just $10 / month + shipping.</p>
+                    </div>
+                </div>
+            </div>
+            <div _ngcontent-c29="" class="checkout-container-title"><img _ngcontent-c29="" alt="" src="{% static '../static/assets/images/shoppingCart@2x.png' %}">
+                <h5 _ngcontent-c29="" class="text-bolder">Checkout</h5>
+            </div>
+            <div _ngcontent-c29="" class="checkout-form ng-pristine ng-valid ng-touched" novalidate="">
+                <div _ngcontent-c29="" class="checkout-content__right">
+                    <sucstu-checkout-basics _ngcontent-c29="" _nghost-c30="">
+                        <div _ngcontent-c30="" class="card card--checkout enabled" test-id="checkout__basics-container">
+                            <div _ngcontent-c30="" class="card-header">
+                                <h3 _ngcontent-c30="" class="card-checkout__title">1. The Basics</h3>
+                            </div>
+                            <div _ngcontent-c30="" class="card-content user_details" style="display:block">
+                                <div _ngcontent-c30="" class="ng-invalid ng-dirty ng-touched">
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid" id="id_email" placeholder="Email" type="email">
+                                        <!--{{ form.email|add_class:"form-group__input ng-untouched ng-pristine ng-valid"|attr:"placeholder:Email"|attr:"type=email" }}-->
+                                        <span _ngcontent-c30="" class="error-text email_errors">{{ form.email.errors }} {{ form.non_field_errors }}</span>
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid" id="id_password1" placeholder="Create Password" type="password"> 
+                                        {{ form.password1|add_class:"form-group__input ng-dirty ng-valid ng-touched"|attr:"placeholder:Create Password" }}
+                                        <span _ngcontent-c30="" class="error-text password_errors">{{ form.password1.errors }}</span>
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid" id="id_password2" placeholder="Confirm Password" type="password">
+                                        {{ form.password2|add_class:"form-group__input ng-dirty ng-valid ng-touched"|attr:"placeholder:Confirm Password" }}
+                                        <span _ngcontent-c30="" class="error-text">{{ form.password2.errors }}</span>
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid capital-case-input" id="id_first_name" placeholder="First Name" type="text">
+                                        {{ form.first_name|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder:First Name" }}
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid capital-case-input" id="id_last_name" placeholder="Last Name" type="text">
+                                        {{ form.last_name|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder:Last Name" }}
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-group form-group__flex-start">
+                                        <input class="form-group__input ng-untouched ng-pristine ng-valid capital-case-input" id="id_phone" placeholder="Phone Number" type="tel">
+                                        {{ form.phone|add_class:"form-group__input capital-case-input ng-untouched ng-pristine ng-invalid"|attr:"placeholder=Phone Number" }}
+                                    </div>
+                                    <div _ngcontent-c30="" class="form-button-container">
+                                        <button _ngcontent-c30="" class="user_details_next btn btn-primary btn-primary--with-hover" id="user_details" test-id="checkout__basics__basic-next" disabled=""> Next </button>
+                                    </div>
+                                </div>
+                                <!---->
+                            </div>
+                            <div _ngcontent-c9="" class="card-content__summary personal_details_summary" style="display:none" test-id="checkout__basics__summary">
+                                <div _ngcontent-c9="" class="summary-container">
+                                    <div _ngcontent-c9="" class="summary-titles">
+                                        <div _ngcontent-c9="" class="summary-group__title text-medium">Name</div>
+                                        <div _ngcontent-c9="" class="summary-group__title text-medium">Email</div>
+                                        <div _ngcontent-c9="" class="summary-group__title text-medium">Phone</div>
+                                    </div>
+                                    <div _ngcontent-c9="" class="summary-values">
+                                        <div _ngcontent-c9="" class="summary-group__value personal_name">123 123</div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_email">josephzsol@gmail.com</div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_phone">+1 310 614 7905</div>
+                                    </div>
+                                </div>
+                                <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_personal_details"> Edit </button>
+                            </div>
+                        </div>
+                    </sucstu-checkout-basics>
+                    <!---->
+                    <sucstu-checkout-shipping-details _ngcontent-c29="" _nghost-c31="">
+                        <div _ngcontent-c31="" class="card card--checkout card--close" test-id="checkout__shipping-details-container">
+                            <div _ngcontent-c31="" class="card-header">
+                                <h3 _ngcontent-c31="" class="card-checkout__title">2. Shipping Details</h3>
+                            </div>
+                            <div _ngcontent-c31="" class="card-content user_address_details" style="display: none;">
+                                <div _ngcontent-c31="" class="user_address_details ng-untouched ng-pristine ng-invalid">
+                                    <div _ngcontent-c31="" formgroupname="address" id="address_autofill" class="ng-untouched ng-pristine ng-invalid">
+                                        <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                        <div _ngcontent-c31="" class="action-btn mb-10" id="address_cant_find" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
+                                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                                    </div>
+                                    <div _ngcontent-c31="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid" id="address_manual" style="display: none;">
+                                        <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="route" placeholder="Street" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                                            <input id="locality" placeholder="City" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                                            <input id="administrative_area_level_1" placeholder="State" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                                            <input id="postal_code" placeholder="Zip Code" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                                            <input id="country" placeholder="Country" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-c7="" class="ng-pristine ng-invalid ng-touched" style="display: block;">
+                                        <input type="hidden" class="field" id="street_number" disabled="true" />
+                        <!--<input type="hidden" class="field" id="route" disabled="true" />-->
+                        <!--<input type="hidden" class="field" id="locality" disabled="true" />-->
+                        <!--<input type="hidden" class="field" id="administrative_area_level_1" disabled="true" />-->
+                        <!--<input type="hidden" class="field" id="postal_code" disabled="true" />-->
+                        <!--<input type="hidden" class="field" id="country" disabled="true" />-->
+                                        <!--<div _ngcontent-c7="" formgroupname="address" class="ng-pristine ng-invalid ng-touched">
+                                            <div _ngcontent-c7="" class="form-group">
+                                                <input _ngcontent-c7="" id="street_number" class="form-group__input ng-pristine ng-invalid ng-touched" formcontrolname="shippingAddress" placeholder="Street" type="text" test-id="checkout__shipping-details__street-1">
+                                                <span _ngcontent-c7="" class="error-text"> Please enter your the address </span>
+                                            </div>
+                                            <div _ngcontent-c7="" class="form-group"><input _ngcontent-c7="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="city" placeholder="City" type="text" test-id="checkout__shipping-details__city">
+                                            </div>
+                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="state" placeholder="State" type="text" test-id="checkout__shipping-details__state">
+                                            </div>
+                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="zip" placeholder="Postal code" type="text" test-id="checkout__shipping-details__postal-code">
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                    <div _ngcontent-c31="" class="form-button-container"><button _ngcontent-c31="" class="address_next btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__shipping-details__shipping-next"> Next </button></div>
+                                </div>
+                            </div>
+                            <div _ngcontent-c9="" class="card-content__summary user_address_details_summary" style="display:none" test-id="checkout__basics__summary">
+                                <div _ngcontent-c9="" class="summary-container">
+                                    <div _ngcontent-c9="" class="summary-titles">
+                                        <div _ngcontent-c9="" class="summary-group__title text-medium">Name</div>
+                                        <div _ngcontent-c9="" class="summary-group__title text-medium">Address</div>
+                                    </div>
+                                    <div _ngcontent-c9="" class="summary-values">
+                                        <div _ngcontent-c9="" class="summary-group__value personal_name">123 123</div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_address">josephzsol@gmail.com</div>
+                                    </div>
+                                </div>
+                                <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_shipping_details"> Edit </button>
+                            </div>
+                        </div>
+                    </sucstu-checkout-shipping-details>
+                    <sucstu-checkout-secure-payment _ngcontent-serverapp-c12="" _nghost-serverapp-c16="">
+                        <div _ngcontent-serverapp-c16="" class="card card--checkout card--secure-payment" id='payment_form' test-id="checkout__card-container">
+                            <div _ngcontent-serverapp-c16="" class="card-header">
+                                <h3 _ngcontent-serverapp-c16="" class="card-checkout__title">3. Secure Payment <span _ngcontent-serverapp-c16=""><img _ngcontent-serverapp-c16="" style='float:right;width:20px' alt="" src="{% static '../static/assets/images/locked@2x.png' %}"></span></h3>
+                            </div>
+                            <div _ngcontent-serverapp-c16="" class="card-content payment_details" style="display: none;">
+                                <div _ngcontent-serverapp-c16="" class="ng-invalid ng-touched ng-dirty" style="display: block;">
+                                    <div _ngcontent-serverapp-c16="" class="form-group form-group__flex-start is-valid" style="display: flex;">
+                                        <input _ngcontent-serverapp-c16="" class="form-group__input capital-case-input ng-touched input-error ng-dirty ng-invalid" id="card-name" placeholder="Cardholder's name" type="text">
+                                        <span _ngcontent-serverapp-c16="" class="error-text validation-message"> Provide the cardholder's name </span>
+                                    </div>
+                                    <div _ngcontent-serverapp-c16="" class="form-group form-group__flex-start is-valid" style="display: flex;">
+                                        <label _ngcontent-serverapp-c16="" class="form-group__input" for="card-number">
+                                                <span _ngcontent-serverapp-c16="" class="hosted-label">Card number</span>
+                                               
+                                        <div _ngcontent-serverapp-c16="" style="padding-left: 0px;" class="form-group__input" id="card-number">
+                                        </div>
+                                        </label>
+                                        <span _ngcontent-serverapp-c16="" class="error-text validation-message">Invalid card number</span>
+                                    </div>
+                                    <div _ngcontent-serverapp-c16="" class="card-info-group" test-id="checkout__card__iframe-expDate" style="display: flex;">
+                                        <div _ngcontent-serverapp-c16="" class="form-group card-info__date form-group__flex-start is-valid">
+                                            <label _ngcontent-serverapp-c16="" class="form-group__input" for="expiration-date">
+                                                <span _ngcontent-serverapp-c16="" class="hosted-label">Expiration Date</span>
+                                                <div _ngcontent-serverapp-c16="" id="card-expiration" style='width: 100%;height: 100%;'>
+                                                    <div style="clear: both;"></div>
+                                                </div>
+                                            </label>
+                                            <span _ngcontent-serverapp-c16="" class="validation-message error-text">Invalid expiration date</span>
+                                        </div>
+
+                                        <div _ngcontent-serverapp-c16="" class="form-group card-info__cvv form-group__flex-start is-valid" test-id="checkout__card__iframe-cvv">
+                                            <label _ngcontent-serverapp-c16="" class="form-group__input" for="cvv">
+                                                <span _ngcontent-serverapp-c16="" class="hosted-label">CVV</span>
+                                                <div _ngcontent-serverapp-c16="" id="card-cvv" style='width: 100%;height: 100%;'>
+                                                    <div style="clear: both;"></div>
+                                                </div>
+                                            </label>
+                                            <span _ngcontent-serverapp-c16="" class="error-text validation-message">Invalid CVV</span>
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-serverapp-c16="" class="form-button-container mt-15"><button _ngcontent-serverapp-c16="" id='submit-card' class="card_next btn btn-primary btn-desk btn-primary--with-hover" type="button" test-id="checkout__card__card-next"> Next </button></div>
+                                </div>
+                            </div>
+                            <div _ngcontent-c10="" class="card-content__summary payment-summary" style="display: none;">
+                                <!---->
+                                <!--<div _ngcontent-c10="" class="ng-untouched ng-pristine ng-valid">-->
+                                    <!---->
+                                    <div _ngcontent-c10="" class="form-group">
+                                        <sucstu-payment-method-select _ngcontent-c10="" _nghost-c13="">
+                                            <div _ngcontent-c13="" class="form-group__select"><select _ngcontent-c13="" class="custom-select" id="" name=""></select></div>
+                                        </sucstu-payment-method-select>
+                                    </div>
+                                    <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_payment_details"> Edit </button>
+                                    <!---->
+                                <!--</div>-->
+                                <!---->
+                            </div>
+                        </div>
+                    </sucstu-checkout-secure-payment>
+                </div>
+                <div _ngcontent-c29="" class="checkout-content__left">
+                    <sucstu-checkout-summary _ngcontent-c29="" _nghost-c34="">
+                        <div _ngcontent-c34="" class="card card--checkout">
+                            <div _ngcontent-c34="" class="card-header">
+                                <h3 _ngcontent-c34="" class="card-checkout__title">Order Summary</h3><span _ngcontent-c34="" class="card-checkout__separator"></span>
+                            </div>
+                            <div _ngcontent-c34="" class="ng-pristine ng-valid ng-touched">
+                                <div _ngcontent-c34="" class="order-summary-order">
+                                    <div _ngcontent-c34="" class="order-summary-img">
+                                        <img _ngcontent-c34="" alt="" src="{% static '../static/assets/images/checkout-img.png' %}"></div>
+                                    <div _ngcontent-c34="" class="order-summary-items">
+                                        <h4 _ngcontent-c34="" class="order-summary-plan text-medium"><span _ngcontent-c34="">Monthly Plan</span>
+                                        </h4>
+                                        <div _ngcontent-c34="" class="order-summary-plan-term">
+                                        </div>
+                                    </div>
+                                </div>
+                                <span _ngcontent-c34="" class="card-checkout__separator mb-15"></span>
+                                <div _ngcontent-c34="" class="order-summary-total">
+                                    <div _ngcontent-c34="" class="order-detail-item order-subtotal"><span _ngcontent-c34="">Subtotal</span><span id="discounted_amount_subtotal" _ngcontent-c34="">$10.00</span></div>
+                                    <div _ngcontent-c34="" class="order-detail-item order-shipping"><span _ngcontent-c34="">Shipping</span><span _ngcontent-c34="">$6.50</span></div>
+                                    <div _ngcontent-c34="" class="order-detail-item order-coupon"><img _ngcontent-c34="" alt="" src="{% static '../static/assets/images/coupon.svg' %}">
+                                        <input _ngcontent-c34="" id='coupon-input' class="coupon-input ng-pristine ng-valid ng-touched" formcontrolname="coupon" placeholder="Enter Coupon Code" type="text">
+                                        <button _ngcontent-c34="" id="apply-coupon" class="btn btn-coupon btn-primary--with-hover">Apply</button> 
+                                    </div>
+                                    <div _ngcontent-c34="" class="order-detail-item order-total"><span _ngcontent-c34="" class="text-bolder">Grand Total</span><span _ngcontent-c34="" id="discounted_amount_grandtotal" class="text-bolder">$16.50</span>
+                                    </div>
+                                </div>
+                                <div class="checkout_order_summary" style='display:none'>
+                                    <span _ngcontent-c34="" class="card-checkout__separator mb-15"></span>
+                                    <div _ngcontent-c10="" class="order-summary__send">
+                                        <div _ngcontent-c10="" class="order-summary__options">
+                                            <!---->
+                                            <div _ngcontent-c10="" class="order-summary__terms"><label _ngcontent-c10="" class="checkbox-container" for="terms-check" test-id="checkout__summary__check-button"><input _ngcontent-c10="" formcontrolname="terms" id="terms-check" type="checkbox" class="ng-touched ng-dirty ng-valid"><span _ngcontent-c10="" class="checkmark"></span></label>
+                                                <p _ngcontent-c10="" class="order-summary__terms-text">I agree to Tillandsia Gardens' <a target="_blank" href="/terms">Terms &amp; Conditions</a>.</p>
+                                            </div>
+                                        </div>
+                                        <div _ngcontent-c10="" class="summary-order-group"><button _ngcontent-c10="" class="btn btn-primary summary-order__btn btn-primary--with-hover" id='place-order' type="button" test-id="checkout__summary__place-order" disabled> Place Order </button>
+                                            <!---->
+                                        </div>
+                                        <!---->
+                                        <!---->
+                                        <p _ngcontent-c10="" class="order-summary__info">This purchase will sign you up for a paid subscription. Your credit card will be charged $16.50 every month until you cancel or modify your subscription. Satisfaction guaranteed. You can cancel at any time. </p>
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </sucstu-checkout-summary>
+                </div>
             </div>
         </div>
+    </sucstu-checkout>
+</div>
+</div>
 {% endblock %}

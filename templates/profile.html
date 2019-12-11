@@ -2,20 +2,15 @@
         <div _ngcontent-c0="" class="app-container">
           <router-outlet _ngcontent-c0=""></router-outlet>
           <sucstu-account _nghost-c5="">
-            <!---->
-            <!---->
             <div _ngcontent-c5="" class="referral-code-container">
               <h1 _ngcontent-c5="" class="referral-title">Here's your unique referral link!</h1>
-              <p _ngcontent-c5="" class="referral-code"> eucalyptusfarms.com?ccode=Wtb94e9cNFnO</p>
-              <p _ngcontent-c5="" class="referral-text">Copy and paste the link above to share it with followers, friends, and family! They'll get $5 off their first box of eucalyptus when they use your link, and every 3 people who use it means 1 FREE box of eucalyptus for you!</p>
+              <p _ngcontent-c5="" class="referral-code"> airplant.garden?ccode=Wtb94e9cNFnO</p>
+              <p _ngcontent-c5="" class="referral-text">Copy and paste the link above to share it with followers, friends, and family! They'll get $5 off their first couple of Tillandsia when they use your link, and every 3 people who use it means 1 FREE box of tillandsia for you!</p>
             </div>
             <div _ngcontent-c5="" class="profile-container container">
               <div _ngcontent-c5="" class="left-section">
-                <!---->
-                <!---->
                 <div _ngcontent-c5="" class="subscriptions-card-list" style="display: block;">
                   <h3 _ngcontent-c5="" class="title">Subscriptions</h3>
-                  <!---->
                   <sucstu-subscription-card _ngcontent-c5="" _nghost-c9="">
                     <div _ngcontent-c9="" class="subscription-card-container">
                       <div _ngcontent-c9="" class="card-content">
@@ -23,26 +18,18 @@
                           <div _ngcontent-c9="" class="subscription-details">
                             <div _ngcontent-c9="" class="subscription-info">
                               <div _ngcontent-c9="" class="subscription-id">
-                                <p _ngcontent-c9="">Subscription ID</p><span _ngcontent-c9="">1717</span></div>
-                              <!---->
+                                <p _ngcontent-c9="">Subscription</p><span _ngcontent-c9=""></span></div>
                               <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
                             </div>
                             <div _ngcontent-c9="" class="subscription-recipient-details">
-                              <p _ngcontent-c9="" class="subscription__recipient-name">Joseph Sokol</p>
-                              <p _ngcontent-c9="" class="subscription__address"><span _ngcontent-c9="">9415 Oakmore Rd</span><span _ngcontent-c9=""></span><span _ngcontent-c9="">Los Angeles, CA 90035-4138</span></p>
+                              <p _ngcontent-c9="" class="subscription__recipient-name">{{address.first_name}} {{address.last_name}}</p>
+                              <p _ngcontent-c9="" class="subscription__address"><span _ngcontent-c9="">{{address.street_number}} {{address.street_name}} {{address.address2}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="">{{address.city}}, {{address.state}} {{address.zip_code}}</span></p>
                             </div>
-                            <!---->
                             <div _ngcontent-c9="">
-                              <!---->
-                              <!----><a _ngcontent-c9="" class="link-button-11"> Re-activate your subscription! </a>
-                              <!---->
+                              <a _ngcontent-c9="" class="link-button-11"> Re-activate your subscription! </a>
                             </div>
                           </div>
                         </div>
-                        <!---->
-                        <!---->
-                        <!---->
-                        <!---->
                         <div _ngcontent-c9="" class="shipments-list-container">
                           <div _ngcontent-c9="" class="col-sm-12">
                             <table _ngcontent-c9="" class="shipments-list">
@@ -65,69 +52,59 @@
               </div>
               <div _ngcontent-c5="" class="right-section">
                 <h3 _ngcontent-c5="" class="title">Account</h3>
-                <div _ngcontent-c5="" class="account-container">
-                  <div _ngcontent-c5="">
-                    <sucstu-account-details _ngcontent-c5="" _nghost-c10="">
-                      <div _ngcontent-c10="" class="account-details">
-                        <div _ngcontent-c10="" class="details">
-                          <div _ngcontent-c10="" class="details-item">
-                            <sucstu-editable-input _ngcontent-c10="" type="text" _nghost-c19="" test-id="account-details__fullName">
-                              <div _ngcontent-c19="">
-                                <!---->
-                                <!---->
-                                <div _ngcontent-c19="" class="value-container">
-                                  <div _ngcontent-c19="" class="value-field">Joseph Sokol</div>
-                                  <div _ngcontent-c19="" class="edit-button"><img _ngcontent-c19="" alt="" src="/assets/images/pencil-small-icon.png"></div>
-                                </div>
+                  <div _ngcontent-c9="" class="subscription-card-container">
+                      <div _ngcontent-c9="" class="card-content">
+                        <div _ngcontent-c9="" class="col-sm-12">
+                          <div _ngcontent-c9="" class="subscription-details">
+                            <div _ngcontent-c9="" class="subscription-info">
+                              <div _ngcontent-c9="" class="subscription-id">
+                                <p _ngcontent-c9="" id="user_name">Hello, {{name.first_name}} {{name.last_name}}</p><span _ngcontent-c9=""></span>
                               </div>
-                            </sucstu-editable-input>
+                              <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
+                            </div>
+                            <div _ngcontent-c9="" class="subscription-recipient-details">
+                              <p _ngcontent-c9="" class="subscription__recipient-email">{{email}}</p>
+                            </div>
                           </div>
-                          <div _ngcontent-c10="" class="details-item">
-                            <sucstu-editable-input _ngcontent-c10="" class="email-field" type="email" _nghost-c19="" test-id="account-details__email">
-                              <div _ngcontent-c19="">
-                                <!---->
-                                <!---->
-                                <div _ngcontent-c19="" class="value-container">
-                                  <div _ngcontent-c19="" class="value-field">joseph@olehpay.co.il</div>
-                                  <div _ngcontent-c19="" class="edit-button"><img _ngcontent-c19="" alt="" src="/assets/images/pencil-small-icon.png"></div>
-                                </div>
+                        </div>
+                        <div _ngcontent-c9="" class="shipments-list-container">
+                          <div _ngcontent-c9="" class="col-sm-12">
+                            <div _ngcontent-c9="" class="subscription-id">
+                                <p _ngcontent-c9="" id="user_name" style="font-weight:700">Payment Method on Account</p>
                               </div>
-                            </sucstu-editable-input>
-                          </div>
-                          <div _ngcontent-c10="" class="details-item">
-                            <sucstu-editable-change-password _ngcontent-c10="" _nghost-c20="">
-                              <div _ngcontent-c20="" class="change-password-container">
-                                <!---->
-                                <!---->
-                                <div _ngcontent-c20=""><a _ngcontent-c20="" class="action-btn action-btn--withouth-margin" test-id="change-password__edit-button">Change password</a></div>
+                              <p _ngcontent-c21="">{{payment.card_type}} ending in {{payment.last_four}} {{payment.expiration}}</p>
                               </div>
-                            </sucstu-editable-change-password>
                           </div>
                         </div>
                       </div>
-                    </sucstu-account-details>
-                  </div>
-                  <div _ngcontent-c5="" class="divider inner-divider"></div>
-                  <div _ngcontent-c5="">
-                    <sucstu-payment-method-list _ngcontent-c5="" _nghost-c11="">
-                      <div _ngcontent-c11="" class="payment-method-list">
-                        <h3 _ngcontent-c11="" class="title">Payment Method</h3>
-                        <!---->
-                        <sucstu-payment-method _ngcontent-c11="" _nghost-c21="">
-                          <div _ngcontent-c21="" class="payment-method">
-                            <!---->
-                            <!---->
-                            <div _ngcontent-c21="" class="payment-method-value">
-                              <p _ngcontent-c21="">Visa ending in 9277 10/2023</p><img _ngcontent-c21="" alt="" class="edit-button" src="/assets/images/pencil-small-icon.png"></div>
-                          </div>
-                        </sucstu-payment-method>
-                      </div>
-                    </sucstu-payment-method-list>
-                  </div>
-                </div>
+                    </div>
               </div>
-            </div>
           </sucstu-account>
         </div>
-      </div>
+<script>
+  $.ajax({
+    url: "",
+    type: 'POST',
+    data: {
+      'email': email.val(),
+      'csrfmiddlewaretoken': '{{ csrf_token }}'
+    },
+    dataType: 'json',
+    success: function(data) {
+      var email_status = Number(data.status)
+      if (email_status == 1) {
+        email_okay = false;
+        $('.email_errors').html(data.message);
+      }
+      else {
+        email_okay = true;
+        $('.email_errors').html("");
+        return;
+      }
+    },
+    error: function(request, error) {
+      alert("Request: " + JSON.stringify(request));
+    }
+  }); 
+</script>
 {% endblock %}
