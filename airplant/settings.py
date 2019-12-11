@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     
     'Accounts.apps.AccountsConfig',
+    'Backend.apps.BackendConfig',
 ]
 
 MIDDLEWARE = [
@@ -155,7 +156,30 @@ USE_X_FORWARDED_HOST = True
 
 
 
+# BRAINTREE CONFIG:
 BRAINTREE_PRODUCTION = config('BRAINTREE_PRODUCTION', cast=bool)
 BRAINTREE_MERCHANT_ID = config('BRAINTREE_MERCHANT_ID')
 BRAINTREE_PUBLIC_KEY = config('BRAINTREE_PUBLIC_KEY')
 BRAINTREE_PRIVATE_KEY = config('BRAINTREE_PRIVATE_KEY')
+
+# check for development / production environment:
+if BRAINTREE_PRODUCTION:
+    braintree_env = braintree.Environment.Production
+else:
+    braintree_env = braintree.Environment.Sandbox
+    
+# configure gateway:
+gateway = braintree.BraintreeGateway(
+    braintree.Configuration(
+        braintree_env,
+        merchant_id=BRAINTREE_MERCHANT_ID,
+        public_key=BRAINTREE_PUBLIC_KEY,
+        private_key=BRAINTREE_PRIVATE_KEY,
+    )
+)
+
+# # EASYPOST CONFIG
+# EASYPOST_TEST_KEY = config('EASYPOST_TEST_KEY')
+# easypost.api_key = EASYPOST_TEST_KEY
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
