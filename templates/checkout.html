@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Checkout - TillandsiaGarden{% endblock %} {% load widget_tweaks %} {% load static %} {% block content %} {% csrf_token %}
+{% extends 'base.html' %} {% block title %}Checkout - AirplantGardens{% endblock %} {% load widget_tweaks %} {% load static %} {% block content %} {% csrf_token %}
 <div _ngcontent-c0="" class="app-container">
     <router-outlet _ngcontent-c0=""></router-outlet>
     <sucstu-checkout _nghost-c29="">
@@ -6,10 +6,10 @@
             <div _ngcontent-c29="" class="checkout-text">
                 <div _ngcontent-c29="">
                     <div _ngcontent-c29="">
-                        <p class="page-title">Incredible Tillandsia shipped straight to your door.</p>
+                        <p class="page-title">Incredible airplants shipped straight to your door.</p>
                     </div>
                     <div _ngcontent-c29="">
-                        <p class="checkout-text__2">Subscribe to receive two different Tillandsia each month! Hand picked, carefully packaged and boxed, then shipped to your door, ready to enjoy. Collect them all!</p>
+                        <p class="checkout-text__2">Subscribe to receive a different airplant each month! Hand picked, carefully packaged and boxed, then shipped to your door, ready to enjoy. Collect them all!</p>
                         <p class="checkout-text__2">Just $10 / month + shipping.</p>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                                         <div _ngcontent-c9="" class="summary-group__title text-medium">Phone</div>
                                     </div>
                                     <div _ngcontent-c9="" class="summary-values">
-                                        <div _ngcontent-c9="" class="summary-group__value personal_name">123 123</div>
-                                        <div _ngcontent-c9="" class="summary-group__value personal_email">josephzsol@gmail.com</div>
-                                        <div _ngcontent-c9="" class="summary-group__value personal_phone">+1 310 614 7905</div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_name"></div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_email"></div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_phone"></div>
                                     </div>
                                 </div>
                                 <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_personal_details"> Edit </button>
@@ -109,24 +109,6 @@
                                     </div>
                                     <div _ngcontent-c7="" class="ng-pristine ng-invalid ng-touched" style="display: block;">
                                         <input type="hidden" class="field" id="street_number" disabled="true" />
-                        <!--<input type="hidden" class="field" id="route" disabled="true" />-->
-                        <!--<input type="hidden" class="field" id="locality" disabled="true" />-->
-                        <!--<input type="hidden" class="field" id="administrative_area_level_1" disabled="true" />-->
-                        <!--<input type="hidden" class="field" id="postal_code" disabled="true" />-->
-                        <!--<input type="hidden" class="field" id="country" disabled="true" />-->
-                                        <!--<div _ngcontent-c7="" formgroupname="address" class="ng-pristine ng-invalid ng-touched">
-                                            <div _ngcontent-c7="" class="form-group">
-                                                <input _ngcontent-c7="" id="street_number" class="form-group__input ng-pristine ng-invalid ng-touched" formcontrolname="shippingAddress" placeholder="Street" type="text" test-id="checkout__shipping-details__street-1">
-                                                <span _ngcontent-c7="" class="error-text"> Please enter your the address </span>
-                                            </div>
-                                            <div _ngcontent-c7="" class="form-group"><input _ngcontent-c7="" class="form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
-                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="city" placeholder="City" type="text" test-id="checkout__shipping-details__city">
-                                            </div>
-                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="state" placeholder="State" type="text" test-id="checkout__shipping-details__state">
-                                            </div>
-                                            <div _ngcontent-c7="" class="form-group form-group--inline mb-10"><input _ngcontent-c7="" class="form-group__input mb-10 ng-untouched ng-pristine ng-invalid" formcontrolname="zip" placeholder="Postal code" type="text" test-id="checkout__shipping-details__postal-code">
-                                            </div>
-                                        </div>-->
                                     </div>
                                     <div _ngcontent-c31="" class="form-button-container"><button _ngcontent-c31="" class="address_next btn btn-primary btn-primary--with-hover" type="button" test-id="checkout__shipping-details__shipping-next"> Next </button></div>
                                 </div>
@@ -138,8 +120,8 @@
                                         <div _ngcontent-c9="" class="summary-group__title text-medium">Address</div>
                                     </div>
                                     <div _ngcontent-c9="" class="summary-values">
-                                        <div _ngcontent-c9="" class="summary-group__value personal_name">123 123</div>
-                                        <div _ngcontent-c9="" class="summary-group__value personal_address">josephzsol@gmail.com</div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_name"></div>
+                                        <div _ngcontent-c9="" class="summary-group__value personal_address"></div>
                                     </div>
                                 </div>
                                 <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_shipping_details"> Edit </button>
@@ -191,18 +173,12 @@
                                 </div>
                             </div>
                             <div _ngcontent-c10="" class="card-content__summary payment-summary" style="display: none;">
-                                <!---->
-                                <!--<div _ngcontent-c10="" class="ng-untouched ng-pristine ng-valid">-->
-                                    <!---->
-                                    <div _ngcontent-c10="" class="form-group">
-                                        <sucstu-payment-method-select _ngcontent-c10="" _nghost-c13="">
-                                            <div _ngcontent-c13="" class="form-group__select"><select _ngcontent-c13="" class="custom-select" id="" name=""></select></div>
-                                        </sucstu-payment-method-select>
-                                    </div>
-                                    <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_payment_details"> Edit </button>
-                                    <!---->
-                                <!--</div>-->
-                                <!---->
+                                <div _ngcontent-c10="" class="form-group">
+                                    <sucstu-payment-method-select _ngcontent-c10="" _nghost-c13="">
+                                        <div _ngcontent-c13="" class="form-group__select"><select _ngcontent-c13="" class="custom-select" id="" name=""></select></div>
+                                    </sucstu-payment-method-select>
+                                </div>
+                                <button _ngcontent-c9="" class="btn btn-primary--inset edit_button" id="edit_payment_details"> Edit </button>
                             </div>
                         </div>
                     </sucstu-checkout-secure-payment>
@@ -216,9 +192,9 @@
                             <div _ngcontent-c34="" class="ng-pristine ng-valid ng-touched">
                                 <div _ngcontent-c34="" class="order-summary-order">
                                     <div _ngcontent-c34="" class="order-summary-img">
-                                        <img _ngcontent-c34="" alt="" src="{% static '../static/assets/images/checkout-img.png' %}"></div>
+                                        <img _ngcontent-c34="" alt="" src="{% static '../static/assets/images/hairy.png' %}"></div>
                                     <div _ngcontent-c34="" class="order-summary-items">
-                                        <h4 _ngcontent-c34="" class="order-summary-plan text-medium"><span _ngcontent-c34="">Monthly Plan</span>
+                                        <h4 _ngcontent-c34="" class="order-summary-plan text-medium" style="text-transform:none"><span _ngcontent-c34="">AirplantGardens Monthly Plan</span>
                                         </h4>
                                         <div _ngcontent-c34="" class="order-summary-plan-term">
                                         </div>
@@ -239,20 +215,14 @@
                                     <span _ngcontent-c34="" class="card-checkout__separator mb-15"></span>
                                     <div _ngcontent-c10="" class="order-summary__send">
                                         <div _ngcontent-c10="" class="order-summary__options">
-                                            <!---->
                                             <div _ngcontent-c10="" class="order-summary__terms"><label _ngcontent-c10="" class="checkbox-container" for="terms-check" test-id="checkout__summary__check-button"><input _ngcontent-c10="" formcontrolname="terms" id="terms-check" type="checkbox" class="ng-touched ng-dirty ng-valid"><span _ngcontent-c10="" class="checkmark"></span></label>
-                                                <p _ngcontent-c10="" class="order-summary__terms-text">I agree to Tillandsia Gardens' <a target="_blank" href="/terms">Terms &amp; Conditions</a>.</p>
+                                                <p _ngcontent-c10="" class="order-summary__terms-text">I agree to Airplant Gardens' <a target="_blank" href="/terms">Terms &amp; Conditions</a>.</p>
                                             </div>
                                         </div>
                                         <div _ngcontent-c10="" class="summary-order-group"><button _ngcontent-c10="" class="btn btn-primary summary-order__btn btn-primary--with-hover" id='place-order' type="button" test-id="checkout__summary__place-order" disabled> Place Order </button>
-                                            <!---->
                                         </div>
-                                        <!---->
-                                        <!---->
                                         <p _ngcontent-c10="" class="order-summary__info">This purchase will sign you up for a paid subscription. Your credit card will be charged $16.50 every month until you cancel or modify your subscription. Satisfaction guaranteed. You can cancel at any time. </p>
-                                        <!---->
-                                        <!---->
-                                        <!---->
+                                        
                                     </div>
                                 </div>
                             </div>

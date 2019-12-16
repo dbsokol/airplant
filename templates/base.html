@@ -4,15 +4,24 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Tillandsia Gardens</title>
-  <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-16x16.png' %}" sizes="16x16">
-  <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-32x32.png' %}" sizes="32x32">
-  <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/app.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/style.css' %}">
-  <link rel="stylesheet" href="{% static '../static/assets/css/owl.carousel.css' %}">
-  <!--<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">-->
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+    <meta charset="utf-8">
+    <title>Airplant Gardens</title>
+    <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-16x16.png' %}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{% static '../static/assets/images/favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '../static/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '../static/assets/css/owl.carousel.css' %}">
+    <!--<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">-->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154516454-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154516454-1');
+        gtag('config', 'UA-154516454-2');
+    </script>
 </head>
 <body data-gr-c-s-loaded="true">
 <sucstu-root _nghost-c0="" ng-version="7.2.0">
@@ -89,7 +98,7 @@
                         <h5 _ngcontent-c4="" class="footer-links__title text-medium">Contact Us</h5>
                         <!---->
                         <ul _ngcontent-c4="" class="footer-links__list">
-                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@eucalyptusfarms.com">hello@tillandsia.garden</a></li>
+                            <li _ngcontent-c4="" class="footer-link__item"><a href="mailto:hello@airplant.garden">hello@airplant.garden</a></li>
                         </ul>
                     </div>
                 </div>
@@ -405,7 +414,7 @@ function coupon_apply(button){
         },
         error : function(request,error)
         {
-            alert("There was an error processing your order, please contact support@tillandsia.garden");
+            alert("There was an error processing your order, please contact support@airplant.garden");
         }
     });
 }
@@ -445,7 +454,7 @@ function register(button) {
         },
         error : function(request,error)
         {
-            alert("There was an error processing your order, please contact support@tillandsia.garden");
+            alert("There was an error processing your order, please contact support@airplant.garden");
         }
     });
 }
@@ -473,7 +482,7 @@ function getBraintreeToken() {
         },
         error : function(request,error)
         {
-            alert("There was an error processing your order, please contact support@tillandsia.garden");
+            alert("There was an error processing your order, please contact support@airplant.garden");
         }
     });
 }

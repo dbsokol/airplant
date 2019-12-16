@@ -54,6 +54,7 @@ class PaymentDetails(models.Model):
     
     email = models.CharField(max_length=100, default=None, blank=True, null=True) 
     payment_token = models.CharField(max_length=5000, default=None, blank=True, null=True)
+    payment_nonce = models.CharField(max_length=5000, default=None, blank=True, null=True)
     card_type = models.CharField(max_length=100, default=None, blank=True, null=True)
     last_four = models.IntegerField(default=None, blank=True, null=True)
     expiration = models.CharField(max_length=100, default=None, blank=True, null=True)
@@ -85,20 +86,19 @@ class Subscription(models.Model):
     
     ''' Subscriptions table '''
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    braintree_subscription_id = models.CharField(max_length=200, default=None, blank=True, null=True)
     subscription_name = models.CharField(max_length=100, default=None, blank=True, null=True)
-    address_details = models.OneToOneField(ShippingDetails, on_delete=models.CASCADE)
     start_date = models.DateField(default=None, blank=True, null=True)
     end_date = models.DateField(default=None, blank=True, null=True)
     number_of_months = models.IntegerField(default=None, blank=True, null=True)
-    activte_status = models.BooleanField(default=False)
+    active_status = models.BooleanField(default=False)
     continue_status = models.BooleanField(default=False)
     qued_status = models.BooleanField(default=False)
     fulfilled_status = models.BooleanField(default=False)
     gift_status = models.BooleanField(default=False)
+    gift_address = models.OneToOneField(ShippingDetails, on_delete=models.CASCADE, default=None, blank=True, null=True, related_name='gift_address')
+    reason_for_canceling = models.TextField(default=None, blank=True, null=True)
     
-    def __str__(self):
-        return self.user.email
 
 
         
@@ -110,6 +110,8 @@ class Profile(models.Model):
     personal_details = models.OneToOneField(PersonalDetails, on_delete=models.CASCADE, default=None, blank=True, null=True)
     shipping_details = models.OneToOneField(ShippingDetails, on_delete=models.CASCADE, default=None, blank=True, null=True)
     payment_details = models.OneToOneField(PaymentDetails, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    subscription = models.OneToOneField(Subscription, on_delete=models.SET_NULL, default=None, blank=True, null=True)
+    is_registered = models.BooleanField(default=False)
    
     def __str__(self):
         return self.user.email

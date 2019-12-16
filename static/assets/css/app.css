@@ -8322,3 +8322,5 @@ card--checkout {
     opacity: 1;
     transition: 0.5s;
 }
+
+.cancel-reason-actions{display:flex;justify-content:center;margin-top:35px;flex-wrap:wrap}.cancel-reason-actions .btn:first-child{margin-right:10px;margin-bottom:10px}.cancel-reason-actions .btn{font-size:14px;width:100%}.modal-title{text-align:center;margin:0 0 21px}.modal-description{text-align:center;margin:0 0 30px}@media (min-width:500px){.cancel-reason-actions .btn{width:auto;padding:0 20px}}

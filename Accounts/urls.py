@@ -11,7 +11,6 @@ urlpatterns = [
     path('check_coupon/', views.CheckCoupon, name='check_coupon'),
     path('get_token/', views.GetToken, name='get_token'),
     #path('submit_nonce/', views.SubmitNonce, name='submit_nonce'),
-    path('profile/', views.Profile, name='profile'),
     path('register/', views.Register, name='register'),
     path('ship/', views.Shipping, name='ship'),
 ]

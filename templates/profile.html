@@ -1,110 +1,281 @@
 {% extends 'base.html' %} {% block title %}Profile - TillandsiaGarden{% endblock %} {% load static %} {% block content %}
-        <div _ngcontent-c0="" class="app-container">
-          <router-outlet _ngcontent-c0=""></router-outlet>
-          <sucstu-account _nghost-c5="">
-            <div _ngcontent-c5="" class="referral-code-container">
-              <h1 _ngcontent-c5="" class="referral-title">Here's your unique referral link!</h1>
-              <p _ngcontent-c5="" class="referral-code"> airplant.garden?ccode=Wtb94e9cNFnO</p>
-              <p _ngcontent-c5="" class="referral-text">Copy and paste the link above to share it with followers, friends, and family! They'll get $5 off their first couple of Tillandsia when they use your link, and every 3 people who use it means 1 FREE box of tillandsia for you!</p>
+<sucstu-modal _ngcontent-serverapp-c5="" id="turn-off-reason-modal" _nghost-serverapp-c13="" style="display: none;">
+  <div _ngcontent-serverapp-c13="" class="modal">
+    <div _ngcontent-serverapp-c13="" class="modal-body" style="padding: 1.875rem 3.4375rem; max-width: 40.5rem; position: relative;">
+      <!---->
+      <sucstu-turn-off-subscription-modal _ngcontent-serverapp-c5="">
+        <h2 class="modal-title">Bon voyage!</h2>
+        <p class="modal-description"> *Wipes a tear and waves at the metaphorical ship you're on.* Before you go, we'd love to hear why you're cancelling your subscription. <br><strong>Thank you for your feedback!</strong></p>
+        <div class="cancel-reason-form ng-untouched ng-pristine ng-valid">
+          <div class="checkbox-list">
+            <!---->
+            <div class="checkbox-item">
+              <label class="checkbox-container ng-untouched ng-pristine ng-valid">
+                <input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid">
+                <span class="checkmark"></span>
+              </label>
+              <p>Not what expected</p>
             </div>
-            <div _ngcontent-c5="" class="profile-container container">
-              <div _ngcontent-c5="" class="left-section">
-                <div _ngcontent-c5="" class="subscriptions-card-list" style="display: block;">
-                  <h3 _ngcontent-c5="" class="title">Subscriptions</h3>
-                  <sucstu-subscription-card _ngcontent-c5="" _nghost-c9="">
-                    <div _ngcontent-c9="" class="subscription-card-container">
-                      <div _ngcontent-c9="" class="card-content">
-                        <div _ngcontent-c9="" class="col-sm-12">
-                          <div _ngcontent-c9="" class="subscription-details">
-                            <div _ngcontent-c9="" class="subscription-info">
-                              <div _ngcontent-c9="" class="subscription-id">
-                                <p _ngcontent-c9="">Subscription</p><span _ngcontent-c9=""></span></div>
-                              <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
-                            </div>
-                            <div _ngcontent-c9="" class="subscription-recipient-details">
-                              <p _ngcontent-c9="" class="subscription__recipient-name">{{address.first_name}} {{address.last_name}}</p>
-                              <p _ngcontent-c9="" class="subscription__address"><span _ngcontent-c9="">{{address.street_number}} {{address.street_name}} {{address.address2}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="">{{address.city}}, {{address.state}} {{address.zip_code}}</span></p>
-                            </div>
-                            <div _ngcontent-c9="">
-                              <a _ngcontent-c9="" class="link-button-11"> Re-activate your subscription! </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div _ngcontent-c9="" class="shipments-list-container">
-                          <div _ngcontent-c9="" class="col-sm-12">
-                            <table _ngcontent-c9="" class="shipments-list">
-                              <tbody _ngcontent-c9="">
-                                <!---->
-                                <tr _ngcontent-c9="" class="shipments-list__item">
-                                  <td _ngcontent-c9="" class="shipments-list__item-box">Apr</td>
-                                  <td _ngcontent-c9="" class="shipments-list__item-status"> Delivered.
-                                    <!----><a _ngcontent-c9="" class="shipment-track action-btn" target="_blank" href="https://track.easypost.com/djE6dHJrX2I0ZTdhOTViNTE1MDRjNTdiNWZjNThmNjA0MWI4YmQ0"> Track </a></td>
-                                  <td _ngcontent-c9="" class="shipments-list__item-date text-right">04/16</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Need to save money</p>
+            </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Too many plants</p>
+            </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Didn’t receive shipment(s)</p>
+            </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Only wanted to try 1 box</p>
+            </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Only wanted the discount</p>
+            </div>
+            <div class="checkbox-item"><label class="checkbox-container ng-untouched ng-pristine ng-valid"><input formcontrolname="enabled" type="checkbox" class="ng-untouched ng-pristine ng-valid"><span class="checkmark"></span></label>
+              <p>Other</p>
+            </div>
+          </div>
+          <!---->
+        </div>
+        <div class="modal-actions"><button id="nevermind" class="btn btn-primary--inset btn-primary--with-hover">Nevermind </button><button class="btn btn-primary btn-primary--with-hover" id="cancel_subscription">Cancel Subscription </button></div>
+      </sucstu-turn-off-subscription-modal>
+    </div>
+  </div>
+  <div _ngcontent-serverapp-c13="" class="modal-background"></div>
+</sucstu-modal>
+<div _ngcontent-c0="" class="app-container">
+  <router-outlet _ngcontent-c0=""></router-outlet>
+  <sucstu-account _nghost-c5="">
+    <div _ngcontent-c5="" class="referral-code-container">
+      <h1 _ngcontent-c5="" class="referral-title">Here's your unique referral link!</h1>
+      <p _ngcontent-c5="" class="referral-code"> airplant.garden?ccode=Wtb94e9cNFnO</p>
+      <p _ngcontent-c5="" class="referral-text">Copy and paste the link above to share it with followers, friends, and family! They'll get $5 off their first couple of Tillandsia when they use your link, and every 3 people who use it means 1 FREE box of tillandsia for you!</p>
+    </div>
+    <div _ngcontent-c5="" class="profile-container container">
+      <div _ngcontent-c5="" class="left-section">
+        <div _ngcontent-c5="" class="subscriptions-card-list" style="display: block;">
+          <h3 _ngcontent-c5="" class="title">Subscriptions</h3>
+          <sucstu-subscription-card _ngcontent-c5="" _nghost-c9="">
+            <div _ngcontent-c9="" class="subscription-card-container">
+              <div _ngcontent-c9="" class="card-content">
+                <div _ngcontent-c9="" class="col-sm-12">
+                  <div _ngcontent-c9="" class="subscription-details">
+                    <div _ngcontent-c9="" class="subscription-info">
+                      <div _ngcontent-c9="" class="subscription-id">
+                        <p _ngcontent-c9="">Subscription</p><span _ngcontent-c9=""></span></div>
+                      <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" id="edit_shipping_details" alt="" src="{% static '../static/assets/images/pencil-small-icon.png' %}"></div>
                     </div>
-                  </sucstu-subscription-card>
+                    <div _ngcontent-c31="" class="card-content user_address_details" style="display: none;">
+                                <div _ngcontent-c31="" class="user_address_details ng-untouched ng-pristine ng-invalid">
+                    <div _ngcontent-c31="" formgroupname="address" id="address_autofill" class="ng-untouched ng-pristine ng-invalid">
+                    <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                      </div>
+                        <div _ngcontent-c31="" class="action-btn mb-10" id="address_cant_find" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
+                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                    </div>
+                    <div _ngcontent-c31="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid" id="address_manual" style="display: none;">
+                        <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="route" placeholder="Street" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                            <input id="locality" placeholder="City" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                            <input id="administrative_area_level_1" placeholder="State" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                            <input id="postal_code" placeholder="Zip Code" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                            <input id="country" placeholder="Country" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                    </div>
+                    <div _ngcontent-c7="" class="ng-pristine ng-invalid ng-touched" style="display: block;">
+                        <input type="hidden" class="field" id="street_number" disabled="true" />
+                    </div>
+                    </div>
+                    <div style="margin-bottom:20px">
+                    <a class="link-button-11" id="save_address_details">Save</a> <a id="cancel_save_address_details" class="link-button-11">Cancel</a>
+                    </div>
+                    </div>
+                    <div _ngcontent-c9="" class="subscription-recipient-details" id="subscription-recipient-details">
+                      <p _ngcontent-c9="" class="subscription__recipient-name">{{shipping_details.first_name}} {{shipping_details.last_name}}</p>
+                      <p _ngcontent-c9="" class="subscription__address"><span _ngcontent-c9="">{{shipping_details.street_number}} {{shipping_details.street_name}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
+                    </div>
+                    <div _ngcontent-c9="" id='new_button'>
+                      {% if subscription.active_status %}
+                      <a _ngcontent-c9="" id="cancel_subscription_modal" class="link-button-11"> Cancel subscription </a>
+                      {% else %}
+                      <a _ngcontent-c9="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div _ngcontent-c9="" class="shipments-list-container">
+                  <div _ngcontent-c9="" class="col-sm-12">
+                    <table _ngcontent-c9="" class="shipments-list">
+                      <tbody _ngcontent-c9="">
+                        <!---->
+                        <tr _ngcontent-c9="" class="shipments-list__item">
+                          <td _ngcontent-c9="" class="shipments-list__item-box">Apr</td>
+                          <td _ngcontent-c9="" class="shipments-list__item-status"> Delivered.
+                            <!----><a _ngcontent-c9="" class="shipment-track action-btn" target="_blank" href="https://track.easypost.com/djE6dHJrX2I0ZTdhOTViNTE1MDRjNTdiNWZjNThmNjA0MWI4YmQ0"> Track </a></td>
+                          <td _ngcontent-c9="" class="shipments-list__item-date text-right">04/16</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-              <div _ngcontent-c5="" class="right-section">
-                <h3 _ngcontent-c5="" class="title">Account</h3>
-                  <div _ngcontent-c9="" class="subscription-card-container">
-                      <div _ngcontent-c9="" class="card-content">
-                        <div _ngcontent-c9="" class="col-sm-12">
-                          <div _ngcontent-c9="" class="subscription-details">
-                            <div _ngcontent-c9="" class="subscription-info">
-                              <div _ngcontent-c9="" class="subscription-id">
-                                <p _ngcontent-c9="" id="user_name">Hello, {{name.first_name}} {{name.last_name}}</p><span _ngcontent-c9=""></span>
-                              </div>
-                              <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
-                            </div>
-                            <div _ngcontent-c9="" class="subscription-recipient-details">
-                              <p _ngcontent-c9="" class="subscription__recipient-email">{{email}}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div _ngcontent-c9="" class="shipments-list-container">
-                          <div _ngcontent-c9="" class="col-sm-12">
-                            <div _ngcontent-c9="" class="subscription-id">
-                                <p _ngcontent-c9="" id="user_name" style="font-weight:700">Payment Method on Account</p>
-                              </div>
-                              <p _ngcontent-c21="">{{payment.card_type}} ending in {{payment.last_four}} {{payment.expiration}}</p>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              </div>
-          </sucstu-account>
+            </div>
+          </sucstu-subscription-card>
         </div>
+      </div>
+      <div _ngcontent-c5="" class="right-section">
+        <h3 _ngcontent-c5="" class="title">Account</h3>
+        <div _ngcontent-c9="" class="subscription-card-container">
+          <div _ngcontent-c9="" class="card-content">
+            <div _ngcontent-c9="" class="col-sm-12">
+              <div _ngcontent-c9="" class="subscription-details">
+                <div _ngcontent-c9="" class="subscription-info">
+                  <div _ngcontent-c9="" class="subscription-id">
+                    <p _ngcontent-c9="" id="user_name">Hello, {{personal_details.first_name}} {{personal_details.last_name}}</p><span _ngcontent-c9=""></span>
+                  </div>
+                  <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
+                </div>
+                <div _ngcontent-c9="" class="subscription-recipient-details">
+                  <p _ngcontent-c9="" class="subscription__recipient-email">{{pesonal_details.email}}</p>
+                </div>
+              </div>
+            </div>
+            <div _ngcontent-c9="" class="shipments-list-container">
+              <div _ngcontent-c9="" class="col-sm-12">
+                <div _ngcontent-c9="" class="subscription-id">
+                  <p _ngcontent-c9="" id="user_name" style="font-weight:700">Payment Method on Account</p>
+                </div>
+                <p _ngcontent-c21="">{{payment_details.card_type}} ending in {{payment_details.last_four}} {{payment_details.expiration}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sucstu-account>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-  $.ajax({
-    url: "",
-    type: 'POST',
-    data: {
-      'email': email.val(),
-      'csrfmiddlewaretoken': '{{ csrf_token }}'
-    },
-    dataType: 'json',
-    success: function(data) {
-      var email_status = Number(data.status)
-      if (email_status == 1) {
-        email_okay = false;
-        $('.email_errors').html(data.message);
+
+var email = '{{ pesonal_details.email }}';
+
+function canceler() { 
+  $("#cancel_subscription_modal").click(function() {
+    $("#turn-off-reason-modal").css("display", "block");
+  });
+}
+canceler();
+  $("#nevermind").click(function() {
+    $("#turn-off-reason-modal").css("display", "none");
+  });
+  $("#cancel_save_address_details").click(function() {
+    $(".user_address_details").css("display", "none");
+    $("#subscription-recipient-details").css("display", "block");
+  });
+  $("#edit_shipping_details").click(function() {
+    $(".user_address_details").css("display", "block");
+    $("#subscription-recipient-details").css("display", "none");
+  });
+  $("#save_address_details").click(function() {
+    $.ajax({
+      url: "{% url 'change_shipping' %}",
+      type: 'POST',
+      data: {
+        'address1' : $('.user_address').val(),
+        'address2' : $('.user_address_2').val(),
+        'street_number' : $('#street_number').val(),
+        'street_name' : $('#route').val(),
+        'city' : $('#locality').val(),
+        'state' : $('#administrative_area_level_1').val(),
+        'zip_code' : $('#postal_code').val(),
+        'country' : $('#country').val(),
+        'email': email.val(),
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 1) {
+          $("#user_address_details").css("display", "none");
+          $("#subscription-recipient-details").css("display", "block");
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
       }
-      else {
-        email_okay = true;
-        $('.email_errors').html("");
-        return;
+    });
+  });
+  $("#cancel_subscription").click(function() {
+    var responses = new Array()
+    $("input").each(function() {
+      if($(this).is(':checked')){
+          responses.push($(this).parent().siblings("p").html());
       }
-    },
-    error: function(request, error) {
-      alert("Request: " + JSON.stringify(request));
-    }
-  }); 
+    });
+    console.log(responses)
+    $.ajax({
+      url: "{% url 'cancel_subscription' %}",
+      type: 'POST',
+      data: {
+        'reason_for_canceling' : responses,
+        'email': email.val(),
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 0) {
+          $("#turn-off-reason-modal").css("display", "none");
+          $("#new_button").html('<a _ngcontent-c9="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>');
+          reactivator();
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
+      }
+    });
+  });
+  
+function reactivator() {  
+  $("#reactivate_subscription").click(function() {
+    $.ajax({
+      url: "{% url 'reactivate_subscription' %}",
+      type: 'POST',
+      data: {
+        'email': email.val(),
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 0) {
+          $("#cancel_subscription_modal").html("Subsription reactivated.").attr("id","cancel_subscription_modal");
+          canceler();
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
+      }
+    });
+  });
+}
+reactivator();
 </script>
 {% endblock %}

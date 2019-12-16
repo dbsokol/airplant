@@ -182,4 +182,4 @@ gateway = braintree.BraintreeGateway(
 # EASYPOST_TEST_KEY = config('EASYPOST_TEST_KEY')
 # easypost.api_key = EASYPOST_TEST_KEY
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', cast=bool)
