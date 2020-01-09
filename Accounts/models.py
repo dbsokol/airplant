@@ -53,8 +53,10 @@ class PaymentDetails(models.Model):
     ''' Payment Details table '''
     
     email = models.CharField(max_length=100, default=None, blank=True, null=True) 
-    payment_token = models.CharField(max_length=5000, default=None, blank=True, null=True)
+    braintree_payment_method_token = models.CharField(max_length=200, default=None, blank=True, null=True)
+    braintree_payment_method_global_id = models.CharField(max_length=200, default=None, blank=True, null=True)
     payment_nonce = models.CharField(max_length=5000, default=None, blank=True, null=True)
+    card_holder_name = models.CharField(max_length=100, default=None, blank=True, null=True)
     card_type = models.CharField(max_length=100, default=None, blank=True, null=True)
     last_four = models.IntegerField(default=None, blank=True, null=True)
     expiration = models.CharField(max_length=100, default=None, blank=True, null=True)
@@ -86,10 +88,13 @@ class Subscription(models.Model):
     
     ''' Subscriptions table '''
 
+    email = models.CharField(max_length=100, default=None, blank=True, null=True) 
     braintree_subscription_id = models.CharField(max_length=200, default=None, blank=True, null=True)
     subscription_name = models.CharField(max_length=100, default=None, blank=True, null=True)
     start_date = models.DateField(default=None, blank=True, null=True)
     end_date = models.DateField(default=None, blank=True, null=True)
+    next_billing_date = models.DateField(default=None, blank=True, null=True)
+    billing_day_of_month = models.IntegerField(default=None, blank=True, null=True)
     number_of_months = models.IntegerField(default=None, blank=True, null=True)
     active_status = models.BooleanField(default=False)
     continue_status = models.BooleanField(default=False)
@@ -99,6 +104,23 @@ class Subscription(models.Model):
     gift_address = models.OneToOneField(ShippingDetails, on_delete=models.CASCADE, default=None, blank=True, null=True, related_name='gift_address')
     reason_for_canceling = models.TextField(default=None, blank=True, null=True)
     
+    def __str__(self):
+        return self.email
+        
+
+
+class Customer(models.Model):
+
+    ''' Customer table '''
+    
+    braintree_customer_id = models.CharField(max_length=200, default=None, blank=True, null=True)
+    braintree_customer_global_id = models.CharField(max_length=200, default=None, blank=True, null=True)
+    first_name = models.CharField(max_length=100, default=None, blank=True, null=True)
+    last_name = models.CharField(max_length=100, default=None, blank=True, null=True)
+    email = models.CharField(max_length=100, default=None, blank=True, null=True)
+    
+    def __str__(self):
+        return self.email
 
 
         
@@ -111,6 +133,7 @@ class Profile(models.Model):
     shipping_details = models.OneToOneField(ShippingDetails, on_delete=models.CASCADE, default=None, blank=True, null=True)
     payment_details = models.OneToOneField(PaymentDetails, on_delete=models.CASCADE, default=None, blank=True, null=True)
     subscription = models.OneToOneField(Subscription, on_delete=models.SET_NULL, default=None, blank=True, null=True)
+    customer = models.OneToOneField(Customer, on_delete=models.SET_NULL, default=None, blank=True, null=True)
     is_registered = models.BooleanField(default=False)
    
     def __str__(self):

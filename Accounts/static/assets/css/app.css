@@ -364,10 +364,12 @@ header-title.header-title--desk[_ngcontent-c3] {
 }
 
 .nav-action[_ngcontent-c3] a[_ngcontent-c3] {
-    font-family: "Bebas Neue";
+    font-family: "Space Mono";
     color: #3d3d3d;
     font-size: 14px;
-    cursor: pointer
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .top-header[_ngcontent-c3] {
@@ -5015,6 +5017,7 @@ h6[_ngcontent-c5] {
     display: flex;
     justify-content: center;
     align-items: center
+    cursor: pointer;
 }
 
 .promotion-text[_ngcontent-c5] {
@@ -5906,7 +5909,8 @@ h6[_ngcontent-c5] {
     background-color: rgba(0, 0, 0, .1);
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    cursor: pointer;
 }
 
 .promotion-text[_ngcontent-c5] {
@@ -8324,3 +8328,323 @@ card--checkout {
 }
 
 .cancel-reason-actions{display:flex;justify-content:center;margin-top:35px;flex-wrap:wrap}.cancel-reason-actions .btn:first-child{margin-right:10px;margin-bottom:10px}.cancel-reason-actions .btn{font-size:14px;width:100%}.modal-title{text-align:center;margin:0 0 21px}.modal-description{text-align:center;margin:0 0 30px}@media (min-width:500px){.cancel-reason-actions .btn{width:auto;padding:0 20px}}
+
+
+.cdk-overlay-container {
+    z-index: 1000000;
+    position: fixed;
+}
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dark-backdrop {
+    background: #000;
+    opacity: .65!important;
+}
+
+.cdk-overlay-backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .4s cubic-bezier(.25,.8,.25,1);
+    opacity: 0;
+}
+
+.cdk-global-overlay-wrapper {
+    display: flex;
+    position: absolute;
+    z-index: 1000;
+}
+
+.cdk-overlay-pane {
+    position: absolute;
+    pointer-events: auto;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.text-bolder[_ngcontent-serverApp-c7] {
+    font-weight: 700
+}
+
+.text-medium[_ngcontent-serverApp-c7] {
+    font-weight: 500
+}
+
+.text-normal[_ngcontent-serverApp-c7] {
+    font-weight: 400
+}
+
+.text-light[_ngcontent-serverApp-c7] {
+    font-weight: 300
+}
+
+.center-text[_ngcontent-serverApp-c7] {
+    text-align: center
+}
+
+.center-element[_ngcontent-serverApp-c7] {
+    margin: 0 auto
+}
+
+.mb-15[_ngcontent-serverApp-c7] {
+    margin-bottom: 15px!important
+}
+
+.mb-10[_ngcontent-serverApp-c7] {
+    margin-bottom: 10px!important
+}
+
+.mt-0[_ngcontent-serverApp-c7] {
+    margin: 0
+}
+
+.mt-15[_ngcontent-serverApp-c7] {
+    margin-top: 15px
+}
+
+.form-group[_ngcontent-serverApp-c7] {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 58px;
+    justify-content: flex-start
+}
+
+.error-text[_ngcontent-serverApp-c7] {
+    color: red;
+    font-size: 12px;
+    display: block;
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7] {
+    padding: 0;
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7]::-webkit-input-placeholder {
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7]::-moz-placeholder {
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7]:-ms-input-placeholder {
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7]::-ms-input-placeholder {
+    text-align: center
+}
+
+.lead-input[_ngcontent-serverApp-c7]::placeholder {
+    text-align: center
+}
+
+.lead-banner[_ngcontent-serverApp-c7] {
+    position: relative;
+    background-image: url(../images/banner-bg-mobile.jpg);
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    width: 295px;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    max-width: 100%
+}
+
+.lead-close-btn[_ngcontent-serverApp-c7] {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    font-size: 34px;
+    cursor: pointer
+}
+
+.lead-banner-content[_ngcontent-serverApp-c7] {
+    background-image: url(../images/banner-bg.png;
+    background-position: top center;
+    background-repeat: no-repeat;
+    height: 334px;
+    max-width: 354px;
+    padding: 0 10px 40px
+}
+
+.lead-banner-content[_ngcontent-serverApp-c7],
+.lead-banner__sub-content[_ngcontent-serverApp-c7] {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center
+}
+
+.lead-banner__title[_ngcontent-serverApp-c7] {
+    font-size: 72px;
+    line-height: 90px
+}
+
+.lead-banner__subtitle[_ngcontent-serverApp-c7] {
+    font-size: 23px;
+    font-weight: 300
+}
+
+.lead-banner__subtitle[_ngcontent-serverApp-c7],
+.lead-banner__title[_ngcontent-serverApp-c7] {
+    font-family: Colfax, Helvetica, sans-serif!important;
+    margin: 0;
+    letter-spacing: .6px
+}
+
+.lead-banner__title[_ngcontent-serverApp-c7] {
+    font-weight: 700;
+    color: #fff
+}
+
+.lead-banner__subtitle[_ngcontent-serverApp-c7] {
+    color: #4a4a4a
+}
+
+.lead-banner__form[_ngcontent-serverApp-c7] .form-group[_ngcontent-serverApp-c7] {
+    height: auto;
+    min-height: auto
+}
+
+.lead-banner__form[_ngcontent-serverApp-c7] .form-group__input[_ngcontent-serverApp-c7] {
+    background-color: transparent;
+    height: 40px;
+    min-width: 250px;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    margin: 10px 0
+}
+
+.lead-banner__form[_ngcontent-serverApp-c7] .lead-input[_ngcontent-serverApp-c7] {
+    background: #fff;
+    border: none
+}
+
+.lead-banner__btn[_ngcontent-serverApp-c7] {
+    font-size: 14px;
+    line-height: 14px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #568186
+}
+
+.lead-banner__link[_ngcontent-serverApp-c7] {
+    color: #4a4a4a;
+    font-size: 12px;
+    letter-spacing: .4px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: .3px
+}
+
+.lead-banner__btn[_ngcontent-serverApp-c7],
+.lead-banner__link[_ngcontent-serverApp-c7] {
+    font-family: "Space mono", Helvetica, sans-serif!important
+}
+
+.close[_ngcontent-serverApp-c7] {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    height: 25px;
+    justify-content: center;
+    margin: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: rotate(45deg);
+    width: 25px;
+    z-index: 5
+}
+
+.close[_ngcontent-serverApp-c7] .sr-only[_ngcontent-serverApp-c7] {
+    display: none
+}
+
+.close[_ngcontent-serverApp-c7]:after,
+.close[_ngcontent-serverApp-c7]:before {
+    background-color: #7d7d7d;
+    content: '';
+    position: absolute
+}
+
+.close[_ngcontent-serverApp-c7]:before {
+    height: 100%;
+    width: 1px
+}
+
+.close[_ngcontent-serverApp-c7]:after {
+    height: 1px;
+    width: 100%
+}
+
+.lead-banner__link[_ngcontent-serverApp-c7]:hover {
+    text-decoration: underline
+}
+
+@media (min-width:350px) {
+    .lead-banner__title[_ngcontent-serverApp-c7] {
+        font-size: 76px!important
+    }
+}
+
+@media (min-width:768px) {
+    .lead-banner[_ngcontent-serverApp-c7] {
+        width: 370px;
+        max-width: 945px
+    }
+}
+
+@media (min-width:1024px) {
+    .close[_ngcontent-serverApp-c7] {
+        margin: 10px!important
+    }
+    .close[_ngcontent-serverApp-c7]:after,
+    .close[_ngcontent-serverApp-c7]:before {
+        background-color: #c4c4c4
+    }
+    .lead-banner[_ngcontent-serverApp-c7] {
+        background-image: url(/assets/images/lead-form/banner-bg.jpg);
+        background-position: inherit!important;
+        width: calc(100vw);
+        height: 370px;
+        justify-content: flex-end;
+        padding: 0
+    }
+    .lead-banner-content[_ngcontent-serverApp-c7] {
+        margin-right: 90px!important;
+        padding: 0 40px 40px!important
+    }
+    .lead-banner-content[_ngcontent-serverApp-c7],
+    .lead-banner__sub-content[_ngcontent-serverApp-c7] {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+}

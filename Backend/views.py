@@ -1,20 +1,21 @@
 from Accounts.models import Subscription, User, PersonalDetails, ShippingDetails, PaymentDetails
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
+from datetime import datetime, timezone, timedelta, date
 from django.views.decorators.csrf import csrf_exempt
 from .models import Subscription_archive
 import Backend.BackendFunctions as funcs
-from datetime import datetime, timezone
 from airplant.settings import gateway
 from django.http import HttpResponse
 import Tools.Tools as tools
+from time import time
 import traceback
 import hashlib
 import json
 
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/home/')
 def Profile(request):
     
     ''' Accepts request from '/profile', renders profile.html template '''
@@ -56,6 +57,7 @@ def Profile(request):
                 },
             'subscription' : {
                 'active_status' : subscription.active_status if subscription else False,
+                'next_billing_date' : subscription.billing_day_of_month,
                 },
             }
         
@@ -93,18 +95,16 @@ def CancelSubscription(request):
         
         # get subsctiption object:
         subscription = user.profile.subscription
+        braintree_subscription_id = subscription.braintree_subscription_id
+    
+        # cancel subscription:
+        result = gateway.subscription.cancel(braintree_subscription_id)
         
         # udpate subscription object:
         subscription.active_status = False
         subscription.end_date = datetime.now(timezone.utc)
         subscription.reason_for_canceling = str(reason_for_canceling)
         subscription.save()
-        
-        # get subscription id:
-        braintree_subscription_id = subscription.braintree_subscription_id
-    
-        # cancel subscription:
-        result = gateway.subscription.cancel(braintree_subscription_id)
         
         # subscription_archive keywords:
         subscription_archive_kwargs = {
@@ -114,6 +114,8 @@ def CancelSubscription(request):
             'shipping_details' : user.profile.shipping_details.address1 + ' ' + user.profile.shipping_details.address2,
             'start_date' : subscription.start_date,
             'end_date' : subscription.end_date, 
+            'next_billing_date' : subscription.next_billing_date,
+            'billing_day_of_month' : subscription.billing_day_of_month,
             'number_of_months' : (subscription.end_date.year - subscription.start_date.year) * 12 + subscription.end_date.month - subscription.start_date.month,
             'reason_for_canceling' : reason_for_canceling,
         }
@@ -121,11 +123,8 @@ def CancelSubscription(request):
         # archive subscription:
         Subscription_archive.objects.create(**subscription_archive_kwargs)
         
-        # delete subscription object:
-        subscription.delete()
-        
         # debug:
-        print('[Backend.views.CancelSubscription]: Canceled subscription with [%s]' %result)
+        print('[Backend.views.CancelSubscription]: Canceled braintree subscription with [BraintreeResult:%s]' %result.is_success)
         
         status = 0
         message = 'You have successfully cancelled your subscription.'
@@ -157,21 +156,23 @@ def ReactivateSubscription(request):
         # unpack post request:
         user = request.user
         
-        # get braintree payment method token
-        payment_token = user.profile.payment_details.payment_token
-        braintree_payment_method_result = gateway.payment_method.find(payment_token)
-        print(braintree_payment_method_result)
+        # get payment_details, subscription archive objects:
+        payment_details = user.profile.payment_details
+        subscription = user.profile.subscription
+        
         # get count of archived subscriptions:
         count = Subscription_archive.objects.filter(user=user.email).count()
         
-        # create braintree_subscription_id:
-        braintree_subscription_id = 's_' + hashlib.md5(user.email.encode('utf-8')).hexdigest() + '_' + str(count)
+        new_subscription_id = 's_' + str(count).zfill(4) + subscription.braintree_subscription_id[6:]
         
         # get subscription object keywords:
         subscription_kwargs = {
-            'braintree_subscription_id' : braintree_subscription_id,
+            'email' : request.POST['email'],
+            'braintree_subscription_id' : new_subscription_id,
             'subscription_name' : 'Standard_Plan',
             'start_date' : datetime.now(timezone.utc),
+            'next_billing_date' : None, # filled in later
+            'billing_day_of_month' : None, # filled in later
             'active_status' : True,
             'continue_status' : True,
             'qued_status' : False,
@@ -179,7 +180,28 @@ def ReactivateSubscription(request):
             'gift_status' : False,
         }
         
+        # determine next billing date:
+        if subscription.next_billing_date < date.today():
+            first_billing_date = date.today()
+        else:
+            first_billing_date = subscription.next_billing_date
+        
+        braintree_subscription_kwargs = {
+            'id' : subscription_kwargs['braintree_subscription_id'],
+            'payment_method_token' : payment_details.braintree_payment_method_token, 
+            'plan_id' : 'Standard_Plan',
+            'first_billing_date' : first_billing_date,
+        }
+        
+        # create new braintree subscription:
+        braintree_subscription_result = gateway.subscription.create(braintree_subscription_kwargs)
+        
+        # delete subscription object:
+        subscription.delete()
+       
         # create new subscription object:
+        subscription_kwargs['next_billing_date'] = braintree_subscription_result.subscription.next_billing_date
+        subscription_kwargs['billing_day_of_month'] = braintree_subscription_result.subscription.billing_day_of_month
         subscription = Subscription.objects.create(**subscription_kwargs)
         subscription.save()
         
@@ -187,19 +209,8 @@ def ReactivateSubscription(request):
         user.profile.subscription = subscription
         user.save()
         
-        # create new braintree subscription:
-        braintree_subscription_result = gateway.subscription.create({
-            'id' : braintree_subscription_id,
-            'payment_method_token' : user.profile.payment_details.payment_token,
-            'plan_id' : 'Standard_Plan',
-        })
-        
-        # debug:
-        print('[Backend.views.ReactivateSubscription]: Created new subscription with id [%s]' %braintree_subscription_id)
-        print('[Backend.views.ReactivateSubscription]: Reactivated subscription with [%s]' %braintree_subscription_result)
-        
         status = 0
-        message = 'You have successfully reactivated your subscription.'
+        message = 'You have successfully reactivated your subscription, you will be billed on the [%s].' %first_billing_date
         internal_message = message
         
     except Exception as error:
@@ -228,33 +239,50 @@ def ChangePayment(request):
         # unpack request:
         user = request.user
         last_four = request.POST['last_four']
+        card_holder_name = request.POST['card_name']
         card_type = request.POST['card_type']
         expiration = request.POST['expiration']
-        new_payment_method_token = request.POST['new_payment_method_token']
+        braintree_nonce = request.POST['nonce']
+
+        # get payment details, subscription objects:
+        payment_details = user.profile.payment_details
+        subscription = user.profile.subscription
+
+        # set payment_method key word arguments:
+        payment_method_kwargs = {
+            'customer_id' : 'c_' + hashlib.md5((request.POST['email'] + str(time())).encode('utf-8')).hexdigest(),
+            'payment_method_nonce' : request.POST['nonce'],
+        }
+
+        # update braintree payment method object:
+        braintree_payment_method_result = gateway.payment_method.update(
+            payment_details.braintree_payment_method_token,
+            {'payment_method_nonce' : request.POST['nonce'],}
+        )
+
+        # debug:
+        if not braintree_payment_method_result.is_success:
+            print('[Backend.views.ChangePayment]: Braintree error on payment method create [%s]' %braintree_payment_method_result)
         
-        # get payment details object:
-        payment_details = PaymentDetails.objects.get(user=user)
-        
+        # update payment method in braintree subscription object:
+        braintree_subscription_result = gateway.subscription.update(
+            subscription.braintree_subscription_id, 
+            {'payment_method_token': braintree_payment_method_result.payment_method.token,}
+        )
+
+        if not braintree_subscription_result.is_success:
+            print('[Backend.views.ChangePayment]: Created braintree subscrption with [BraintreeResult:%s]' %braintree_subscription_result)
+
         # update payment details object:
+        payment_details.braintree_payment_method_token = braintree_payment_method_result.payment_method.token
+        payment_details.braintree_payment_method_global_id = braintree_payment_method_result.payment_method.global_id
+        payment_details.customer_id = braintree_payment_method_result.payment_method.customer_id
+        payment_details.card_holder_name = card_holder_name
         payment_details.last_four = last_four
         payment_details.card_type = card_type
         payment_details.expiration = expiration
         payment_details.save()
-        
-        # get subscription obbject:
-        subscription = Subscription.objects.get(user=user)
-        
-        # update subscription:
-        braintree_subscription_id = subscription.braintree_subscription_id
-        
-        # update payment method in braintree subscription object:
-        result = gateway.subscription.update(braintree_subscription_id, {
-            'payment_method_token': new_payment_method_token,
-        })
-        
-        # debug:
-        print('[Backend.views.ChangePayment]: Changed braintree subscription payment method with [%s]' %result)
-        
+
         status = 0
         message = 'Successfully updated your payment information.'
         internal_message = message
@@ -267,7 +295,7 @@ def ChangePayment(request):
         
     print('[Backend.views.ChangePayment]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message)) 
     
-    return render(request, 'profile.html', context=context)
+    return HttpResponse(json.dumps({'status' : status, 'message' : message}))
 
 
 
@@ -282,13 +310,16 @@ def ChangeShipping(request):
         # debug:
         print('[Backend.views.ChangeShipping]: Got post request with [%s]' %request.POST)
         
+        # unpack post request:
+        user = request.user
+        
         # get shipping details key word arguments from front end:
         shipping_details_kwargs = {
             'email' : request.POST['email'],
             'address1' : request.POST['address1'],
             'address2' : request.POST['address2'],
-            'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
+            'first_name' : request.POST['first_name'].capitalize(),
+            'last_name' : request.POST['last_name'].capitalize(),
             'country' : request.POST['country'],
             'state' : request.POST['state'],
             'zip_code' : request.POST['zip_code'],
@@ -298,63 +329,35 @@ def ChangeShipping(request):
         }
         
         # get payment details object:
-        shipping_details = ShippingDetails.objects.get(user=user)
+        shipping_details = user.profile.shipping_details
         
-        # update payment details object:
-        shipping_details.update(**shipping_details_kwargs)
+        # update shipping details object:
+        shipping_details.email = shipping_details_kwargs['email']
+        shipping_details.first_name = shipping_details_kwargs['first_name']
+        shipping_details.last_name = shipping_details_kwargs['last_name']
+        shipping_details.address1 = shipping_details_kwargs['address1']
+        shipping_details.address2 = shipping_details_kwargs['address2']
+        shipping_details.country = shipping_details_kwargs['country']
+        shipping_details.state = shipping_details_kwargs['state']
+        shipping_details.zip_code = shipping_details_kwargs['zip_code']
+        shipping_details.city = shipping_details_kwargs['city']
+        shipping_details.street_name = shipping_details_kwargs['street_name']
+        shipping_details.street_number = shipping_details_kwargs['street_number']
         shipping_details.save()
         
-        # # unpack post request:
-        # address1 = request.POST['address1']
-        # address2 = request.POST['address2']
-        # country = request.POST['country']
-        # state = request.POST['state']
-        # zip_code = request.POST['zip_code']
-        # city = request.POST['city']
-        # street_name = request.POST['street_name']
-        # street_number = request.POST['street_number']
-        
-        # # get shipping details object:
-        # shipping_details = ShippingDetails.objects.get(user=user)
-        
-        # # update shipping details object:
-        # shipping_details.address1 = address1
-        # shipping_details.address2 = address2
-        # shipping_details.country = country
-        # shipping_details.state = state
-        # shipping_details.zip_code = zip_code
-        # shipping_details.city = city
-        # shipping_details.street_name = street_name
-        # shipping_details.street_number = street_number
-        # shipping_details.save()
-        
-        # get subscription obbject:
-        subscription = Subscription.objects.get(user=user)
-        
-        # update subscription:
-        braintree_subscription_id = subscription.braintree_subscription_id
-        
-        # update payment method in braintree subscription object:
-        result = gateway.subscription.update(braintree_subscription_id, {
-            'payment_method_token': new_payment_method_token,
-        })
-        
-        # debug:
-        print('[Backend.views.ChangeShipping]: Changed braintree subscription payment method with [%s]' %result)
-        
         status = 0
-        message = 'Successfully updated your payment information.'
+        message = 'Successfully updated your shipping information.'
         internal_message = message
     
     except Exception as error:
         
         status = 1
-        message = 'Unable to update your payment information, contact support@airplant.garden for assistance.'
+        message = 'Unable to update your shipping information, contact support@airplant.garden for assistance.'
         internal_message = traceback.format_exc()
         
     print('[Backend.views.ChangeShipping]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message)) 
     
-    return render(request, 'profile.html', context=context)
+    return HttpResponse(json.dumps({'status' : status, 'message' : message}))
 
 
 

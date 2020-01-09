@@ -1,9 +1,16 @@
-from .models import Profile, ShippingDetails, PersonalDetails, PaymentDetails, Coupon, Subscription
+from .models import Profile, ShippingDetails, PersonalDetails, PaymentDetails, Coupon, Subscription, Customer
 from django.utils.html import escape, mark_safe
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.urls import reverse
+
+
+
+class CustomCustomerAdmin(admin.ModelAdmin):
+    
+    list_display = [field.name for field in Customer._meta.get_fields()]
+    list_display_links = ['id']
 
 
 
@@ -83,3 +90,4 @@ admin.site.register(PersonalDetails, CustomPersonalDetailsAdmin)
 admin.site.register(PaymentDetails, CustomPaymentDetailsAdmin)
 admin.site.register(Coupon, CustomCouponAdmin)
 admin.site.register(Subscription, CustomSubscriptionAdmin)
+admin.site.register(Customer, CustomCustomerAdmin)

@@ -1,5 +1,4 @@
-from Accounts.forms import RegisterForm, PersonalDetailsForm, ShippingDetailsForm, PaymentDetailsForm
-from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, Coupon, Subscription
+from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, Coupon, Subscription, Customer
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -202,7 +201,7 @@ def GetToken(request):
         
         # get braintree token keyword argsuments:
         braintree_token_kwargs = {
-            'id' : hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
+            'id' : hashlib.md5((request.POST['email'] + str(datetime.now())).encode('utf-8')).hexdigest(),
             'email' : request.POST['email'],
             'first_name' : request.POST['first_name'],
             'last_name' : request.POST['last_name'],
@@ -213,18 +212,20 @@ def GetToken(request):
         braintree_customer_result = gateway.customer.create(braintree_token_kwargs)
         braintree_client_token = gateway.client_token.generate({"customer_id" : braintree_token_kwargs['id'] })
         
+        customer_id = braintree_token_kwargs['id']
         
         status = 0
         internal_message = 'built token with user email [%s]' %braintree_token_kwargs['email'] 
         message = 'built token'
     
         print('[Accounts.views.GetToken]: customer id [%s]' %braintree_token_kwargs['id'])
-        print('[Accounts.views.GetToken]: Braintree customer [%s]' %braintree_customer_result)
+        print('[Accounts.views.GetToken]: Braintree customer [BraintreeResult:%s]' %braintree_customer_result.is_success)
         
     except Exception as e:
         
-        print('[Accounts.views.GetToken]: Exception [%s]' %e)
+        print('[Accounts.views.GetToken]: Exception [%s]' %traceback.format_exc())
         
+        customer_id = -1
         braintree_client_token = 0
         
         status = 1
@@ -233,7 +234,7 @@ def GetToken(request):
 
     print('[Accounts.views.GetToken]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
 
-    return HttpResponse(json.dumps({'message': message, 'status' : status, 'token' : braintree_client_token, 'customer_id' : braintree_token_kwargs['id']}))
+    return HttpResponse(json.dumps({'message': message, 'status' : status, 'token' : braintree_client_token, 'customer_id' : customer_id}))
 
 
 
@@ -251,8 +252,8 @@ def Register(request):
         # get personal details key word arguments from front end:
         personal_details_kwargs = {
             'email' : request.POST['email'],
-            'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
+            'first_name' : request.POST['first_name'].capitalize(),
+            'last_name' : request.POST['last_name'].capitalize(),
             'phone' : request.POST['phone'],
         }
         
@@ -261,8 +262,8 @@ def Register(request):
             'email' : request.POST['email'],
             'address1' : request.POST['address1'],
             'address2' : request.POST['address2'],
-            'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
+            'first_name' : request.POST['first_name'].capitalize(),
+            'last_name' : request.POST['last_name'].capitalize(),
             'country' : request.POST['country'],
             'state' : request.POST['state'],
             'zip_code' : request.POST['zip_code'],
@@ -274,12 +275,37 @@ def Register(request):
         # get payment details key word arguments:
         payment_details_kwargs = {
             'email' : request.POST['email'],
+            'braintree_payment_method_token' : None, # filled in after braintree payment method is created
+            'braintree_payment_method_global_id' : None, # filled in after braintree payment method is created
             'payment_nonce' : request.POST['nonce'],
-            'payment_token' : None, # filled in after braintree payment method is created
+            'card_holder_name' : request.POST['card_name'],
             'card_type' : request.POST['card_type'],
             'last_four' : request.POST['last_four'],
             'expiration' : request.POST['expiration'],
             'start_date' : datetime.now(timezone.utc),
+        }
+        
+        # get subscription object keywords:
+        subscription_kwargs = {
+            'email' : request.POST['email'],
+            'braintree_subscription_id' : 's_0000_' + hashlib.md5((request.POST['email'] + str(time())).encode('utf-8')).hexdigest(),
+            'subscription_name' : 'Standard_Plan',
+            'start_date' : datetime.now(timezone.utc),
+            'next_billing_date' : None, # filled in later
+            'billing_day_of_month' : None, # filled in later
+            'active_status' : True,
+            'continue_status' : True,
+            'qued_status' : False,
+            'fulfilled_status' : False,
+            'gift_status' : False,
+        }
+
+        customer_kwargs = {
+            'braintree_customer_id' : 'c_' + hashlib.md5((request.POST['email'] + str(time())).encode('utf-8')).hexdigest(),
+            'braintree_customer_global_id' : None, # filled in after braintree customer is created
+            'first_name' : request.POST['first_name'].capitalize(),
+            'last_name' : request.POST['last_name'].capitalize(),
+            'email' : request.POST['email'],
         }
         
         # get user key word arguments:
@@ -289,61 +315,25 @@ def Register(request):
             'password' : request.POST['password1'],
         }
         
-        # get payment_method key word arguments:
-        payment_method_kwargs = {
-            'customer_id' : hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
+        # set braintree customer key word arguments:
+        braintree_customer_kwargs = {
+            'id' : customer_kwargs['braintree_customer_id'],
+            'first_name' : request.POST['first_name'].capitalize(),
+            'last_name' : request.POST['last_name'].capitalize(),
+            'email' : request.POST['email'],
+        }
+        
+        # set braintree payment_method key word arguments:
+        braintree_payment_method_kwargs = {
+            'customer_id' : customer_kwargs['braintree_customer_id'],
             'payment_method_nonce' : request.POST['nonce'],
         }
         
-        # # get braintree subscription keywords:
-        # braintree_subscription_kwargs = {
-        #     'payment_method_token' : request.POST['nonce'],
-        #     'plan_id' : 'Standard_Plan',
-        #     'discounts' : { 
-        #         'add' : {
-        #             'inherited_from_id' : request.POST['discount'],
-        #         }
-        #     }
-        # }
-        
-        # get subscription object keywords:
-        subscription_kwargs = {
-            'braintree_subscription_id' : 's_' + hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
-            'subscription_name' : 'Standard_Plan',
-            'start_date' : datetime.now(timezone.utc),
-            'active_status' : True,
-            'continue_status' : True,
-            'qued_status' : False,
-            'fulfilled_status' : False,
-            'gift_status' : False,
-        }
-
-        # create personal details, shipping details, payment objects:
-        personal_details = PersonalDetails.objects.create(**personal_details_kwargs)
-        shipping_details = ShippingDetails.objects.create(**shipping_details_kwargs)
-        payment_details = PaymentDetails.objects.create(**payment_details_kwargs)
-        
-        # save personal details, shipping details, payment objects:
-        personal_details.save()
-        shipping_details.save()
-        payment_details.save()
-        
-        # create, save registered user:
-        user = User.objects.create_user(**user_kwargs)
-        user.save()
-        
-        braintree_payment_method_result = gateway.payment_method.create(payment_method_kwargs)
-        print('[Accounts.views.Register]: Braintree payment_method result [%s]' %braintree_payment_method_result)
-
-        # update payment method object:
-        payment_details.payment_token = braintree_payment_method_result.payment_method.token
-        payment_details.save()
-
-        # create payment method:
+        # set braintree subscription keywords:
         if Coupon.objects.filter(coupon_code=request.POST['discount']).exists():
-            braintree_subscription_result = gateway.subscription.create({
-                'id' : 's_' + hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
-                'payment_method_token' : braintree_payment_method_result.payment_method.token,
+            braintree_subscription_kwargs = {
+                'id' : subscription_kwargs['braintree_subscription_id'],
+                'payment_method_token' : None, # filled in later 
                 'plan_id' : 'Standard_Plan',
                 'discounts' : { 
                     'add' : [{
@@ -351,20 +341,61 @@ def Register(request):
                         'amount' : 5
                     }]
                 }
-            })
+            }
         else:
-            braintree_subscription_result = gateway.subscription.create({
-                'id' : 's_' + hashlib.md5(request.POST['email'].encode('utf-8')).hexdigest(),
-                'payment_method_token' : braintree_payment_method_result.payment_method.token,
+            braintree_subscription_kwargs = {
+                'id' : subscription_kwargs['braintree_subscription_id'],
+                'payment_method_token' : None, # filled in later 
                 'plan_id' : 'Standard_Plan',
-            })
+            }
+            
+        # create braintree customer:
+        braintree_customer_result = gateway.customer.create(braintree_customer_kwargs)
         
         # debug:
-        # print('[Accounts.views.Register]: Braintree payment_method result [%s]' %braintree_payment_method_result)
-        # print('[Accounts.views.Register]: Braintree subscription result [%s]' %braintree_subscription_result)
+        if not braintree_customer_result.is_success:
+            print('[Accounts.views.Register]: Braintree error on customer create [%s]' %braintree_customer_result)
         
+        # create braintree payment method:
+        braintree_payment_method_result = gateway.payment_method.create(braintree_payment_method_kwargs)
+        
+        # debug:
+        if not braintree_payment_method_result.is_success:
+            print('[Accounts.views.Register]: Braintree error on payment method create [%s]' %braintree_payment_method_result)
+        
+        # create braintree subscription:
+        braintree_subscription_kwargs['payment_method_token'] = braintree_payment_method_result.payment_method.token
+        braintree_subscription_result = gateway.subscription.create(braintree_subscription_kwargs)
+        
+        if not braintree_subscription_result.is_success:
+            print('[Accounts.views.Register]: Created braintree subscrption with [BraintreeResult:%s]' %braintree_subscription_result)
+        
+        # create personal details:
+        personal_details = PersonalDetails.objects.create(**personal_details_kwargs)
+        personal_details.save()
+        
+        # create shipping details:
+        shipping_details = ShippingDetails.objects.create(**shipping_details_kwargs)
+        shipping_details.save()
+            
+        # update payment method object:
+        payment_details_kwargs['braintree_payment_method_token'] = braintree_payment_method_result.payment_method.token
+        payment_details_kwargs['braintree_payment_method_global_id'] = braintree_payment_method_result.payment_method.global_id
+        payment_details = PaymentDetails.objects.create(**payment_details_kwargs)
+        payment_details.save()
+            
         # create subscrption object in database:
+        subscription_kwargs['next_billing_date'] = braintree_subscription_result.subscription.next_billing_date
+        subscription_kwargs['billing_day_of_month'] = braintree_subscription_result.subscription.billing_day_of_month
         subscription = Subscription.objects.create(**subscription_kwargs)
+        
+        # create customer:
+        customer_kwargs['braintree_customer_global_id'] = braintree_customer_result.customer.global_id
+        customer = Customer.objects.create(**customer_kwargs)
+        
+        # create, save registered user:
+        user = User.objects.create_user(**user_kwargs)
+        user.save()
         
         # update profile fields:
         user.refresh_from_db()
@@ -372,6 +403,7 @@ def Register(request):
         user.profile.shipping_details = shipping_details
         user.profile.payment_details = payment_details
         user.profile.subscription = subscription
+        user.profile.customer = customer
         user.profile.is_registered = True
         user.save()
         

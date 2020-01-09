@@ -24,6 +24,28 @@
     </script>
 </head>
 <body data-gr-c-s-loaded="true">
+<div class="cdk-overlay-container" style='display:none'>
+  <div class="cdk-overlay-backdrop dark-backdrop cdk-overlay-backdrop-showing"></div>
+  <div class="cdk-global-overlay-wrapper" dir="ltr" style="justify-content: center; align-items: center;">
+    <div id="cdk-overlay-0" class="cdk-overlay-pane modal-dialog-panel" style="pointer-events: auto; position: static;">
+      <sucstu-five-off-lead-form _nghost-serverapp-c7="">
+        <div _ngcontent-serverapp-c7="" class="lead-banner"><a _ngcontent-serverapp-c7="" class="close"><span _ngcontent-serverapp-c7="" class="sr-only">close</span></a>
+          <div _ngcontent-serverapp-c7="" class="lead-banner-content">
+            <h1 _ngcontent-serverapp-c7="" class="lead-banner__title text-bolder">$5 OFF</h1>
+            <div _ngcontent-serverapp-c7="" class="lead-banner__sub-content">
+              <h3 _ngcontent-serverapp-c7="" class="lead-banner__subtitle">YOUR FIRST MONTH</h3>
+              <form _ngcontent-serverapp-c7="" class="lead-banner__form ng-untouched ng-pristine ng-invalid" novalidate="">
+                <div _ngcontent-serverapp-c7="" class="form-group"><input _ngcontent-serverapp-c7="" class="lead-input form-group__input text-extralight ng-untouched ng-pristine ng-invalid" formcontrolname="email" id="nameInput" placeholder="Enter your email" required="" type="email">
+                  <!---->
+                </div><button _ngcontent-serverapp-c7="" class="lead-banner__btn btn btn-primary" type="button">I want airplants </button>
+              </form>
+            </div>
+            <a _ngcontent-serverapp-c7="" class="lead-banner__link" test-id="lead-banner__close-button">No thanks, I don’t want a $5 discount. </a></div>
+        </div>
+      </sucstu-five-off-lead-form>
+    </div>
+  </div>
+</div>
 <sucstu-root _nghost-c0="" ng-version="7.2.0">
     <!---->
     <div _ngcontent-c0="" class="content">
@@ -42,8 +64,8 @@
                 <header _ngcontent-c3="" class="header">
                     <div _ngcontent-c3="" class="header-container">
                         <!---->
-                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="{% static '../static/assets/images/top-logo.png' %}"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="{% static '../static/assets/images/top-logo-mobile.png' %}"></a>
-                            <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Succulent</span> Studios</a></h1>
+                        <div _ngcontent-c3="" class="nav-row sticked" style="top: 0px;"><a _ngcontent-c3="" class="logo-container" routerlink="/" href="/"><img _ngcontent-c3="" class="logo-container-img" src="{% static '../static/assets/images/lowercase-logo.png' %}"><img _ngcontent-c3="" class="logo-container-img logo-container-img--mobile" src="{% static '../static/assets/images/lowercase-logo.png' %}"></a>
+                            <h1 _ngcontent-c3="" class="header-title header-title--desk"><a _ngcontent-c3="" routerlink="/" href="/"><span _ngcontent-c3="" class="header-title-bolder">Airplant</span> Gardens</a></h1>
                             <!---->
                             <!---->
                             <div _ngcontent-c3="" class="nav-container">
@@ -105,7 +127,7 @@
                 <div _ngcontent-c4="" class="footer-social-links">
                     <div _ngcontent-c4="" class="footer-social-links__group">
                        <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/facebook-square.svg' %}"></a>
-                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/EucalyptusFarms/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/instagram.svg' %}"></a>
+                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/airplant.gardens/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/instagram.svg' %}"></a>
                    </div>
                 </div>
             </footer>
@@ -121,6 +143,16 @@
 
 <!-- application javascript -->
 <script>
+
+// this is the first time
+if (! localStorage.noFirstVisit) {
+    // show the element
+    // and do the animation you want
+    $('.cdk-overlay-container').css('display','block');
+    alert('welcome')
+    // check this flag for escaping this if block next time
+    localStorage.noFirstVisit = "1";
+}
 
 var owl = $('.owl-carousel');
 
@@ -374,7 +406,6 @@ $('.edit_button').click(function() {
 
 function nextDisaply(button) {
     console.log('next applied')
-    debugger;
     $(button).closest('.card-content').css('display','none');
     $(button).closest('.card-content').siblings('.card-content__summary').css('display','block');
 }
@@ -438,6 +469,7 @@ function register(button) {
             'state' : $('#administrative_area_level_1').val(),
             'zip_code' : $('#postal_code').val(),
             'country' : $('#country').val(),
+            'card_name' : $('#card-name').val(),
             'nonce' : hold_payment.nonce,
             'card_type' : hold_payment.details.cardType,
             'last_four' : hold_payment.details.lastFour,
@@ -475,7 +507,6 @@ function getBraintreeToken() {
         dataType:'json',
         success : function(data) {   
             console.log(data.status + data.token + data.message + data.customer_id);
-            debugger;
             customer_id = data.customer_id;
             initializeBraintreeFields(data.token);
             return data.token;
@@ -611,9 +642,80 @@ hostedFieldsInstance.on('validityChange', function(event) {
         cvvLabel.text('CVV');
       }
     });
-    
+     $("#save_payment_details").click(function() {
+    console.log("Saving payment details.");
+     var formIsInvalid = false;
+     var state = hostedFieldsInstance.getState();
+
+
+
+      // Loop through the Hosted Fields and check
+      // for validity, apply the is-invalid class
+      // to the field container if invalid
+      Object.keys(state.fields).forEach(function(field) {
+        if (!state.fields[field].isValid) {
+          $(state.fields[field].container).addClass('is-invalid');
+          formIsInvalid = true;
+        }
+      });
+
+      if (formIsInvalid) {
+        // skip tokenization request if any fields are invalid
+        return;
+      }
+
+      hostedFieldsInstance.tokenize({
+        // include the cardholderName in the tokenization
+        // request
+        cardholderName: $('#card-name').val()
+      }, function(err, payload) {
+          
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        console.log('submitting payment load');
+        
+        
+        hold_payment = payload;
+        console.log(hold_payment)
+        // submitToken(payload);
+        
+        //handles payment method summary and form
+        user_payment = true;
+        cardSummary();
+        nextDisaply($("#submit-card"))
+        $('.payment-summary').css('display','block');
+        $('.custom-select').html('<option value="Card Choice">' + hold_payment.details.cardType + ' ending in **** **** **** ' + hold_payment.details.lastFour + '</option>');
+    $.ajax({
+        url : "{% url 'change_payment' %}",
+        type : 'POST',
+        data : {
+            'card_name' : $('#card-name').val(),
+            'email' : '{{personal_details.email}}',
+            'nonce' : hold_payment.nonce,
+            'card_type' : hold_payment.details.cardType,
+            'last_four' : hold_payment.details.lastFour,
+            'expiration' : hold_payment.details.expirationMonth + '/' + hold_payment.details.expirationYear,
+            'customer_id' : customer_id,
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType:'json',
+        success : function(data) {              
+            window.location.href="/profile";
+            console.log(email.val() + "completed registation");
+            $(".payment_details").css("display", "none");
+            $("#payment_summary").css("display", "block");
+        },
+        error : function(request,error)
+        {
+            alert("There was an error processing your order, please contact support@airplant.garden");
+        }
+    });
+  });
+     });
     $("#submit-card").click(function(){
-            debugger;
              var formIsInvalid = false;
              var state = hostedFieldsInstance.getState();
         
@@ -639,8 +741,6 @@ hostedFieldsInstance.on('validityChange', function(event) {
                 // request
                 cardholderName: $('#card-name').val()
               }, function(err, payload) {
-                  
-                  debugger;
                 if (err) {
                   console.error(err);
                   return;
@@ -650,7 +750,7 @@ hostedFieldsInstance.on('validityChange', function(event) {
                 
                 
                 hold_payment = payload;
-                debugger;
+                console.log(hold_payment)
                 // submitToken(payload);
                 
                 //handles payment method summary and form
@@ -665,6 +765,157 @@ hostedFieldsInstance.on('validityChange', function(event) {
   });
 });
 }
+
+function canceler() { 
+  $("#cancel_subscription_modal").click(function() {
+    $("#turn-off-reason-modal").css("display", "block");
+  });
+}
+canceler();
+  $("#nevermind").click(function() {
+    $("#turn-off-reason-modal").css("display", "none");
+  });
+  $("#cancel_save_address_details").click(function() {
+    $(".user_address_details").css("display", "none");
+    $("#subscription-recipient-details").css("display", "block");
+  });
+  $("#edit_shipping_details").click(function() {
+    $(".user_address_details").css("display", "block");
+    $("#subscription-recipient-details").css("display", "none");
+  });
+  $("#edit_payment_details").click(function() {
+    getBraintreeTokenProfile()
+    $(".payment_details").css("display", "block");
+    $("#payment_summary").css("display", "none");
+  });
+  $("#cancel_save_payment_details").click(function() {
+    $(".payment_details").css("display", "none");
+    $("#payment_summary").css("display", "block");
+  });
+  $("#save_address_details").click(function() {
+    $.ajax({
+      url: "{% url 'change_shipping' %}",
+      type: 'POST',
+      data: {
+        'first_name' : $('.first_name').val(),
+        'last_name' : $('.last_name').val(),
+        'address1' : $('.user_address').val(),
+        'address2' : $('.user_address_2').val(),
+        'street_number' : $('#street_number').val(),
+        'street_name' : $('#route').val(),
+        'city' : $('#locality').val(),
+        'state' : $('#administrative_area_level_1').val(),
+        'zip_code' : $('#postal_code').val(),
+        'country' : $('#country').val(),
+        'email': '{{ pesonal_details.email }}',
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 0) {
+          $(".user_address_details").css("display", "none");
+          $("#subscription-recipient-details").css("display", "block");
+          $(".subscription__recipient-name").html($('.first_name').val() + " " + $('.last_name').val());
+          $("#address_street").html($('#street_number').val() + " " + $('#route').val() + " " + $('.user_address_2').val());
+          $("#address_locale").html($('#locality').val() + ", " + $('#administrative_area_level_1').val() + " " + $('#postal_code').val());
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
+      }
+    });
+  });
+  $("#cancel_subscription").click(function() {
+    var responses = new Array()
+    $("input").each(function() {
+      if($(this).is(':checked')){
+          responses.push($(this).parent().siblings("p").html());
+      }
+    });
+    console.log(responses)
+    $.ajax({
+      url: "{% url 'cancel_subscription' %}",
+      type: 'POST',
+      data: {
+        'reason_for_canceling' : responses,
+        'email': email.val(),
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 0) {
+          $("#turn-off-reason-modal").css("display", "none");
+          $("#new_button").html('<a _ngcontent-c9="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>');
+          reactivator();
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
+      }
+    });
+  });
+  
+function reactivator() {  
+  $("#reactivate_subscription").click(function() {
+    $.ajax({
+      url: "{% url 'reactivate_subscription' %}",
+      type: 'POST',
+      data: {
+        'email': '{{ pesonal_details.email }}',
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: 'json',
+      success: function(data) {
+        var subscription_cancel_status = data.status
+        if (subscription_cancel_status == 0) {
+          $("#new_button").html('<a _ngcontent-c9="" class="link-button-11" id="cancel_subscription_modal"> Cancel subscription. </a>');
+          canceler();
+        }
+        else {
+          return;
+        }
+      },
+      error: function(request, error) {
+        alert("Request: " + JSON.stringify(request));
+      }
+    });
+  });
+}
+reactivator();
+
+function getBraintreeTokenProfile() {
+    $.ajax({
+        url : "{% url 'get_token' %}",
+        type : 'POST',
+        data : {
+            'email' : '{{ personal_details.email }}',
+            'first_name' : $('.first_name').val(),
+            'last_name' : $('.last_name').val(),
+            'phone' : '123',
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType:'json',
+        success : function(data) {   
+            // console.log(data.status + data.token + data.message + data.customer_id);
+            customer_id = data.customer_id;
+            initializeBraintreeFields(data.token);
+            return data.token;
+        },
+        error : function(request,error)
+        {
+            alert("There was an error processing your order, please contact support@airplant.garden");
+        }
+    });
+}
+
 
 </script>
 

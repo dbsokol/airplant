@@ -7,6 +7,7 @@ urlpatterns = [
     path('backend/', views.Backend, name='backend'),   
     path('failed_braintree_transaction/', views.FailedTransaction, name='failed_braintree_transaction'), 
     path('profile/', views.Profile, name='profile'), 
+    path('', views.Profile, name='profile'), 
     path('change_shipping/', views.ChangeShipping, name='change_shipping'), 
     path('change_payment/', views.ChangePayment, name='change_payment'),
     path('cancel_subscription/', views.CancelSubscription, name='cancel_subscription'), 

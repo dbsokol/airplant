@@ -46,11 +46,11 @@
 <div _ngcontent-c0="" class="app-container">
   <router-outlet _ngcontent-c0=""></router-outlet>
   <sucstu-account _nghost-c5="">
-    <div _ngcontent-c5="" class="referral-code-container">
+    <!--<div _ngcontent-c5="" class="referral-code-container">
       <h1 _ngcontent-c5="" class="referral-title">Here's your unique referral link!</h1>
       <p _ngcontent-c5="" class="referral-code"> airplant.garden?ccode=Wtb94e9cNFnO</p>
       <p _ngcontent-c5="" class="referral-text">Copy and paste the link above to share it with followers, friends, and family! They'll get $5 off their first couple of Tillandsia when they use your link, and every 3 people who use it means 1 FREE box of tillandsia for you!</p>
-    </div>
+    </div>-->
     <div _ngcontent-c5="" class="profile-container container">
       <div _ngcontent-c5="" class="left-section">
         <div _ngcontent-c5="" class="subscriptions-card-list" style="display: block;">
@@ -67,27 +67,30 @@
                     </div>
                     <div _ngcontent-c31="" class="card-content user_address_details" style="display: none;">
                                 <div _ngcontent-c31="" class="user_address_details ng-untouched ng-pristine ng-invalid">
+                    <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="first_name form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" value="{{shipping_details.first_name}}" placeholder="{{shipping_details.first_name}}" type="text"></div>
+                    <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="last_name form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" value="{{shipping_details.last_name}}" placeholder="{{shipping_details.last_name}}" type="text"></div>
                     <div _ngcontent-c31="" formgroupname="address" id="address_autofill" class="ng-untouched ng-pristine ng-invalid">
-                    <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                    <div _ngcontent-c31="" class="form-group form-group__flex-start">
+                      <input id="autocomplete" placeholder="Enter your address" value="{{shipping_details.address1}}" onFocus="geolocate()" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                       </div>
                         <div _ngcontent-c31="" class="action-btn mb-10" id="address_cant_find" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
-                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" value="{{shipping_details.address2}}"  class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
                     </div>
                     <div _ngcontent-c31="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid" id="address_manual" style="display: none;">
-                        <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="route" placeholder="Street" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="route" placeholder="Street" value="{{shipping_details.street_name}}"  class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                         </div>
-                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                        <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" value="{{shipping_details.street_number}}" class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
                         <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
-                            <input id="locality" placeholder="City" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
-                        </div>
-                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
-                            <input id="administrative_area_level_1" placeholder="State" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                            <input id="locality" placeholder="City" value="{{shipping_details.city}}"  class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                         </div>
                         <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
-                            <input id="postal_code" placeholder="Zip Code" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                            <input id="administrative_area_level_1" placeholder="State" value="{{shipping_details.state}}"class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                         </div>
                         <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
-                            <input id="country" placeholder="Country" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                            <input id="postal_code" placeholder="Zip Code" value="{{shipping_details.zip_code}}" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
+                        </div>
+                        <div _ngcontent-c31="" class="form-group form-group--inline form-group__flex-start">
+                            <input id="country" placeholder="Country" value="{{shipping_details.country}}" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                         </div>
                     </div>
                     <div _ngcontent-c7="" class="ng-pristine ng-invalid ng-touched" style="display: block;">
@@ -95,18 +98,18 @@
                     </div>
                     </div>
                     <div style="margin-bottom:20px">
-                    <a class="link-button-11" id="save_address_details">Save</a> <a id="cancel_save_address_details" class="link-button-11">Cancel</a>
+                    <a class="link-button-11 action-btn" id="save_address_details">Save</a> <a id="cancel_save_address_details" class="link-button-11 action-btn">Cancel</a>
                     </div>
                     </div>
                     <div _ngcontent-c9="" class="subscription-recipient-details" id="subscription-recipient-details">
-                      <p _ngcontent-c9="" class="subscription__recipient-name">{{shipping_details.first_name}} {{shipping_details.last_name}}</p>
-                      <p _ngcontent-c9="" class="subscription__address"><span _ngcontent-c9="">{{shipping_details.street_number}} {{shipping_details.street_name}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
+                      <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__recipient-name">{{shipping_details.first_name}} {{shipping_details.last_name}}</p>
+                      <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.street_number}} {{shipping_details.street_name}} {{shipping_details.address2}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="" id="address_locale">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
                     </div>
                     <div _ngcontent-c9="" id='new_button'>
                       {% if subscription.active_status %}
-                      <a _ngcontent-c9="" id="cancel_subscription_modal" class="link-button-11"> Cancel subscription </a>
+                      <a _ngcontent-c31="" id="cancel_subscription_modal" class="link-button-11"> Cancel subscription </a>
                       {% else %}
-                      <a _ngcontent-c9="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>
+                      <a _ngcontent-c31="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>
                       {% endif %}
                     </div>
                   </div>
@@ -141,16 +144,56 @@
                   <div _ngcontent-c9="" class="subscription-id">
                     <p _ngcontent-c9="" id="user_name">Hello, {{personal_details.first_name}} {{personal_details.last_name}}</p><span _ngcontent-c9=""></span>
                   </div>
-                  <div _ngcontent-c9="" class="subscription-info-icon"><img _ngcontent-c9="" alt="" src="/assets/images/pencil-small-icon.png"></div>
                 </div>
                 <div _ngcontent-c9="" class="subscription-recipient-details">
-                  <p _ngcontent-c9="" class="subscription__recipient-email">{{pesonal_details.email}}</p>
+                  <p _ngcontent-c9="" class="subscription__recipient-email">{{personal_details.email}}</p>
                 </div>
               </div>
             </div>
             <div _ngcontent-c9="" class="shipments-list-container">
-              <div _ngcontent-c9="" class="col-sm-12">
-                <div _ngcontent-c9="" class="subscription-id">
+            <div _ngcontent-serverapp-c16="" class="card-content payment_details" style="display: none;">
+              <div _ngcontent-serverapp-c16="" class="ng-invalid ng-touched ng-dirty" style="display: block;">
+                <div _ngcontent-serverapp-c16="" class="form-group form-group__flex-start is-valid" style="display: flex;">
+                  <input _ngcontent-serverapp-c16="" class="form-group__input capital-case-input ng-touched input-error ng-dirty ng-invalid" id="card-name" placeholder="Cardholder's name" type="text">
+                  <span _ngcontent-serverapp-c16="" class="error-text validation-message"> Provide the cardholder's name </span>
+                </div>
+                <div _ngcontent-serverapp-c16="" class="form-group form-group__flex-start is-valid" style="display: flex;">
+                  <label _ngcontent-serverapp-c16="" class="form-group__input" for="card-number">
+                                                            <span _ngcontent-serverapp-c16="" class="hosted-label">Card number</span>
+                                                           
+                                                    <div _ngcontent-serverapp-c16="" style="padding-left: 0px;" class="form-group__input" id="card-number">
+                                                    </div>
+                                                    </label>
+                  <span _ngcontent-serverapp-c16="" class="error-text validation-message">Invalid card number</span>
+                </div>
+                <div _ngcontent-serverapp-c16="" class="card-info-group" test-id="checkout__card__iframe-expDate" style="display: flex;">
+                  <div _ngcontent-serverapp-c16="" class="form-group card-info__date form-group__flex-start is-valid">
+                    <label _ngcontent-serverapp-c16="" class="form-group__input" for="expiration-date">
+                                                            <span _ngcontent-serverapp-c16="" class="hosted-label">Expiration Date</span>
+                                                            <div _ngcontent-serverapp-c16="" id="card-expiration" style='width: 100%;height: 100%;'>
+                                                                <div style="clear: both;"></div>
+                                                            </div>
+                                                        </label>
+                    <span _ngcontent-serverapp-c16="" class="validation-message error-text">Invalid expiration date</span>
+                  </div>
+            
+                  <div _ngcontent-serverapp-c16="" class="form-group card-info__cvv form-group__flex-start is-valid" test-id="checkout__card__iframe-cvv">
+                    <label _ngcontent-serverapp-c16="" class="form-group__input" for="cvv">
+                                                            <span _ngcontent-serverapp-c16="" class="hosted-label">CVV</span>
+                                                            <div _ngcontent-serverapp-c16="" id="card-cvv" style='width: 100%;height: 100%;'>
+                                                                <div style="clear: both;"></div>
+                                                            </div>
+                                                        </label>
+                    <span _ngcontent-serverapp-c16="" class="error-text validation-message">Invalid CVV</span>
+                  </div>
+                </div>
+                <div style="margin-bottom:20px">
+                  <a class="link-button-11 action-btn" id="save_payment_details">Save</a> <a id="cancel_save_payment_details" class="link-button-11 action-btn">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <div_ngcontent-c9="" id="payment_summary" class="col-sm-12">
+                <div _ngcontent-c9="" class="subscription-id"><div _ngcontent-c9="" style="display:flex;width:15px;float:right" class="subscription-info-icon"><img _ngcontent-c9="" id="edit_payment_details" alt="" src="{% static '../static/assets/images/pencil-small-icon.png' %}"></div>
                   <p _ngcontent-c9="" id="user_name" style="font-weight:700">Payment Method on Account</p>
                 </div>
                 <p _ngcontent-c21="">{{payment_details.card_type}} ending in {{payment_details.last_four}} {{payment_details.expiration}}</p>
@@ -163,119 +206,4 @@
   </sucstu-account>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script>
-
-var email = '{{ pesonal_details.email }}';
-
-function canceler() { 
-  $("#cancel_subscription_modal").click(function() {
-    $("#turn-off-reason-modal").css("display", "block");
-  });
-}
-canceler();
-  $("#nevermind").click(function() {
-    $("#turn-off-reason-modal").css("display", "none");
-  });
-  $("#cancel_save_address_details").click(function() {
-    $(".user_address_details").css("display", "none");
-    $("#subscription-recipient-details").css("display", "block");
-  });
-  $("#edit_shipping_details").click(function() {
-    $(".user_address_details").css("display", "block");
-    $("#subscription-recipient-details").css("display", "none");
-  });
-  $("#save_address_details").click(function() {
-    $.ajax({
-      url: "{% url 'change_shipping' %}",
-      type: 'POST',
-      data: {
-        'address1' : $('.user_address').val(),
-        'address2' : $('.user_address_2').val(),
-        'street_number' : $('#street_number').val(),
-        'street_name' : $('#route').val(),
-        'city' : $('#locality').val(),
-        'state' : $('#administrative_area_level_1').val(),
-        'zip_code' : $('#postal_code').val(),
-        'country' : $('#country').val(),
-        'email': email.val(),
-        'csrfmiddlewaretoken': '{{ csrf_token }}'
-      },
-      dataType: 'json',
-      success: function(data) {
-        var subscription_cancel_status = data.status
-        if (subscription_cancel_status == 1) {
-          $("#user_address_details").css("display", "none");
-          $("#subscription-recipient-details").css("display", "block");
-        }
-        else {
-          return;
-        }
-      },
-      error: function(request, error) {
-        alert("Request: " + JSON.stringify(request));
-      }
-    });
-  });
-  $("#cancel_subscription").click(function() {
-    var responses = new Array()
-    $("input").each(function() {
-      if($(this).is(':checked')){
-          responses.push($(this).parent().siblings("p").html());
-      }
-    });
-    console.log(responses)
-    $.ajax({
-      url: "{% url 'cancel_subscription' %}",
-      type: 'POST',
-      data: {
-        'reason_for_canceling' : responses,
-        'email': email.val(),
-        'csrfmiddlewaretoken': '{{ csrf_token }}'
-      },
-      dataType: 'json',
-      success: function(data) {
-        var subscription_cancel_status = data.status
-        if (subscription_cancel_status == 0) {
-          $("#turn-off-reason-modal").css("display", "none");
-          $("#new_button").html('<a _ngcontent-c9="" class="link-button-11" id="reactivate_subscription"> Re-activate your subscription! </a>');
-          reactivator();
-        }
-        else {
-          return;
-        }
-      },
-      error: function(request, error) {
-        alert("Request: " + JSON.stringify(request));
-      }
-    });
-  });
-  
-function reactivator() {  
-  $("#reactivate_subscription").click(function() {
-    $.ajax({
-      url: "{% url 'reactivate_subscription' %}",
-      type: 'POST',
-      data: {
-        'email': email.val(),
-        'csrfmiddlewaretoken': '{{ csrf_token }}'
-      },
-      dataType: 'json',
-      success: function(data) {
-        var subscription_cancel_status = data.status
-        if (subscription_cancel_status == 0) {
-          $("#cancel_subscription_modal").html("Subsription reactivated.").attr("id","cancel_subscription_modal");
-          canceler();
-        }
-        else {
-          return;
-        }
-      },
-      error: function(request, error) {
-        alert("Request: " + JSON.stringify(request));
-      }
-    });
-  });
-}
-reactivator();
-</script>
 {% endblock %}
