@@ -29,18 +29,18 @@
   <div class="cdk-global-overlay-wrapper" dir="ltr" style="justify-content: center; align-items: center;">
     <div id="cdk-overlay-0" class="cdk-overlay-pane modal-dialog-panel" style="pointer-events: auto; position: static;">
       <sucstu-five-off-lead-form _nghost-serverapp-c7="">
-        <div _ngcontent-serverapp-c7="" class="lead-banner"><a _ngcontent-serverapp-c7="" class="close"><span _ngcontent-serverapp-c7="" class="sr-only">close</span></a>
+        <div _ngcontent-serverapp-c7="" class="lead-banner"><a _ngcontent-serverapp-c7="" class="close-ad close"><span _ngcontent-serverapp-c7="" class="sr-only">close</span></a>
           <div _ngcontent-serverapp-c7="" class="lead-banner-content">
             <h1 _ngcontent-serverapp-c7="" class="lead-banner__title text-bolder">$5 OFF</h1>
             <div _ngcontent-serverapp-c7="" class="lead-banner__sub-content">
               <h3 _ngcontent-serverapp-c7="" class="lead-banner__subtitle">YOUR FIRST MONTH</h3>
-              <form _ngcontent-serverapp-c7="" class="lead-banner__form ng-untouched ng-pristine ng-invalid" novalidate="">
-                <div _ngcontent-serverapp-c7="" class="form-group"><input _ngcontent-serverapp-c7="" class="lead-input form-group__input text-extralight ng-untouched ng-pristine ng-invalid" formcontrolname="email" id="nameInput" placeholder="Enter your email" required="" type="email">
+              <div _ngcontent-serverapp-c7="" class="lead-banner__form ng-untouched ng-pristine ng-invalid" novalidate="">
+                <div _ngcontent-serverapp-c7="" class="form-group"><input _ngcontent-serverapp-c7="" class="lead-input form-group__input text-extralight ng-untouched ng-pristine ng-invalid" formcontrolname="email" id="emailInput" placeholder="Enter your email" required="" type="email">
                   <!---->
-                </div><button _ngcontent-serverapp-c7="" class="lead-banner__btn btn btn-primary" type="button">I want airplants </button>
-              </form>
+                </div><button _ngcontent-serverapp-c7="" class="lead-banner__btn btn btn-primary" id="get_email_discount" type="button">I want airplants </button>
+              </div>
             </div>
-            <a _ngcontent-serverapp-c7="" class="lead-banner__link" test-id="lead-banner__close-button">No thanks, I don’t want a $5 discount. </a></div>
+            <a _ngcontent-serverapp-c7="" class="close-ad lead-banner__link" test-id="lead-banner__close-button">No thanks, I don’t want a $5 discount. </a></div>
         </div>
       </sucstu-five-off-lead-form>
     </div>
@@ -149,10 +149,45 @@ if (! localStorage.noFirstVisit) {
     // show the element
     // and do the animation you want
     $('.cdk-overlay-container').css('display','block');
-    alert('welcome')
-    // check this flag for escaping this if block next time
+      // check this flag for escaping this if block next time
     localStorage.noFirstVisit = "1";
 }
+
+$('.close-ad').click(function(){
+   $('.cdk-overlay-container').css('display','none');
+});
+
+localStorage.requested_discount = false;
+
+// Submit Email from lead generator banner
+$('#get_email_discount').click(function () {
+    $.ajax({
+        url : "{% url 'get_discount' %}",
+        type : 'POST',
+        data : {
+            'email' : $('#emailInput').val(),
+            'amount' : 5,
+            'csrfmiddlewaretoken' : '{{ csrf_token }}'
+        },
+        dataType    :'json',
+        success : function(data) { 
+            var password_status = Number(data.status)
+            if (password_status == 1){
+                console.log('an error occured')
+                $('.cdk-overlay-container').css('display','none');
+            } else {
+                $('.cdk-overlay-container').css('display','none');
+                localStorage.requested_discount = true;
+                localStorage.coupon_code = data.coupon_code;
+            }
+        },
+        error : function(request,error)
+        {
+            alert("Request: "+JSON.stringify(request));
+        }
+    });
+});
+
 
 var owl = $('.owl-carousel');
 
@@ -450,6 +485,11 @@ function coupon_apply(button){
     });
 }
 
+if (localStorage.requested_discount){
+  $('#coupon-input').val(localStorage.coupon_code)
+  coupon_apply($('#apply-coupon'))
+}
+
 function register(button) {
     console.log(email.val() + "submitted payment");
     $.ajax({
@@ -474,7 +514,7 @@ function register(button) {
             'card_type' : hold_payment.details.cardType,
             'last_four' : hold_payment.details.lastFour,
             'expiration' : hold_payment.details.expirationMonth + '/' + hold_payment.details.expirationYear,
-            'discount' : $('#coupon-input').val(),
+            'coupon_code' : $('#coupon-input').val(),
             'discount_amount' : discount_amount,
             'customer_id' : customer_id,
             'csrfmiddlewaretoken' : '{{ csrf_token }}'

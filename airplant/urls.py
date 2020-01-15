@@ -28,7 +28,7 @@ urlpatterns = [
     path('faq/', TemplateView.as_view(template_name='faq.html'), name='faq'),
     path('gift-checkout/', TemplateView.as_view(template_name='gift-checkout.html'), name='gift-checkout'),
     path('gift/', TemplateView.as_view(template_name='gift.html'), name='gift'),
-    path('home/', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('header/', TemplateView.as_view(template_name='header.html'), name='header'),
     path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
     path('privacy/', TemplateView.as_view(template_name='privacy.html'), name='privacy'),

@@ -71,6 +71,19 @@ class PaymentDetails(models.Model):
         
       
       
+class Discount(models.Model):
+    
+    ''' Discounts Table '''
+    
+    email = models.CharField(max_length=100, default=None, blank=True, null=True) 
+    amount = models.IntegerField(default=None, blank=True, null=True)
+    has_been_used = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.description
+    
+
+
 class Coupon(models.Model):
     
     ''' Coupons table '''

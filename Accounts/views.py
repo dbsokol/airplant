@@ -1,4 +1,4 @@
-from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, Coupon, Subscription, Customer
+from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, Coupon, Subscription, Customer, Discount
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -141,6 +141,48 @@ def CheckPassword(request):
 
 
 
+def GetDiscount(request):
+
+    ''' Accepts requests to /get_discount, applies discount to given user '''
+    
+    tools.PrintTitle('Accounts.views.GetDiscount')
+    
+    try:
+        
+        # debug:
+        print('[Accounts.views.GetDiscount]: Got post request with [%s]' %request.POST)
+    
+        # discount key word argments:
+        discount_kwargs = {
+            'email' :  request.POST['email'],
+            'amount' : int(request.POST['amount']),
+        }
+    
+        # create discount object:
+        discount = Discount.objects.create(**discount_kwargs)
+        discount.save()
+
+        coupon_code = '5OFFAIRPLANT'
+
+        status = 0
+        internal_message = 'apllied discount of [%d] to user [%s]' %(discount_kwargs['amount'], discount_kwargs['email']) 
+        message = 'Successfully applied discount!'
+
+    # error handler:
+    except Exception as e:
+        
+        coupon_code = '-1'
+        
+        status = 1
+        internal_message = traceback.format_exc()
+        message = 'Error, could not apply your discount.'
+
+    print('[Accounts.views.GetDiscount]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
+
+    return HttpResponse(json.dumps({'message': message, 'status' : status, 'coupon_code' : coupon_code}), content_type='application/json')
+    
+    
+
 def CheckCoupon(request):
     
     ''' Checks coupon code from front end '''
@@ -153,7 +195,7 @@ def CheckCoupon(request):
         print('[Accounts.views.CheckCoupon]: Got post request with [%s]' %request.POST)
     
         email = request.POST['email']
-        coupon_code = request.POST['coupon']
+        coupon_code = request.POST['coupon'].upper()
         
         # check if code is valid:
         if Coupon.objects.filter(coupon_code=coupon_code).exists():
@@ -179,7 +221,7 @@ def CheckCoupon(request):
         discount = 0
         
         status = 1
-        internal_message = e
+        internal_message = traceback.format_exc()
         message = 'bad request (404)'
 
     print('[Accounts.views.CheckCoupon]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
@@ -237,6 +279,29 @@ def GetToken(request):
     return HttpResponse(json.dumps({'message': message, 'status' : status, 'token' : braintree_client_token, 'customer_id' : customer_id}))
 
 
+
+def RedeemDiscounts(request):
+    
+    ''' Accepts post request, returns discount object for Braintree '''
+    
+    # initialize variables:
+    discounts = {}
+        
+    # apply discount if coupon code is provided:
+    if Coupon.objects.filter(coupon_code=request.POST['coupon_code']).exists():
+    
+        dicounts =  {
+            'add' : [{
+                'inherited_from_id' : request.POST['coupon_code'],
+                'amount' : 5
+                }]
+            }
+            
+        return discounts
+        
+    return discounts
+    
+    
 
 def Register(request):
 
@@ -330,23 +395,11 @@ def Register(request):
         }
         
         # set braintree subscription keywords:
-        if Coupon.objects.filter(coupon_code=request.POST['discount']).exists():
-            braintree_subscription_kwargs = {
+        braintree_subscription_kwargs = {
                 'id' : subscription_kwargs['braintree_subscription_id'],
                 'payment_method_token' : None, # filled in later 
                 'plan_id' : 'Standard_Plan',
-                'discounts' : { 
-                    'add' : [{
-                        'inherited_from_id' : request.POST['discount'],
-                        'amount' : 5
-                    }]
-                }
-            }
-        else:
-            braintree_subscription_kwargs = {
-                'id' : subscription_kwargs['braintree_subscription_id'],
-                'payment_method_token' : None, # filled in later 
-                'plan_id' : 'Standard_Plan',
+                'discounts' : RedeemDiscounts(request),
             }
             
         # create braintree customer:
