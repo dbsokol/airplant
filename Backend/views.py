@@ -15,7 +15,7 @@ import json
 
 
 
-@login_required(login_url='/home/')
+@login_required(login_url='')
 def Profile(request):
     
     ''' Accepts request from '/profile', renders profile.html template '''

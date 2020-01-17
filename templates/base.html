@@ -126,7 +126,7 @@
                 </div>
                 <div _ngcontent-c4="" class="footer-social-links">
                     <div _ngcontent-c4="" class="footer-social-links__group">
-                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/Eucalyptus-Farms/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/facebook-square.svg' %}"></a>
+                       <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.facebook.com/AirplantGardens-110105993859762"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/facebook-square.svg' %}"></a>
                        <a _ngcontent-c4="" class="social-link__item" target="a_blank" href="https://www.instagram.com/airplant.gardens/"><img _ngcontent-c4="" alt="Facebook Icon" src="{% static '../static/assets/images/instagram.svg' %}"></a>
                    </div>
                 </div>
@@ -471,8 +471,8 @@ function coupon_apply(button){
         success : function(data) {  
             console.log(data)
             if (data.status === 0){
-                $('#discounted_amount_subtotal').html("$5 - DISCOUNTED").css("color","green");
-                $('#discounted_amount_grandtotal').html("$11.50");
+                $('#discounted_amount_subtotal').html("$10.00 - DISCOUNT APPLIED").css("color","green");
+                $('#discounted_amount_grandtotal').html("$10.00");
                 discount_amount = data.amount;
             } else {
                 console.log(data.message);

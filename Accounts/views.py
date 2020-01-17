@@ -194,7 +194,6 @@ def CheckCoupon(request):
         # debug:
         print('[Accounts.views.CheckCoupon]: Got post request with [%s]' %request.POST)
     
-        email = request.POST['email']
         coupon_code = request.POST['coupon'].upper()
         
         # check if code is valid:
