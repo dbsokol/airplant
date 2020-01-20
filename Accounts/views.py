@@ -221,7 +221,7 @@ def CheckCoupon(request):
         
         status = 1
         internal_message = traceback.format_exc()
-        message = 'bad request (404)'
+        message = 'could not validate coupon'
 
     print('[Accounts.views.CheckCoupon]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
 
@@ -271,7 +271,7 @@ def GetToken(request):
         
         status = 1
         internal_message = traceback.format_exc()
-        message = traceback.format_exc()
+        message = 'could not create token'
 
     print('[Accounts.views.GetToken]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
 
