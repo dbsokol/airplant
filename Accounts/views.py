@@ -270,8 +270,8 @@ def GetToken(request):
         braintree_client_token = 0
         
         status = 1
-        internal_message = 'error in token creation'
-        message = 'could not build token'
+        internal_message = traceback.format_exc()
+        message = traceback.format_exc()
 
     print('[Accounts.views.GetToken]: [Status: %s] [Internal Message: %s] [Message: %s]' %(status, internal_message, message))
 
