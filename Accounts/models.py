@@ -108,6 +108,7 @@ class Subscription(models.Model):
     end_date = models.DateField(default=None, blank=True, null=True)
     next_billing_date = models.DateField(default=None, blank=True, null=True)
     billing_day_of_month = models.IntegerField(default=None, blank=True, null=True)
+    this_month_total = models.DecimalField(decimal_places=2, max_digits=5, default=None, blank=True, null=True)
     number_of_months = models.IntegerField(default=None, blank=True, null=True)
     active_status = models.BooleanField(default=False)
     continue_status = models.BooleanField(default=False)

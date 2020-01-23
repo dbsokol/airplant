@@ -16,13 +16,15 @@ Including another URLconf
 from django.views.generic.base import TemplateView
 from django.urls import include, path
 from django.contrib import admin
+from decouple import config
+
 
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('Accounts.urls')),
     path('', include('Backend.urls')),
-    path('admin/', admin.site.urls),
+    path(config('ADMIN_URL'), admin.site.urls),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('checkout/', TemplateView.as_view(template_name='checkout.html'), name='checkout'),
     path('faq/', TemplateView.as_view(template_name='faq.html'), name='faq'),

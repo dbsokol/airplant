@@ -69,13 +69,19 @@
                                 <div _ngcontent-c31="" class="user_address_details ng-untouched ng-pristine ng-invalid">
                     <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="first_name form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" value="{{shipping_details.first_name}}" placeholder="{{shipping_details.first_name}}" type="text"></div>
                     <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" class="last_name form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" value="{{shipping_details.last_name}}" placeholder="{{shipping_details.last_name}}" type="text"></div>
+                    
                     <div _ngcontent-c31="" formgroupname="address" id="address_autofill" class="ng-untouched ng-pristine ng-invalid">
+                    
                     <div _ngcontent-c31="" class="form-group form-group__flex-start">
+                      
                       <input id="autocomplete" placeholder="Enter your address" value="{{shipping_details.address1}}" onFocus="geolocate()" class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                       </div>
                         <div _ngcontent-c31="" class="action-btn mb-10" id="address_cant_find" test-id="checkout__shipping-details-manual-address"> Can't find your address? </div>
+                        
                         <div _ngcontent-c31="" class="form-group"><input _ngcontent-c31="" value="{{shipping_details.address2}}"  class="user_address_2 form-group__input ng-untouched ng-pristine ng-valid" formcontrolname="shippingAddressExtra" placeholder="Apartment, Suite, Floor, etc." type="text" test-id="checkout__shipping-details__street-2"></div>
+                    
                     </div>
+                    
                     <div _ngcontent-c31="" formgroupname="address" class="ng-untouched ng-pristine ng-invalid" id="address_manual" style="display: none;">
                         <div _ngcontent-c31="" class="form-group form-group__flex-start"><input id="route" placeholder="Street" value="{{shipping_details.street_name}}"  class="user_address form-group__input ng-untouched ng-pristine ng-invalid" type="text">
                         </div>
@@ -103,7 +109,22 @@
                     </div>
                     <div _ngcontent-c9="" class="subscription-recipient-details" id="subscription-recipient-details">
                       <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__recipient-name">{{shipping_details.first_name}} {{shipping_details.last_name}}</p>
-                      <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.street_number}} {{shipping_details.street_name}} {{shipping_details.address2}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="" id="address_locale">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
+                   
+                      {% if shipping_details.city %}
+                        {% if shipping_details.address2 %}
+                        <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.street_number}} {{shipping_details.street_name}} {{shipping_details.address2}}</span><span _ngcontent-c9=""></span><span _ngcontent-c9="" id="address_locale">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
+                        {% else %}
+                        <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.street_number}} {{shipping_details.street_name}} </span><span _ngcontent-c9=""></span><span _ngcontent-c9="" id="address_locale">{{shipping_details.city}}, {{shipping_details.state}} {{shipping_details.zip_code}}</span></p>
+                        {% endif %}
+                      {% else %}
+                        {% if shipping_details.address2 %}
+                        <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.address1}} {{shipping_details.address2}}</span></p>
+                        {% else %}
+                        <p _ngcontent-c9="" _ngcontent-c31="" class="subscription__address"><span _ngcontent-c9="" id="address_street">{{shipping_details.address1}} </span></p>
+                        {% endif %}
+                      {% endif %}
+                   
+                   
                     </div>
                     <div _ngcontent-c9="" id='new_button'>
                       {% if subscription.active_status %}

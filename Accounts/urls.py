@@ -11,4 +11,5 @@ urlpatterns = [
     path('get_token/', views.GetToken, name='get_token'),
     path('register/', views.Register, name='register'),
     path('ship/', views.Shipping, name='ship'),
+    path('test/', views.Test, name='test'),
 ]

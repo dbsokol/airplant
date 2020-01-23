@@ -28,38 +28,12 @@ def Profile(request):
         print('[Backend.views.Profile]: Got post request with [%s]' %request.POST)
         
         user = request.user
-        email = user.email
-        personal_details = user.profile.personal_details
-        shipping_details = user.profile.shipping_details
-        payment_details = user.profile.payment_details
-        subscription = user.profile.subscription
         context = {
-            'personal_details' : {
-                'first_name' : personal_details.first_name,
-                'last_name' : personal_details.last_name,
-                'email' : personal_details.email,
-                },
-            'payment_details' : { 
-                'last_four' : payment_details.last_four,
-                'card_type' : payment_details.card_type,
-                'expiration' : payment_details.expiration,
-                },
-            'shipping_details' : {
-                'first_name' : shipping_details.first_name,
-                'last_name' : shipping_details.last_name,
-                'country' : shipping_details.country,
-                'state' : shipping_details.state,
-                'zip_code' : shipping_details.zip_code,
-                'city' : shipping_details.city,
-                'street_name' : shipping_details.street_name,
-                'street_number' : shipping_details.street_number,
-                'address2' : shipping_details.address2,
-                },
-            'subscription' : {
-                'active_status' : subscription.active_status if subscription else False,
-                'next_billing_date' : subscription.billing_day_of_month,
-                },
-            }
+        'personal_details' : user.profile.personal_details,
+        'payment_details' : user.profile.payment_details,
+        'shipping_details' : user.profile.shipping_details,
+        'subscription' : user.profile.subscription,
+        }
         
         status = 0
         message = 'Edit your Profile.'

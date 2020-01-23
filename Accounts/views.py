@@ -2,9 +2,12 @@ from .models import Profile, PersonalDetails, ShippingDetails, PaymentDetails, C
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
+from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.template import RequestContext
+from django.utils.html import strip_tags
 from datetime import datetime, timezone
+from django.core.mail import send_mail
 from airplant.settings import gateway
 from django.http import HttpResponse
 import Tools.Tools as tools
@@ -300,6 +303,35 @@ def RedeemDiscounts(request):
         
     return discounts
     
+
+
+def SendWelcomeEmail(request):
+    
+    ''' Accpets post request, sends welcome email '''
+    
+    # create email subject:    
+    subject = 'Welcome to your airplant subscription service.'
+    
+    # set context:
+    user = request.user
+    context = {
+        'personal_details' : user.profile.personal_details,
+        'payment_details' : user.profile.payment_details,
+        'shipping_details' : user.profile.shipping_details,
+        'subscription' : user.profile.subscription,
+        }
+    
+    # create email body: 
+    html_message  = render_to_string('welcome.html', context=context)
+    plain_message = strip_tags(html_message)
+    
+    # set sender and recipient:
+    from_email = 'support@airplant.garden'
+    to_email_list = [user.email]
+    
+    # send email:
+    send_mail(subject, plain_message, from_email, to_email_list, html_message=html_message, fail_silently=False)
+    
     
 
 def Register(request):
@@ -357,6 +389,7 @@ def Register(request):
             'start_date' : datetime.now(timezone.utc),
             'next_billing_date' : None, # filled in later
             'billing_day_of_month' : None, # filled in later
+            'this_month_total' : None, # filled in later
             'active_status' : True,
             'continue_status' : True,
             'qued_status' : False,
@@ -439,6 +472,7 @@ def Register(request):
         # create subscrption object in database:
         subscription_kwargs['next_billing_date'] = braintree_subscription_result.subscription.next_billing_date
         subscription_kwargs['billing_day_of_month'] = braintree_subscription_result.subscription.billing_day_of_month
+        subscription_kwargs['this_month_total'] = braintree_subscription_result.subscription.transactions[0].amount
         subscription = Subscription.objects.create(**subscription_kwargs)
         
         # create customer:
@@ -463,6 +497,9 @@ def Register(request):
         user = authenticate(username=user_kwargs['email'], password=user_kwargs['password'])
         login(request, user)
         
+        # send welcome email upon successful registration:
+        SendWelcomeEmail(request)
+        
         status = 0
         internal_message = 'user successfully registered'
         message = 'Weclome!'
@@ -478,6 +515,40 @@ def Register(request):
 
     return HttpResponse(json.dumps({'message': message, 'status' : status}))
     
+    
+    
+    
+def Test(request):
+
+    # create email subject:    
+    subject = 'Welcome to your airplant subscription service.'
+    
+    # set context:
+    user = request.user
+    context = {
+        'personal_details' : user.profile.personal_details,
+        'payment_details' : user.profile.payment_details,
+        'shipping_details' : user.profile.shipping_details,
+        'subscription' : user.profile.subscription,
+        }
+    
+    # create email body:
+    html_message  = render_to_string('welcome.html', context=context)
+    plain_message = strip_tags(html_message)
+    
+    # set sender and recipient:
+    from_email = 'support@airplant.garden'
+    to_email_list = [user.email]
+    
+    # send email:
+    send_mail(subject, plain_message, from_email, to_email_list, html_message=html_message, fail_silently=False)
+
+    message = 'testing'
+    status = 0
+
+    return render(request, 'welcome.html', context=context)
+    #return HttpResponse(json.dumps({'message': message, 'status' : status}))
+
     
     
 def Shipping(request):
