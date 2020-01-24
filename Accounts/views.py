@@ -398,11 +398,11 @@ def Register(request):
     
     # set braintree subscription keywords:
     braintree_subscription_kwargs = {
-            'id' : subscription_kwargs['braintree_subscription_id'],
-            'payment_method_token' : None, # filled in later 
-            'plan_id' : 'Standard_Plan',
-            'discounts' : RedeemDiscounts(request),
-        }
+        'id' : subscription_kwargs['braintree_subscription_id'],
+        'payment_method_token' : None, # filled in later 
+        'plan_id' : 'Standard_Plan',
+        'discounts' : RedeemDiscounts(request),
+    }
         
     # create braintree customer:
     braintree_customer_result = gateway.customer.create(braintree_customer_kwargs)
@@ -493,7 +493,7 @@ def Test(request):
         'payment_details' : user.profile.payment_details,
         'shipping_details' : user.profile.shipping_details,
         'subscription' : user.profile.subscription,
-        }
+    }
     
     # create email body:
     html_message  = render_to_string('welcome.html', context=context)

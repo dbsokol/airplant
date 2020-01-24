@@ -16,7 +16,6 @@ import json
 
 
 @login_required(login_url='/login/')
-@tools.monitor_me()
 def LoadProfile(request):
     
     ''' Accepts request from '/profile', renders profile.html template '''
@@ -79,12 +78,14 @@ def CancelSubscription(request):
     
     # raise error if cancellcing the braintree subscription object fails:
     if not braintree_subscription_result.is_success:
-        raise('[Backend.views.CancelSubscription]: Canceled braintree subscription with [BraintreeResult:%s]' %braintree_subscription_result.is_success)
+        raise ValueError('[Backend.views.CancelSubscription]: Canceled braintree subscription with [BraintreeResult:%s]' %braintree_subscription_result.is_success)
     
-    status = 0
-    message = 'You have successfully cancelled your subscription.'
-   
-    return HttpResponse(json.dumps({'status' : status, 'message' : message}))
+    context = json.dumps({
+        'status' : 0,
+        'message' : 'You have successfully cancelled your subscription.',
+    })
+    
+    return HttpResponse(context)
 
     
 
@@ -138,7 +139,7 @@ def ReactivateSubscription(request):
     
     # raise error if creating new subscription object fails:
     if not braintree_subscription_result.is_success:
-        raise('[Backend.views.ReactivateSubscription]: Reactivated braintree subscription with [BraintreeResult:%s]' %braintree_subscription_result.is_success)
+        raise ValueError('[Backend.views.ReactivateSubscription]: Reactivated braintree subscription with [BraintreeResult:%s]' %braintree_subscription_result.is_success)
     
     # delete subscription object:
     subscription.delete()
@@ -193,7 +194,7 @@ def ChangePayment(request):
 
     # raise error if new braintree paymenth method fails:
     if not braintree_payment_method_result.is_success:
-        raise('[Backend.views.ChangePayment]: Braintree error on payment method create [%s]' %braintree_payment_method_result)
+        raise ValueError('[Backend.views.ChangePayment]: Braintree error on payment method create [%s]' %braintree_payment_method_result)
     
     # update payment method in braintree subscription object:
     braintree_subscription_result = gateway.subscription.update(
@@ -203,7 +204,7 @@ def ChangePayment(request):
 
     # raise error if updating braintree subscription object fails:
     if not braintree_subscription_result.is_success:
-        raise('[Backend.views.ChangePayment]: Created braintree subscrption with [BraintreeResult:%s]' %braintree_subscription_result)
+        raise ValueError('[Backend.views.ChangePayment]: Created braintree subscrption with [BraintreeResult:%s]' %braintree_subscription_result)
 
     # update payment details object:
     payment_details.braintree_payment_method_token = braintree_payment_method_result.payment_method.token

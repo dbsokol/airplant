@@ -4,6 +4,7 @@ from time import time
 import traceback
 import pickle
 import json
+import ast
 
 
 
@@ -19,12 +20,11 @@ def PrintTitle(function_name):
 
 # Decorator tools:
 def monitor_me(
-    monitor = True,
     verbose_level = 2,
     save_output = False,
     ):
     
-    ''' time_it decorator, used to time execution time of functions '''
+    ''' monitor_me decorator, used to time execution time of functions and handle errors '''
     
     def decorator(function):
         
@@ -33,22 +33,13 @@ def monitor_me(
             # intialize result object:
             result = {}
         
-            # if monitor is set to false, do nothing:
-            if not monitor:
-                
-                result['content'] = function(*args, **kwargs)
-                result['status'] = -1
-                result['message'] = "Set 'monitor' to True in Configuration to enable monitorting"
-                
-                return result['content']
-        
             # start timer:
             function_start = time()
             
             # try to execute function:
             try:
                 content = function(*args, **kwargs)
-                status = 0
+                status = ast.literal_eval(content.content.decode('utf-8'))['status']
                 message_body = 'Success'
             
             except:
