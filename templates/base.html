@@ -456,15 +456,21 @@ $("#terms-check").click(function(){
 
 var discount = "NONE";
 var discount_amount = 0;
+var coupon_code = 'None';
 
 //retrieves and applies coupon
 function coupon_apply(button){
+  
+    if ($('#coupon-input').val()) {
+        coupon_code = $('#coupon-input').val()
+    }
+  
     $.ajax({
         url : "{% url 'check_coupon' %}",
         type : 'POST',
         data : {
             'email' : email.val(),
-            'coupon' : $('#coupon-input').val(),
+            'coupon' : coupon_code,
             'csrfmiddlewaretoken' : '{{ csrf_token }}'
         },
         dataType:'json',
